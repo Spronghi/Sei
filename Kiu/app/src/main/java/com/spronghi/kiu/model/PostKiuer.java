@@ -82,11 +82,11 @@ public class PostKiuer {
         this.startDate = startDate;
     }
     public String getStartDateString(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy kk:mm");
         return formatter.format(startDate);
     }
     public void setStartDate(String startDate){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy kk:mm");
         try {
             this.startDate = formatter.parse(startDate);
         } catch (ParseException e) {

@@ -1,8 +1,13 @@
 package com.spronghi.kiu.runtime;
 
+import android.util.Log;
+
 import com.spronghi.kiu.model.Place;
 import com.spronghi.kiu.model.PostHelper;
 import com.spronghi.kiu.model.PostKiuer;
+import com.spronghi.kiu.setup.DateFormatter;
+
+import java.util.Date;
 
 /**
  * Created by spronghi on 08/09/16.
@@ -21,7 +26,7 @@ public class CurrentPost {
         postKiuer.setStatus("This is the first postKiuer in this app!!");
         postKiuer.setHelper(CurrentUser.getHelper());
         postKiuer.setKiuer(CurrentUser.getKiuer());
-        postKiuer.setStartDate("08/10/2016 12:48");
+        postKiuer.setStartDate("14/09/2016 12:15");
         postKiuer.setDuration(50);
         postKiuer.setCost(10);
         postKiuer.setOpen(true);

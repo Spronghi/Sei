@@ -78,4 +78,8 @@
     <string name="refuse">Refuse</string>
     <string name="send">Send</string>
     <string name="post_selected">Post selected</string>
+    <string name="no_kiuing">No Kiuing open process</string>
+    <string name="refresh">Refresh</string>
+    <string name="minutes_for_begin">minutes for the beginning of the Kiuing</string>
+    <string name="kiuiung_started">Kiuing has started!</string>
 </resources>

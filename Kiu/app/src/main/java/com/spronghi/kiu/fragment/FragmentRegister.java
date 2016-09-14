@@ -42,6 +42,7 @@ class FragmentRegister extends FragmentControl{
             container.put(VIEW_REQUEST_HELPER, new RequestHelperFragment().clone());
             container.put(SEND_REQUEST_HELPER, new SendRequestHelperFragment().clone());
             container.put(SEND_REQUEST_KIUER, new SendRequestKiuerFragment().clone());
+            container.put(KIUING_KIUER, new KiuingKiuerFragment().clone());
         } catch (CloneNotSupportedException e) {
             Log.d("FragmentRegister", e.getLocalizedMessage());
         }

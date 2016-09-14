@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/fragment_kiuing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/fragment_kiuing_main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/accentColor"
+            android:elevation="4dp"
+            android:padding="24dp"
+            android:layout_marginTop="65dp">
+
+            <TextView
+                android:id="@+id/fragment_kiuing_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/no_kiuing"
+                android:textColor="#fff" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_kiuing_main_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/fragment_kiuing_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+            <Button
+                android:id="@+id/fragment_kiuing_refresh_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:textColor="#fff"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_gravity="end"
+                android:text="@string/refresh"/>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

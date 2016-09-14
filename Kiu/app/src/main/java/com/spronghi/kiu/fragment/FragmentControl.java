@@ -25,5 +25,6 @@ public class FragmentControl {
     public static final String VIEW_REQUEST_KIUER = "view_request_kiuer";
     public static final String SEND_REQUEST_HELPER = "send_request_helper";
     public static final String SEND_REQUEST_KIUER = "send_request_kiuer";
+    public static final String KIUING_KIUER = "kiuing_kiuer";
 
 }
