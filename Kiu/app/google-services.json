@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "553576768606",
+    "firebase_url": "https://kiusei-af53a.firebaseio.com",
+    "project_id": "kiusei-af53a",
+    "storage_bucket": "kiusei-af53a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553576768606:android:932dc91077524791",
+        "android_client_info": {
+          "package_name": "com.spronghi.kiu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553576768606-jd5t55f7n496v9ll1o1pd4rs6mde1vac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMsaAAg_JT6AEZ3Mk3XQTdy67xMetnFU8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

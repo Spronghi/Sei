@@ -30,5 +30,13 @@
             android:name="com.spronghi.kiu.activity.SignupKiuerActivity"
             android:label="@string/app_name"
             android:theme="@style/FullScreen"/>
+        <activity
+            android:name="com.spronghi.kiu.activity.LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/FullScreen"/>
+        <activity
+            android:name="com.spronghi.kiu.activity.LauncherActivity"
+            android:label="@string/app_name"
+            android:theme="@style/FullScreen"/>
     </application>
 </manifest>

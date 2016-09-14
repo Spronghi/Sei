@@ -82,4 +82,11 @@
     <string name="refresh">Refresh</string>
     <string name="minutes_for_begin">minutes for the beginning of the Kiuing</string>
     <string name="kiuiung_started">Kiuing has started!</string>
+
+    <string name="usernamehint">Username</string>
+    <string name="passwordhint">Password</string>
+    <string name="loginBtn">Login</string>
+    <string name="checkbox_text">Remember me!</string>
+    <string name="login">Don't have an account?</string>
+    <string name="link_login">Sign up!</string>
 </resources>
