@@ -18,14 +18,14 @@ public class PostHelperAdapter extends RecyclerView.Adapter<PostHelperAdapter.My
     private List<PostHelper> postsList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView username, startdate, enddate, city;
+        public TextView username, startDate, endDate, location;
 
         public MyViewHolder(View view) {
             super(view);
-            username = (TextView) view.findViewById(R.id.id_fragment_post_list_row_username_label);
-            startdate = (TextView) view.findViewById(R.id.id_fragment_post_list_row_addresslocation_label);
-            enddate = (TextView) view.findViewById(R.id.id_fragment_post_list_row_enddate_label);
-            city = (TextView) view.findViewById(R.id.id_fragment_post_list_row_city_label);
+            username = (TextView) view.findViewById(R.id.fragment_post_helper_row_username_text);
+            startDate = (TextView) view.findViewById(R.id.fragment_post_helper_row_start_text);
+            endDate = (TextView) view.findViewById(R.id.fragment_post_helper_row_end_text);
+            location = (TextView) view.findViewById(R.id.fragment_post_helper_row_location_text);
         }
     }
 
@@ -37,7 +37,7 @@ public class PostHelperAdapter extends RecyclerView.Adapter<PostHelperAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_post_list_row, parent, false);
+                .inflate(R.layout.fragment_post_helper_row, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -46,9 +46,9 @@ public class PostHelperAdapter extends RecyclerView.Adapter<PostHelperAdapter.My
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PostHelper post = postsList.get(position);
         holder.username.setText(post.getHelper().getUsername());
-        holder.startdate.setText(post.getStartDateString());
-        holder.enddate.setText(post.getEndDateString());
-        holder.city.setText(post.getCity());
+        holder.startDate.setText("Start: "+post.getStartDateString());
+        holder.endDate.setText("End: "+post.getEndDateString());
+        holder.location.setText(post.getCity());
     }
 
     @Override

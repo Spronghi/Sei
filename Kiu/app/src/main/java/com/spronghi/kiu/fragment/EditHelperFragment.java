@@ -69,7 +69,6 @@ public class EditHelperFragment extends ModelFragment<Helper>{
     }
     private void setupToolbar(){
         final FragmentManager manager = this.getFragmentManager();
-        toolbar.setTitle(R.string.title);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.spronghi.kiu.R;
+import com.spronghi.kiu.fragment.FragmentControl;
 import com.spronghi.kiu.fragment.FragmentFactory;
 import com.spronghi.kiu.fragment.ModelFragment;
 import com.spronghi.kiu.model.PostKiuer;
@@ -92,7 +93,7 @@ public class CostCreatePostKiuerFragment extends ModelFragment<PostKiuer> {
                     post.setCost(Double.parseDouble(costText.getText().toString().replace("€/h","")));
                     post.setDuration(Integer.parseInt(durationText.getText().toString().replace(" minutes", "")));
 
-                    ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance("ViewPostKiuerFragment");
+                    ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.VIEW_POST_KIUER);
                     modelFragment.setModel(post);
                     manager.beginTransaction()
                             .replace(R.id.activity_main_frame_layout, modelFragment, "view_post_kiuer")
@@ -106,7 +107,6 @@ public class CostCreatePostKiuerFragment extends ModelFragment<PostKiuer> {
 
     private void setupToolbar(){
         final FragmentManager manager = this.getFragmentManager();
-        toolbar.setTitle(R.string.title);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

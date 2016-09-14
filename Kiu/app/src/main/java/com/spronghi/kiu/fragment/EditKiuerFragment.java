@@ -67,7 +67,6 @@ public class EditKiuerFragment extends ModelFragment<Kiuer>{
 
     private void setupToolbar(){
         final FragmentManager manager = this.getFragmentManager();
-        toolbar.setTitle(R.string.title);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

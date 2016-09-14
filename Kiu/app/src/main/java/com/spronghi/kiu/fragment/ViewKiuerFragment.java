@@ -21,7 +21,6 @@ import com.spronghi.kiu.setup.SetupView;
  */
 public class ViewKiuerFragment extends ModelFragment<Kiuer> {
     private ImageView actionIcon;
-    private TextView actionText;
     private TextView usernameText;
     private TextView statusText;
     private TextView nameAndSurnameText;
@@ -48,7 +47,6 @@ public class ViewKiuerFragment extends ModelFragment<Kiuer> {
         telephoneText = (TextView) layout.findViewById(R.id.fragment_view_kiuer_telephone);
         favoriteCityText = (TextView) layout.findViewById(R.id.fragment_view_kiuer_favorite_city);
         feedbackText = (TextView) layout.findViewById(R.id.fragment_view_kiuer_feedback);
-        actionText = (TextView) layout.findViewById(R.id.fragment_view_kiuer_action_text);
         actionIcon = (ImageView) layout.findViewById(R.id.fragment_view_kiuer_action_icon);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_view_kiuer_toolbar);
 
@@ -73,7 +71,7 @@ public class ViewKiuerFragment extends ModelFragment<Kiuer> {
             actionIcon.setImageResource(R.mipmap.ic_mode_edit_white_24dp);
             actionIcon.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    ModelFragment<Kiuer> modelFragment = FragmentFactory.getInstance("EditKiuerFragment");
+                    ModelFragment<Kiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.EDIT_KIUER);
                     modelFragment.setModel(kiuer);
                     manager.beginTransaction()
                             .replace(R.id.activity_main_frame_layout, modelFragment, "edit_kiuer")
@@ -87,7 +85,6 @@ public class ViewKiuerFragment extends ModelFragment<Kiuer> {
 
     private void setupToolbar(){
         final FragmentManager manager = this.getFragmentManager();
-        toolbar.setTitle(R.string.title);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

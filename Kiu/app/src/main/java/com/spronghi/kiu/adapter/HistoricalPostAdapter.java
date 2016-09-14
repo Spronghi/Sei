@@ -23,8 +23,8 @@ public class HistoricalPostAdapter extends RecyclerView.Adapter<HistoricalPostAd
 
         public MyViewHolder(View view) {
             super(view);
-            startdate = (TextView) view.findViewById(R.id.id_fragment_post_list_row_username_label);
-            addresslocation = (TextView) view.findViewById(R.id.id_fragment_post_list_row_addresslocation_label);
+            //startdate = (TextView) view.findViewById(R.id.id_fragment_post_list_row_username_label);
+            //addresslocation = (TextView) view.findViewById(R.id.id_fragment_post_list_row_addresslocation_label);
         }
     }
 
@@ -36,7 +36,7 @@ public class HistoricalPostAdapter extends RecyclerView.Adapter<HistoricalPostAd
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_post_list_row, parent, false);
+                .inflate(R.layout.fragment_post_helper_row, parent, false);
 
         return new MyViewHolder(itemView);
     }

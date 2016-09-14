@@ -7,12 +7,15 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostKiuer;
+import com.spronghi.kiu.notification.Notification;
+import com.spronghi.kiu.runtime.CurrentUser;
 import com.spronghi.kiu.setup.SetupView;
 
 /**
@@ -28,7 +31,8 @@ public class ViewPostKiuerFragment extends ModelFragment<PostKiuer>{
     private TextView startText;
     private TextView durationText;
     private TextView costText;
-    private ImageView actionIcon;
+    private Button requestButton;
+
     private Toolbar toolbar;
     private PostKiuer postKiuer;
 
@@ -52,13 +56,13 @@ public class ViewPostKiuerFragment extends ModelFragment<PostKiuer>{
         startText = (TextView) layout.findViewById(R.id.fragment_view_post_kiuer_start);
         durationText = (TextView) layout.findViewById(R.id.fragment_view_post_kiuer_duration);
         costText = (TextView) layout.findViewById(R.id.fragment_view_post_kiuer_cost);
-        actionIcon = (ImageView) layout.findViewById(R.id.fragment_view_post_kiuer_action_icon);
+        requestButton = (Button) layout.findViewById(R.id.fragment_view_post_kiuer_request_button);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_view_post_kiuer_toolbar);
 
         setupToolbar();
         setupView();
-
-
+        if(!(CurrentUser.isKiuer()))
+            setupRequestButton();
         return layout;
     }
 
@@ -77,7 +81,7 @@ public class ViewPostKiuerFragment extends ModelFragment<PostKiuer>{
         kiuerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ModelFragment<Kiuer> modelFragment = FragmentFactory.getInstance("ViewKiuerFragment");
+                ModelFragment<Kiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.VIEW_KIUER);
                 modelFragment.setModel(postKiuer.getKiuer());
                 manager.beginTransaction()
                         .replace(R.id.activity_main_frame_layout, modelFragment, "view_kiuer")
@@ -86,9 +90,24 @@ public class ViewPostKiuerFragment extends ModelFragment<PostKiuer>{
             }
         });
     }
+    private void setupRequestButton(){
+        requestButton.setVisibility(View.VISIBLE);
+        requestButton.setClickable(true);
+        final FragmentManager manager = this.getFragmentManager();
+        requestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.SEND_REQUEST_HELPER);
+                modelFragment.setModel(postKiuer);
+                manager.beginTransaction()
+                        .replace(R.id.activity_main_frame_layout, modelFragment, "send_request")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+    }
     private void setupToolbar() {
         final FragmentManager manager = this.getFragmentManager();
-        toolbar.setTitle(R.string.title);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.spronghi.kiu.R;
+import com.spronghi.kiu.fragment.FragmentControl;
 import com.spronghi.kiu.fragment.FragmentFactory;
 import com.spronghi.kiu.fragment.ModelFragment;
 import com.spronghi.kiu.model.Place;
@@ -67,7 +68,7 @@ public class PlaceCreatePostKiuerFragment extends ModelFragment<PostKiuer>{
                     place.setAddress(addressText.getText().toString());
                     post.setPlace(place);
 
-                    ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance("StartCreatePostKiuerFragment");
+                    ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.CREATE_POST_KIUER_START);
                     modelFragment.setModel(post);
                     manager.beginTransaction()
                             .replace(R.id.activity_main_frame_layout, modelFragment, "create_post_start_date_duration")
@@ -81,7 +82,6 @@ public class PlaceCreatePostKiuerFragment extends ModelFragment<PostKiuer>{
 
     private void setupToolbar(){
         final FragmentManager manager = this.getFragmentManager();
-        toolbar.setTitle(R.string.title);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

@@ -61,4 +61,21 @@
     <string name="posts">Posts</string>
     <string name="wait_for_me">Wait For Me</string>
 
+    <string name="request_post_kiuer">A Kiuer sent you a request!</string>
+    <string name="request_post_helper">An Helper sent you a request!</string>
+    <string name="sent_you_a_request">sent you a request!</string>
+    <string name="send_a_request">Send a request</string>
+    <string name="send_request_to">Send request to </string>
+    <string name="choose_post">Choose the post</string>
+    <string name="sender">Sender</string>
+    <string name="message">Message</string>
+    <string name="requests">Requests</string>
+    <string name="request_body">Touch to open requests</string>
+    <string name="arrived_request">You have a new request</string>
+    <string name="accepted_request">Your request has been accepted</string>
+    <string name="refused_request">Your request has been refused</string>
+    <string name="accept">Accept</string>
+    <string name="refuse">Refuse</string>
+    <string name="send">Send</string>
+    <string name="post_selected">Post selected</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.spronghi.kiu.runtime;
 
 import com.spronghi.kiu.model.Place;
+import com.spronghi.kiu.model.PostHelper;
 import com.spronghi.kiu.model.PostKiuer;
 
 /**
@@ -8,6 +9,7 @@ import com.spronghi.kiu.model.PostKiuer;
  */
 public class CurrentPost {
     private static PostKiuer postKiuer;
+    private static PostHelper postHelper;
     static {
         Place place = new Place();
         place.setCity("Lecce");
@@ -24,8 +26,19 @@ public class CurrentPost {
         postKiuer.setCost(10);
         postKiuer.setOpen(true);
         postKiuer.setPlace(place);
+
+        postHelper = new PostHelper();
+        postHelper.setCost(10);
+        postHelper.setStartDate("06/10/2016 12:48");
+        postHelper.setEndDate("08/10/2016 12:48");
+        postHelper.setHelper(CurrentUser.getHelper());
+        postHelper.setCity("Lecce");
+        postHelper.setTitle("Sucate Forte");
     }
-    public static PostKiuer get(){
+    public static PostKiuer getPostKiuer(){
         return postKiuer;
+    }
+    public static PostHelper getPostHelper(){
+        return postHelper;
     }
 }

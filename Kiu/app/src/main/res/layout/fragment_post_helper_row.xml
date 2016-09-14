@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_post_helper_row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+       <ImageButton
+           android:id="@+id/fragment_post_helper_row_photo"
+           android:layout_width="50dp"
+           android:layout_height="50dp"
+           android:layout_below="@+id/activity_main_menu_profile_image"
+           android:src="@mipmap/ic_face_white"
+           android:layout_centerHorizontal="true"
+           android:background="@drawable/profile_image_circular"
+           android:elevation="5dp"
+           android:padding="10dp"
+           android:scaleType="centerCrop"
+           />
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+           <TextView
+               android:id="@+id/fragment_post_helper_row_username_text"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:paddingTop="5dp"
+               android:paddingLeft="12dp"
+               android:textSize="20sp"
+               android:textColor="@color/accentColor"
+               android:text="@string/username"
+               />
+           <TextView
+               android:id="@+id/fragment_post_helper_row_location_text"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:paddingTop="5dp"
+               android:paddingLeft="12dp"
+               android:textSize="15sp"
+               android:text="@string/address"
+               />
+
+           <TextView
+               android:id="@+id/fragment_post_helper_row_start_text"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:paddingTop="5dp"
+               android:paddingLeft="12dp"
+               android:textSize="15sp"
+               android:text="@string/start"
+               />
+
+           <TextView
+               android:id="@+id/fragment_post_helper_row_end_text"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:paddingTop="5dp"
+               android:paddingLeft="12dp"
+               android:textSize="15sp"
+               android:text="@string/end"
+               />
+       </LinearLayout>
+   </LinearLayout>
+
+</RelativeLayout>

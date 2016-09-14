@@ -48,7 +48,6 @@ public class CreatePostHelperFragment extends ModelFragment<PostHelper>{
         setupToolbar();
         setupView();
 
-
         SetupView.clearEditText(titleText);
         SetupView.clearEditText(cityText);
 
@@ -63,10 +62,10 @@ public class CreatePostHelperFragment extends ModelFragment<PostHelper>{
                 } else {
                     post.setTitle(titleText.getText().toString());
                     post.setCity(cityText.getText().toString());
-                    ModelFragment<PostHelper> modelFragment = FragmentFactory.getInstance("StartCreatePostHelperFragment");
+                    ModelFragment<PostHelper> modelFragment = new StartCreatePostHelperFragment();
                     modelFragment.setModel(post);
                     manager.beginTransaction()
-                            .replace(R.id.activity_main_frame_layout, modelFragment, "create_post_start_date")
+                            .replace(R.id.activity_main_frame_layout, modelFragment, "create_post_helper_start_date")
                             .addToBackStack(null)
                             .commit();
                 }
@@ -86,7 +85,6 @@ public class CreatePostHelperFragment extends ModelFragment<PostHelper>{
 
     private void setupToolbar(){
         final FragmentManager manager = this.getFragmentManager();
-        toolbar.setTitle(R.string.title);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

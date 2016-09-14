@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/fragment_send_request_helper_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/fragment_send_request_helper_main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/accentColor"
+            android:elevation="4dp"
+            android:padding="24dp"
+            android:layout_marginTop="65dp">
+
+            <TextView
+                android:id="@+id/fragment_send_request_helper_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send_request_to"
+                android:textColor="#fff" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_send_request_helper_main_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/fragment_send_request_helper_send_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_gravity="end"
+                android:text="@string/send"/>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

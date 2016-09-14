@@ -7,15 +7,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.model.Helper;
-import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostHelper;
-import com.spronghi.kiu.model.PostKiuer;
-import com.spronghi.kiu.setup.SetupView;
+import com.spronghi.kiu.runtime.CurrentUser;
 
 /**
  * Created by spronghi on 10/09/16.
@@ -27,7 +25,8 @@ public class ViewPostHelperFragment extends ModelFragment<PostHelper>{
     private TextView startText;
     private TextView endText;
     private TextView costText;
-    private ImageView actionIcon;
+    private Button requestButton;
+
     private Toolbar toolbar;
     private PostHelper post;
 
@@ -48,12 +47,14 @@ public class ViewPostHelperFragment extends ModelFragment<PostHelper>{
         startText = (TextView) layout.findViewById(R.id.fragment_view_post_helper_start);
         endText = (TextView) layout.findViewById(R.id.fragment_view_post_helper_end);
         costText = (TextView) layout.findViewById(R.id.fragment_view_post_helper_cost);
-        actionIcon = (ImageView) layout.findViewById(R.id.fragment_view_post_helper_action_icon);
+        requestButton = (Button) layout.findViewById(R.id.fragment_view_post_helper_request_button);
+
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_view_post_helper_toolbar);
 
         setupToolbar();
         setupView();
-
+        if(CurrentUser.isKiuer())
+            setupRequestButton();
         return layout;
     }
 
@@ -64,12 +65,12 @@ public class ViewPostHelperFragment extends ModelFragment<PostHelper>{
         startText.setText("Starts on "+post.getStartDateString());
         endText.setText("Ends on "+post.getEndDateString());
         costText.setText(post.getCostString()+"€/h");
-        final FragmentManager manager = this.getFragmentManager();
 
+        final FragmentManager manager = this.getFragmentManager();
         helperText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ModelFragment<Helper> modelFragment = FragmentFactory.getInstance("ViewHelperFragment");
+                ModelFragment<Helper> modelFragment = FragmentFactory.getInstance(FragmentControl.VIEW_HELPER);
                 modelFragment.setModel(post.getHelper());
                 manager.beginTransaction()
                         .replace(R.id.activity_main_frame_layout, modelFragment, "view_helper")
@@ -79,10 +80,24 @@ public class ViewPostHelperFragment extends ModelFragment<PostHelper>{
         });
 
     }
-
+    private void setupRequestButton(){
+        requestButton.setVisibility(View.VISIBLE);
+        requestButton.setClickable(true);
+        final FragmentManager manager = this.getFragmentManager();
+        requestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModelFragment<Helper> modelFragment = FragmentFactory.getInstance(FragmentControl.SEND_REQUEST_KIUER);
+                modelFragment.setModel(post.getHelper());
+                manager.beginTransaction()
+                        .replace(R.id.activity_main_frame_layout, modelFragment, "send_request")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+    }
     private void setupToolbar(){
         final FragmentManager manager = this.getFragmentManager();
-        toolbar.setTitle(R.string.title);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

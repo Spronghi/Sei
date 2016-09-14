@@ -11,38 +11,30 @@
             android:id="@+id/fragment_view_kiuer_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/fragment_view_kiuer_profile_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/darkPrimaryColor"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="65dp"
-            />
 
-        <ImageButton
-            android:id="@+id/fragment_view_kiuer_profile_photo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_below="@+id/fragment_view_kiuer_profile_image"
-            android:src="@mipmap/ic_face_white"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="-60dp"
-            android:background="@drawable/profile_image_circular"
-            android:elevation="5dp"
-            android:padding="20dp"
-            android:scaleType="centerCrop"
-           />
+
+
 
         <RelativeLayout
             android:id="@+id/fragment_view_kiuer_main_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/fragment_view_kiuer_profile_image"
+            android:layout_height="match_parent"
             android:background="@color/accentColor"
             android:elevation="4dp"
+            android:layout_marginTop="65dp"
             android:paddingBottom="24dp">
-
+            <ImageButton
+                android:id="@+id/fragment_view_helper_profile_photo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@mipmap/ic_face_white"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/profile_image_circular"
+                android:elevation="5dp"
+                android:padding="20dp"
+                android:scaleType="centerCrop"
+                />
 
             <ImageView
                 android:id="@+id/fragment_view_kiuer_action_icon"
@@ -52,16 +44,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_toLeftOf="@+id/fragment_view_kiuer_drop_down_option_menu"
                 />
-            <TextView android:id="@+id/fragment_view_kiuer_action_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="-35dp"
-                android:layout_marginTop="45dp"
-                android:textColor="#fff"
-                android:layout_alignParentBottom="@id/fragment_view_kiuer_action_icon"
-                android:layout_toLeftOf="@+id/fragment_view_kiuer_drop_down_option_menu"
-                android:textSize="18sp" />
-
 
             <ImageView
                 android:id="@+id/fragment_view_kiuer_drop_down_option_menu"
@@ -70,14 +52,14 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                 />
+                />
 
             <TextView
                 android:id="@+id/fragment_view_kiuer_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="76dp"
+                android:layout_marginLeft="175dp"
                 android:text="@string/kiuer"
                 android:textColor="#fff"
                 android:textSize="24sp"
@@ -88,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fragment_view_kiuer_username"
-                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="175dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/profile_status"
                 android:textColor="#fff"

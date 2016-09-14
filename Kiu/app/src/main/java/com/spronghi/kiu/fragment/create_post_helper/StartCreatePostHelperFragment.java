@@ -2,7 +2,10 @@ package com.spronghi.kiu.fragment.create_post_helper;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -10,10 +13,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.spronghi.kiu.R;
+import com.spronghi.kiu.fragment.FragmentControl;
 import com.spronghi.kiu.fragment.FragmentFactory;
 import com.spronghi.kiu.fragment.ModelFragment;
 import com.spronghi.kiu.model.PostHelper;
-import com.spronghi.kiu.model.PostKiuer;
 import com.spronghi.kiu.setup.DateFormatter;
 import com.spronghi.kiu.setup.SetupView;
 
@@ -27,6 +30,7 @@ public class StartCreatePostHelperFragment extends  ModelFragment<PostHelper>{
 
     private EditText startDateText;
     private EditText startHourText;
+    private Toolbar toolbar;
 
     private Button button;
 
@@ -39,9 +43,11 @@ public class StartCreatePostHelperFragment extends  ModelFragment<PostHelper>{
         final View layout = inflater.inflate(R.layout.fragment_create_start_date, parent, false);
 
         startDateText = (EditText) layout.findViewById(R.id.fragment_create_start_date_text);
-        startHourText = (EditText) layout.findViewById(R.id.fragment_create_start_hour_text);
+        startHourText = (EditText) layout.findViewById(R.id.fragment_create_start_date_hour_text);
         button = (Button) layout.findViewById(R.id.fragment_create_start_date_button);
+        toolbar = (Toolbar) layout.findViewById(R.id.fragment_create_start_date_toolbar);
 
+        setupToolbar();
         SetupView.setEditTextForDate(startDateText, getActivity());
         SetupView.setEditTextForTime(startHourText, getActivity());
 
@@ -56,7 +62,7 @@ public class StartCreatePostHelperFragment extends  ModelFragment<PostHelper>{
                 } else if (Calendar.getInstance().getTime().after(DateFormatter.parseDate(startDateText.getText().toString()))){
                     post.setStartDate(startDateText.getText().toString()+" "+startHourText.getText().toString());
 
-                    ModelFragment<PostHelper> modelFragment = FragmentFactory.getInstance("EndCreatePostHelperFragment");
+                    ModelFragment<PostHelper> modelFragment = FragmentFactory.getInstance(FragmentControl.CREATE_POST_HELPER_END);
                     modelFragment.setModel(post);
                     manager.beginTransaction()
                             .replace(R.id.activity_main_frame_layout, modelFragment, "create_post_end_date")
@@ -67,7 +73,7 @@ public class StartCreatePostHelperFragment extends  ModelFragment<PostHelper>{
                 } else {
                     post.setStartDate(startDateText.getText().toString()+" "+startHourText.getText().toString());
 
-                    ModelFragment<PostHelper> modelFragment = FragmentFactory.getInstance("EndCreatePostHelperFragment");
+                    ModelFragment<PostHelper> modelFragment = FragmentFactory.getInstance(FragmentControl.CREATE_POST_HELPER_END);
                     modelFragment.setModel(post);
                     manager.beginTransaction()
                             .replace(R.id.activity_main_frame_layout, modelFragment, "create_post_end_date")
@@ -77,5 +83,25 @@ public class StartCreatePostHelperFragment extends  ModelFragment<PostHelper>{
             }
         });
         return layout;
+    }
+
+    private void setupToolbar(){
+        final FragmentManager manager = this.getFragmentManager();
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return false;
+            }
+        });
+
+        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                manager.popBackStack();
+            }
+        });
     }
 }

@@ -22,7 +22,6 @@ import com.spronghi.kiu.setup.SetupView;
 public class ViewHelperFragment extends ModelFragment<Helper>{
     private final static String TAG = "ViewHelperFragment";
     private ImageView actionIcon;
-    private TextView actionText;
     private TextView usernameText;
     private TextView statusText;
     private TextView nameAndSurnameText;
@@ -77,7 +76,7 @@ public class ViewHelperFragment extends ModelFragment<Helper>{
             actionIcon.setImageResource(R.mipmap.ic_mode_edit_white_24dp);
             actionIcon.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    ModelFragment<Helper> modelFragment = FragmentFactory.getInstance("EditHelperFragment");
+                    ModelFragment<Helper> modelFragment = FragmentFactory.getInstance(FragmentControl.EDIT_HELPER);
                     modelFragment.setModel(helper);
                     manager.beginTransaction()
                             .replace(R.id.activity_main_frame_layout, modelFragment, "edit_helper")
@@ -91,8 +90,6 @@ public class ViewHelperFragment extends ModelFragment<Helper>{
 
     private void setupToolbar(){
         final FragmentManager manager = this.getFragmentManager();
-        toolbar.setTitle(R.string.title);
-
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {

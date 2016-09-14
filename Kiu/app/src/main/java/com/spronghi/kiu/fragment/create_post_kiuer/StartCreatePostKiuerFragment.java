@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.spronghi.kiu.R;
+import com.spronghi.kiu.fragment.FragmentControl;
 import com.spronghi.kiu.fragment.FragmentFactory;
 import com.spronghi.kiu.fragment.ModelFragment;
 import com.spronghi.kiu.model.PostKiuer;
@@ -41,9 +42,9 @@ public class StartCreatePostKiuerFragment extends ModelFragment<PostKiuer>{
         final View layout = inflater.inflate(R.layout.fragment_create_start_date, parent, false);
 
         startDateText = (EditText) layout.findViewById(R.id.fragment_create_start_date_text);
-        startHourText = (EditText) layout.findViewById(R.id.fragment_create_start_hour_text);
+        startHourText = (EditText) layout.findViewById(R.id.fragment_create_start_date_hour_text);
         button = (Button) layout.findViewById(R.id.fragment_create_start_date_button);
-        toolbar = (Toolbar) layout.findViewById(R.id.fragment_create_start_date_duration_toolbar);
+        toolbar = (Toolbar) layout.findViewById(R.id.fragment_create_start_date_toolbar);
 
         setupToolbar();
 
@@ -61,7 +62,7 @@ public class StartCreatePostKiuerFragment extends ModelFragment<PostKiuer>{
                 } else if (Calendar.getInstance().getTime().after(DateFormatter.parseDate(startDateText.getText().toString()))){
                     post.setStartDate(startDateText.getText().toString()+" "+startHourText.getText().toString());
 
-                    ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance("CostCreatePostKiuerFragment");
+                    ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.CREATE_POST_KIUER_COST);
                     modelFragment.setModel(post);
                     manager.beginTransaction()
                             .replace(R.id.activity_main_frame_layout, modelFragment, "create_cost")
@@ -72,7 +73,7 @@ public class StartCreatePostKiuerFragment extends ModelFragment<PostKiuer>{
                 } else {
                     post.setStartDate(startDateText.getText().toString()+" "+startHourText.getText().toString());
 
-                    ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance("CostCreatePostKiuerFragment");
+                    ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.CREATE_POST_KIUER_COST);
                     modelFragment.setModel(post);
                     manager.beginTransaction()
                             .replace(R.id.activity_main_frame_layout, modelFragment, "create_cost")
@@ -85,7 +86,6 @@ public class StartCreatePostKiuerFragment extends ModelFragment<PostKiuer>{
     }
     private void setupToolbar(){
         final FragmentManager manager = this.getFragmentManager();
-        toolbar.setTitle(R.string.title);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
