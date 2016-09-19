@@ -3,43 +3,40 @@ package com.spronghi.kiu.kiuing;
 import com.spronghi.kiu.model.PostKiuer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by spronghi on 14/09/16.
  */
 public class Kiuing {
+    private int id;
     private PostKiuer post;
-    private List<String> operationList;
-    private Map<String, Boolean> kiuingMap;
+    private List<KiuingOperation> operationList;
 
+    public Kiuing() {}
     public Kiuing(PostKiuer post) {
         this.post = post;
-
-        kiuingMap = new HashMap<>();
-        kiuingMap.put(post.getHelper().getUsername() + " is coming", false);
-        kiuingMap.put(post.getHelper().getUsername() + " arrived", false);
-        kiuingMap.put(post.getHelper().getUsername() + " is Kiuing", false);
-        kiuingMap.put(post.getHelper().getUsername() + " finished the kiu", false);
-
         operationList = new ArrayList<>();
-        operationList.add(post.getHelper().getUsername() + " is coming");
-        operationList.add(post.getHelper().getUsername() + " arrived");
-        operationList.add(post.getHelper().getUsername() + " is Kiuing");
-        operationList.add(post.getHelper().getUsername() + " finished the kiu");
-
-
-
     }
 
     public void checkForOperations() {
         //TO DO check for operations
     }
 
-    public Map<String, Boolean> getKiuingMap() {
-        return kiuingMap;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<KiuingOperation> getOperationList() {
+        return operationList;
+    }
+
+    public void setOperationList(List<KiuingOperation> operationList) {
+        this.operationList = operationList;
     }
 
     public PostKiuer getPost() {
@@ -50,27 +47,32 @@ public class Kiuing {
         this.post = post;
     }
 
-    public List<String> getOperationList() {
-        return operationList;
-    }
-
-    public void setOperationList(List<String> operationList) {
-        this.operationList = operationList;
-    }
 
     public void setComingTrue() {
-        kiuingMap.put(post.getHelper().getUsername() + " is coming", true);
+        for(KiuingOperation operation : operationList){
+            if(operation.getOperation().equals("is coming"))
+                operation.setDone(true);
+        }
     }
 
     public void setArrivedTrue() {
-        kiuingMap.put(post.getHelper().getUsername() + " arrived", true);
+        for(KiuingOperation operation : operationList){
+            if(operation.getOperation().equals("arrived"))
+                operation.setDone(true);
+        }
     }
 
     public void setIsKiuingTrue() {
-        kiuingMap.put(post.getHelper().getUsername() + " is Kiuing", true);
+        for(KiuingOperation operation : operationList){
+            if(operation.getOperation().equals("is Kiuing"))
+                operation.setDone(true);
+        }
     }
 
     public void setIsFinishedTrue() {
-        kiuingMap.put(post.getHelper().getUsername() + " finished the kiu", true);
+        for(KiuingOperation operation : operationList){
+            if(operation.getOperation().equals("finished the kiu"))
+                operation.setDone(true);
+        }
     }
 }

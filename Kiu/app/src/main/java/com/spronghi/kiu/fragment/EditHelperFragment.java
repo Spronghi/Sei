@@ -27,6 +27,7 @@ public class EditHelperFragment extends ModelFragment<Helper>{
     private EditText telephoneText;
     private EditText favoriteCityText;
     private EditText favoriteCostText;
+    private EditText passwordText;
     private Button okButton;
     private Toolbar toolbar;
 
@@ -45,6 +46,7 @@ public class EditHelperFragment extends ModelFragment<Helper>{
         telephoneText.setText(helper.getTelephone());
         favoriteCityText.setText(helper.getFavoriteCity());
         favoriteCostText.setText(helper.getFavoriteCostString());
+        passwordText.setText(helper.getPassword());
 
     }
     @Override
@@ -59,6 +61,7 @@ public class EditHelperFragment extends ModelFragment<Helper>{
         telephoneText = (EditText) layout.findViewById(R.id.fragment_edit_helper_telephone);
         favoriteCityText = (EditText) layout.findViewById(R.id.fragment_edit_helper_favorite_city);
         favoriteCostText = (EditText) layout.findViewById(R.id.fragment_edit_helper_favorite_cost);
+        passwordText = (EditText) layout.findViewById(R.id.fragment_edit_helper_password);
         okButton = (Button) layout.findViewById(R.id.fragment_edit_helper_ok_button);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_edit_helper_toolbar);
 

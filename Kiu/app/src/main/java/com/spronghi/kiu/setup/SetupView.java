@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Selection;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -45,7 +46,6 @@ public enum SetupView {
             }
         });
     }
-
     public static void clearEditText(final EditText e) {
         e.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -78,7 +78,7 @@ public enum SetupView {
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                String myFormat = "dd/MM/yyyy";
+                String myFormat = "dd-MM-yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALY);
                 editText.setText(sdf.format(myCalendar.getTime()));
             }
@@ -107,7 +107,7 @@ public enum SetupView {
                 myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 myCalendar.set(Calendar.MINUTE, minute);
 
-                String myFormat = "hh:mm";
+                String myFormat = "kk:mm";
                 SimpleDateFormat formatter = new SimpleDateFormat(myFormat, Locale.ITALY);
 
                 editText.setText(formatter.format(myCalendar.getTime()));

@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,11 +24,8 @@ import com.spronghi.kiu.R;
 import com.spronghi.kiu.adapter.DividerItemDecoration;
 import com.spronghi.kiu.adapter.KiuingAdapter;
 import com.spronghi.kiu.kiuing.Kiuing;
-import com.spronghi.kiu.runtime.CurrentKiuing;
 import com.spronghi.kiu.runtime.CurrentUser;
 import com.spronghi.kiu.setup.DateFormatter;
-
-import java.util.Map;
 
 /**
  * Created by spronghi on 14/09/16.

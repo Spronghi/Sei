@@ -17,13 +17,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    //Add the following block (Firebase)
-    packagingOptions {
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE-FIREBASE.txt'
-        exclude 'META-INF/NOTICE'
-    }
 }
 
 dependencies {
@@ -31,23 +24,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:design:23.2.1'
-
-
-    //aggiunta firebase
     compile 'com.google.firebase:firebase-core:9.4.0'
     compile 'com.google.firebase:firebase-database:9.4.0'
     compile 'com.google.firebase:firebase-storage:9.4.0'
-    compile 'com.google.firebase:firebase-crash:9.4.0'
-    compile 'com.google.firebase:firebase-auth:9.4.0'
-    compile 'com.google.firebase:firebase-messaging:9.4.0'
-    compile 'com.google.firebase:firebase-config:9.4.0'
-    compile 'com.google.firebase:firebase-invites:9.4.0'
-    compile 'com.google.firebase:firebase-ads:9.4.0'
-    compile 'com.google.android.gms:play-services-appindexing:9.4.0'
-    compile 'com.google.android.gms:play-services:9.4.0'
 
-    //Adding Firebase
-    compile 'com.firebase:firebase-client-android:2.5.2+'
 }
 
-apply plugin: 'com.google.gms.google-services'

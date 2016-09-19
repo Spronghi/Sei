@@ -24,7 +24,6 @@ import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.model.PostKiuer;
 import com.spronghi.kiu.request.HelperRequest;
 import com.spronghi.kiu.request.Request;
-import com.spronghi.kiu.runtime.CurrentPost;
 import com.spronghi.kiu.runtime.CurrentUser;
 
 import java.util.ArrayList;
@@ -89,9 +88,7 @@ public class SendRequestKiuerFragment extends ModelFragment<Helper>{
         recyclerView.setAdapter(adapter);
 
         list.clear();
-        list.add(CurrentPost.getPostKiuer());
-        list.add(CurrentPost.getPostKiuer());
-        list.add(CurrentPost.getPostKiuer());
+        // TO DO populate list
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override

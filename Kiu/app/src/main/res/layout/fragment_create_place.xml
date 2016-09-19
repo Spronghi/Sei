@@ -54,7 +54,8 @@
                 android:textColor="#fff"
                 android:padding="20dp"
                 android:elevation="4dp"
-                android:text="@string/ask_for_city"/>
+                android:hint="@string/ask_for_city"
+                android:textColorHint="@color/textIconColor"/>
             <EditText
                 android:id="@+id/fragment_create_address_text"
                 android:layout_width="fill_parent"
@@ -66,7 +67,8 @@
                 android:textColor="#fff"
                 android:padding="20dp"
                 android:elevation="4dp"
-                android:text="@string/ask_for_address"/>
+                android:hint="@string/ask_for_address"
+                android:textColorHint="@color/textIconColor"/>
 
             <EditText
                 android:id="@+id/fragment_create_location_text"
@@ -80,12 +82,13 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/ask_for_location" />
+                android:hint="@string/ask_for_location"
+                android:textColorHint="@color/textIconColor"/>
             <Button
                 android:id="@+id/fragment_create_place_button"
                 android:layout_gravity="end"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-
+                android:textColor="@color/textIconColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/next"/>

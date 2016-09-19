@@ -64,14 +64,14 @@ public class PostHelper {
         return startDate;
     }
     public String getStartDateString(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm");
         return formatter.format(startDate);
     }
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
     public void setStartDate(String startDate){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm");
         try {
             this.startDate = formatter.parse(startDate);
         } catch (ParseException e) {
@@ -82,14 +82,14 @@ public class PostHelper {
         return endDate;
     }
     public String getEndDateString(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm");
         return formatter.format(endDate);
     }
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
     public void setEndDate(String endDate){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm");
         try {
             this.endDate = formatter.parse(endDate);
         } catch (ParseException e) {
@@ -113,5 +113,13 @@ public class PostHelper {
 
     public void setOpen(boolean open) {
         this.open = open;
+    }
+    public String getStartDateRequest(){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
+        return formatter.format(startDate);
+    }
+    public String getEndDateRequest(){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
+        return formatter.format(endDate);
     }
 }

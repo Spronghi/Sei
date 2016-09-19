@@ -45,10 +45,11 @@
                 android:layout_marginLeft="175dp"
                 android:layout_marginTop="76dp"
                 android:background="@android:color/transparent"
-                android:text="@string/kiuer"
                 android:textColor="#fff"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:hint="@string/kiuer"
+                android:textColorHint="@color/textIconColor"/>
 
             <EditText
                 android:id="@+id/fragment_edit_kiuer_status"
@@ -58,9 +59,10 @@
                 android:background="@android:color/transparent"
                 android:layout_marginLeft="175dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/profile_status"
                 android:textColor="#fff"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:hint="@string/profile_status"
+                android:textColorHint="@color/textIconColor"/>
         </RelativeLayout>
 
 
@@ -81,7 +83,8 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/name" />
+                android:hint="@string/name"
+                android:textColorHint="@color/textIconColor"/>
 
             <EditText
                 android:id="@+id/fragment_edit_kiuer_surname"
@@ -93,7 +96,20 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/surname" />
+                android:hint="@string/surname"
+                android:textColorHint="@color/textIconColor"/>
+            <EditText
+                android:id="@+id/fragment_edit_kiuer_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/darkPrimaryColor"
+                android:textColor="#fff"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:hint="@string/passwordhint"
+                android:textColorHint="@color/textIconColor"/>
 
             <EditText
                 android:id="@+id/fragment_edit_kiuer_birth"
@@ -107,7 +123,8 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/birth" />
+                android:hint="@string/birth"
+                android:textColorHint="@color/textIconColor"/>
 
             <EditText
                 android:id="@+id/fragment_edit_kiuer_telephone"
@@ -119,7 +136,8 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/telephone" />
+                android:hint="@string/telephone"
+                android:textColorHint="@color/textIconColor"/>
 
             <EditText
                 android:id="@+id/fragment_edit_kiuer_favorite_city"
@@ -133,7 +151,8 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/favorite_city" />
+                android:hint="@string/favorite_city"
+                android:textColorHint="@color/textIconColor"/>
 
             <Button
                 android:id="@+id/fragment_edit_kiuer_ok_button"

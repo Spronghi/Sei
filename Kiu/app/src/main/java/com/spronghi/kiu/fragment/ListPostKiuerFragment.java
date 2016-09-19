@@ -24,8 +24,8 @@ import java.util.List;
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.adapter.DividerItemDecoration;
 import com.spronghi.kiu.adapter.PostKiuerAdapter;
+import com.spronghi.kiu.http.PostKiuerService;
 import com.spronghi.kiu.model.PostKiuer;
-import com.spronghi.kiu.runtime.CurrentPost;
 
 /**
  * Created by MatteoSemolaArena on 09/09/2016.
@@ -134,12 +134,7 @@ public class ListPostKiuerFragment extends ModelFragment {
 
     }
     private void populateList(){
-        postList.add(CurrentPost.getPostKiuer());
-        postList.add(CurrentPost.getPostKiuer());
-        postList.add(CurrentPost.getPostKiuer());
-        postList.add(CurrentPost.getPostKiuer());
-        postList.add(CurrentPost.getPostKiuer());
-        postList.add(CurrentPost.getPostKiuer());
+        postList = PostKiuerService.getAll();
     }
     private void updateSubtitle(final String subtitle) {
         toolbar.setSubtitle(subtitle);

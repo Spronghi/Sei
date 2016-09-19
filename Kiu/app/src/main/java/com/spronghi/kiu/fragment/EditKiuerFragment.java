@@ -26,6 +26,7 @@ public class EditKiuerFragment extends ModelFragment<Kiuer>{
     private EditText birthText;
     private EditText telephoneText;
     private EditText favoriteCityText;
+    private EditText passwordText;
     private Toolbar toolbar;
     private Button okButton;
 
@@ -43,6 +44,7 @@ public class EditKiuerFragment extends ModelFragment<Kiuer>{
         birthText.setText(kiuer.getBirthString());
         telephoneText.setText(kiuer.getTelephone());
         favoriteCityText.setText(kiuer.getFavoriteCity());
+        passwordText.setText(kiuer.getPassword());
 
     }
     @Override
@@ -56,6 +58,7 @@ public class EditKiuerFragment extends ModelFragment<Kiuer>{
         birthText = (EditText) layout.findViewById(R.id.fragment_edit_kiuer_birth);
         telephoneText = (EditText) layout.findViewById(R.id.fragment_edit_kiuer_telephone);
         favoriteCityText = (EditText) layout.findViewById(R.id.fragment_edit_kiuer_favorite_city);
+        passwordText = (EditText) layout.findViewById(R.id.fragment_edit_kiuer_password);
         okButton = (Button) layout.findViewById(R.id.fragment_edit_kiuer_ok_button);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_edit_kiuer_toolbar);
 

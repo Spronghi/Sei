@@ -1,15 +1,17 @@
 package com.spronghi.kiu.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.spronghi.kiu.R;
+import com.spronghi.kiu.backgroundservice.NotificationService;
 import com.spronghi.kiu.fragment.FragmentControl;
 import com.spronghi.kiu.fragment.FragmentFactory;
 import com.spronghi.kiu.fragment.ModelFragment;
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         setupMenu(savedInstanceState);
         setupDrawerContent(navigationView);
         //setupUsernameText();
+
+        //Intent s = new Intent(this, NotificationService.class);
+        //startService(s);
     }
 
     private void setupMenu(Bundle savedInstanceState){

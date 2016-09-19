@@ -1,6 +1,7 @@
 package com.spronghi.kiu.activity;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.model.Kiuer;
+import com.spronghi.kiu.setup.SetupView;
 
 /**
  * Created by spronghi on 14/09/16.
@@ -33,31 +35,35 @@ public class SignupHelperActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup_kiuer);
+        setContentView(R.layout.activity_signup_helper);
 
-        usernameText = (EditText) findViewById(R.id.fragment_edit_helper_username);
-        statusText = (EditText) findViewById(R.id.fragment_edit_helper_status);
-        nameText = (EditText) findViewById(R.id.fragment_edit_helper_name);
-        surnameText = (EditText) findViewById(R.id.fragment_edit_helper_surname);
-        birthText = (EditText) findViewById(R.id.fragment_edit_helper_birth);
-        telephoneText = (EditText) findViewById(R.id.fragment_edit_helper_telephone);
-        favoriteCityText = (EditText) findViewById(R.id.fragment_edit_helper_favorite_city);
-        favoriteCostText = (EditText) findViewById(R.id.fragment_edit_helper_favorite_cost);
-        okButton = (Button) findViewById(R.id.fragment_edit_helper_ok_button);
-        toolbar = (Toolbar) findViewById(R.id.fragment_edit_helper_toolbar);
+        usernameText = (EditText) findViewById(R.id.activity_signup_helper_username);
+        statusText = (EditText) findViewById(R.id.activity_signup_helper_status);
+        nameText = (EditText) findViewById(R.id.activity_signup_helper_name);
+        surnameText = (EditText) findViewById(R.id.activity_signup_helper_surname);
+        birthText = (EditText) findViewById(R.id.activity_signup_helper_birth);
+        telephoneText = (EditText) findViewById(R.id.activity_signup_helper_telephone);
+        favoriteCityText = (EditText) findViewById(R.id.activity_signup_helper_favorite_city);
+        favoriteCostText = (EditText) findViewById(R.id.activity_signup_helper_favorite_cost);
+        okButton = (Button) findViewById(R.id.activity_signup_helper_ok_button);
+        toolbar = (Toolbar) findViewById(R.id.activity_signup_helper_toolbar);
 
         helper= new Helper();
 
-        setupHelper();
-        setupToolbar();
+        SetupView.setEditTextForDate(birthText, this);
+
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TO DO create helper
-                //TO DO load MainActivity
+                Intent intent = new Intent(SignupHelperActivity.this, MainActivity.class);
+                startActivity(intent);
+                SignupHelperActivity.this.finish();
             }
         });
+
+        setupToolbar();
     }
 
     private void setupHelper(){
@@ -65,7 +71,7 @@ public class SignupHelperActivity  extends AppCompatActivity {
 
     }
     private void setupToolbar(){
-        final FragmentManager manager = this.getFragmentManager();
+
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -79,7 +85,9 @@ public class SignupHelperActivity  extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                manager.popBackStack();
+                Intent intent = new Intent(SignupHelperActivity.this, LoginActivity.class);
+                startActivity(intent);
+                SignupHelperActivity.this.finish();
             }
         });
     }

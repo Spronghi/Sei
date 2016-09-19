@@ -46,4 +46,14 @@ public class Place {
     public String getAddressLocation() {
         return address+", "+location;
     }
+
+    @Override
+    public String toString() {
+        return "Place{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", address='" + address + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
 }

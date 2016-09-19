@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,9 +24,8 @@ import java.util.List;
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.adapter.DividerItemDecoration;
 import com.spronghi.kiu.adapter.PostHelperAdapter;
-import com.spronghi.kiu.adapter.PostKiuerAdapter;
+import com.spronghi.kiu.http.PostHelperService;
 import com.spronghi.kiu.model.PostHelper;
-import com.spronghi.kiu.runtime.CurrentPost;
 
 /**
  * Created by MatteoSemolaArena on 10/09/2016.
@@ -134,11 +132,7 @@ public class ListPostHelperFragment extends ModelFragment {
 
     }
     private void populateList(){
-        postList.add(CurrentPost.getPostHelper());
-        postList.add(CurrentPost.getPostHelper());
-        postList.add(CurrentPost.getPostHelper());
-        postList.add(CurrentPost.getPostHelper());
-        postList.add(CurrentPost.getPostHelper());
+        postList = PostHelperService.getAll();
     }
     
     private void updateSubtitle(final String subtitle) {

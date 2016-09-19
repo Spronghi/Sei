@@ -43,10 +43,11 @@
                 android:layout_marginTop="76dp"
                 android:layout_marginLeft="175dp"
                 android:background="@android:color/transparent"
-                android:text="@string/helper"
                 android:textColor="#fff"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:hint="@string/helper"
+                android:textColorHint="@color/textIconColor"/>
 
             <EditText
                 android:id="@+id/activity_signup_helper_status"
@@ -58,7 +59,10 @@
                 android:layout_marginLeft="175dp"
                 android:text="@string/profile_status"
                 android:textColor="#fff"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:hint="@string/helper"
+                android:textColorHint="@color/textIconColor"
+                />
         </RelativeLayout>
 
 
@@ -75,11 +79,12 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@color/darkPrimaryColor"
-                android:textColor="#fff"
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/name" />
+                android:hint="@string/name"
+                android:textColor="@color/textIconColor"
+                android:textColorHint="@color/textIconColor"/>
 
             <EditText
                 android:id="@+id/activity_signup_helper_surname"
@@ -91,7 +96,8 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/surname" />
+                android:hint="@string/surname"
+                android:textColorHint="@color/textIconColor"/>
 
             <EditText
                 android:id="@+id/activity_signup_helper_birth"
@@ -105,7 +111,8 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/birth" />
+                android:hint="@string/birth"
+                android:textColorHint="@color/textIconColor"/>
 
             <EditText
                 android:id="@+id/activity_signup_helper_telephone"
@@ -117,7 +124,8 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/telephone" />
+                android:hint="@string/telephone"
+                android:textColorHint="@color/textIconColor"/>
 
             <EditText
                 android:id="@+id/activity_signup_helper_favorite_city"
@@ -131,7 +139,8 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/favorite_city" />
+                android:hint="@string/favorite_city"
+                android:textColorHint="@color/textIconColor"/>
             <EditText
                 android:id="@+id/activity_signup_helper_favorite_cost"
                 android:layout_width="fill_parent"
@@ -144,7 +153,8 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/favorite_cost" />
+                android:hint="@string/favorite_cost"
+                android:textColorHint="@color/textIconColor"/>
 
             <Button
                 android:id="@+id/activity_signup_helper_ok_button"

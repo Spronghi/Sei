@@ -1,6 +1,5 @@
 package com.spronghi.kiu.request;
 
-import com.spronghi.kiu.runtime.CurrentPost;
 import com.spronghi.kiu.runtime.CurrentUser;
 
 import java.util.ArrayList;
@@ -30,11 +29,11 @@ public class RequestChecker {
     }
 
     private void populateKiuerList(){
-        KiuerRequest kiuerRequest = new KiuerRequest(CurrentUser.getHelper(), CurrentUser.getKiuer(), CurrentPost.getPostKiuer(), Request.SEND);
-        kiuerRequestList.add(kiuerRequest);
+        //KiuerRequest kiuerRequest = new KiuerRequest(CurrentUser.getHelper(), CurrentUser.getKiuer(), CurrentPost.getPostKiuer(), Request.SEND);
+        //kiuerRequestList.add(kiuerRequest);
     }
     private void populateHelperList(){
-        HelperRequest helperRequest = new HelperRequest(CurrentUser.getKiuer(), CurrentUser.getHelper(), CurrentPost.getPostKiuer(), Request.SEND);
-        helperRequestList.add(helperRequest);
+        //HelperRequest helperRequest = new HelperRequest(CurrentUser.getKiuer(), CurrentUser.getHelper(), CurrentPost.getPostKiuer(), Request.SEND);
+        //helperRequestList.add(helperRequest);
     }
 }

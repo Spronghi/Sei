@@ -54,7 +54,8 @@
                 android:textColor="#fff"
                 android:padding="20dp"
                 android:elevation="4dp"
-                android:text="@string/ask_for_end_date"/>
+                android:textColorHint="@color/textIconColor"
+                android:hint="@string/ask_for_end_date"/>
             <EditText
                 android:id="@+id/fragment_create_end_hour_text"
                 android:layout_width="fill_parent"
@@ -67,7 +68,8 @@
                 android:textColor="#fff"
                 android:padding="20dp"
                 android:elevation="4dp"
-                android:text="@string/ask_for_end_hour"/>
+                android:textColorHint="@color/textIconColor"
+                android:hint="@string/ask_for_end_hour"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,13 +78,15 @@
                     android:id="@+id/fragment_create_end_date_preview_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/preview"/>
+                    android:text="@string/preview"
+                    android:textColor="@color/textIconColor"/>
                 <Button
                     android:id="@+id/fragment_create_end_date_create_button"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/create_post"/>
+                    android:text="@string/create_post"
+                    android:textColor="@color/textIconColor"/>
             </LinearLayout>
         </LinearLayout>
 

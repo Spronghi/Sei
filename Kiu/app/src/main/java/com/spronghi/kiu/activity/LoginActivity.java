@@ -1,5 +1,7 @@
 package com.spronghi.kiu.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -11,8 +13,15 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.spronghi.kiu.R;
+import com.spronghi.kiu.http.HelperService;
+import com.spronghi.kiu.http.KiuerService;
+import com.spronghi.kiu.http.Login;
+import com.spronghi.kiu.model.Helper;
+import com.spronghi.kiu.model.Kiuer;
+import com.spronghi.kiu.runtime.CurrentUser;
 
 /**
  * Created by matte on 13/06/2016.
@@ -48,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         kiuerRadioButton.setOnClickListener(new View.OnClickListener() {
-
+            @Override
             public void onClick(View v) {
                 mScrollView.setBackgroundColor(getResources().getColor(R.color.primaryColor));
                 kiuerRadioButton.setButtonTintList(ColorStateList.valueOf(getResources().getColor(R.color.accentColor)));
@@ -59,12 +68,12 @@ public class LoginActivity extends AppCompatActivity {
                 usernameEditText.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.accentColor)));
                 passwordEditText.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.accentColor)));
 
-                //CurrentUser.setConsumerFlag(true);
+                CurrentUser.setIsKiuer(true);
             }
         });
 
         helperRadioButton.setOnClickListener(new View.OnClickListener() {
-
+            @Override
             public void onClick(View v) {
                 mScrollView.setBackgroundColor(getResources().getColor(R.color.accentColor));
                 helperRadioButton.setButtonTintList(ColorStateList.valueOf(getResources().getColor(R.color.primaryColor)));
@@ -74,7 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                 rememberMe.setButtonTintList(ColorStateList.valueOf(getResources().getColor(R.color.primaryColor)));
                 usernameEditText.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primaryColor)));
                 passwordEditText.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primaryColor)));
-                //CurrentUser.setConsumerFlag(false);
+
+                CurrentUser.setIsKiuer(false);
             }
         });
 
@@ -103,41 +113,50 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    /*public void loginBtnClicked(View view){
+
+    public void loginBtnClicked(View view){
         Context context = getApplicationContext();
-        String text;
-        try {
-            text = context.getString(R.string.opSuccessfully);
-            int duration = Toast.LENGTH_SHORT;
+        if(kiuerRadioButton.isChecked()){
+            CurrentUser.setKiuer(Login.asKiuer(usernameEditText.getText().toString(), passwordEditText.getText().toString()));
+            if(CurrentUser.getKiuer() != null){
+                Toast.makeText(context, R.string.opSuccessfully, Toast.LENGTH_SHORT).show();
 
-            Toast toast = Toast.makeText(context, text, duration);
-            //toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
-            toast.show();
-            /*
-            Consumer consumer = Login.login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
-            if(consumer != null){
-                loggati e carica la home
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                this.finish();
+            } else {
+                Toast.makeText(context, R.string.loginFailed, Toast.LENGTH_SHORT).show();
             }
+        } else if(helperRadioButton.isChecked()){
+            CurrentUser.setHelper(Login.asHelper(usernameEditText.getText().toString(), passwordEditText.getText().toString()));
+            if(CurrentUser.getHelper() != null) {
+                Toast.makeText(context, R.string.opSuccessfully, Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-            this.finish();
-        } catch (Exception e) {
-            text = context.getString(R.string.loginFailed);
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            e.printStackTrace();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                this.finish();
+            } else {
+                Toast.makeText(context, R.string.loginFailed, Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(context, R.string.loginFailedUnchecked, Toast.LENGTH_SHORT).show();
         }
-
     }
 
-    public void signupClicked(View view){
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
-        finish();
-    }*/
+    public void signupClicked(View view) {
+        Context context = getApplicationContext();
+        String text;
+
+        if (kiuerRadioButton.isChecked()) {
+            Intent intent = new Intent(this, SignupKiuerActivity.class);
+            startActivity(intent);
+        } else if (helperRadioButton.isChecked()) {
+            Intent intent = new Intent(this, SignupHelperActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(context, R.string.loginFailedUnchecked, Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

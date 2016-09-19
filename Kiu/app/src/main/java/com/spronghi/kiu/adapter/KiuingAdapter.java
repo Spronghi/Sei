@@ -1,6 +1,5 @@
 package com.spronghi.kiu.adapter;
 
-import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,26 +8,23 @@ import android.widget.TextView;
 
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.kiuing.Kiuing;
+import com.spronghi.kiu.kiuing.KiuingOperation;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by spronghi on 14/09/16.
  */
 public class KiuingAdapter extends RecyclerView.Adapter<KiuingAdapter.MyViewHolder>{
-    private List<String> list;
-    private Map<String, Boolean> requestMap;
+    private List<KiuingOperation> operationList;
 
     public KiuingAdapter(Kiuing kiuing) {
         if(kiuing==null){
-            list = new ArrayList<>();
-            requestMap = new HashMap<>();
+            operationList = new ArrayList<>();
         } else {
-            list = kiuing.getOperationList();
-            requestMap = kiuing.getKiuingMap();
+            operationList = new ArrayList<>();
+            // operationList = OperationKiuingService.getAllByKiuing(kiuing.getId());
         }
     }
 
@@ -52,16 +48,16 @@ public class KiuingAdapter extends RecyclerView.Adapter<KiuingAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        if(requestMap.get(list.get(position))) {
+        if(operationList.get(position).isDone()) {
             holder.message.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_done_black_24dp, 0, 0, 0);
         } else {
             holder.message.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_clear_black_24dp, 0, 0, 0);
         }
-        holder.message.setText(list.get(position));
+        holder.message.setText(operationList.get(position).getOperation());
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return operationList.size();
     }
 }

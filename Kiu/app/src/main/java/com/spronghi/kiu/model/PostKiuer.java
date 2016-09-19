@@ -82,11 +82,15 @@ public class PostKiuer {
         this.startDate = startDate;
     }
     public String getStartDateString(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy kk:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy kk:mm");
+        return formatter.format(startDate);
+    }
+    public String getStartDateRequest(){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-kk-mm");
         return formatter.format(startDate);
     }
     public void setStartDate(String startDate){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy kk:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy kk:mm");
         try {
             this.startDate = formatter.parse(startDate);
         } catch (ParseException e) {
@@ -118,5 +122,21 @@ public class PostKiuer {
 
     public void setOpen(boolean open) {
         this.open = open;
+    }
+
+    @Override
+    public String toString() {
+        return "PostKiuer{" +
+                "id=" + id +
+                ", kiuer=" + kiuer +
+                ", helper=" + helper +
+                ", title='" + title + '\'' +
+                ", status='" + status + '\'' +
+                ", place=" + place +
+                ", startDate=" + startDate +
+                ", duration=" + duration +
+                ", cost=" + cost +
+                ", open=" + open +
+                '}';
     }
 }
