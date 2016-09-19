@@ -1,9 +1,7 @@
 package http;
 
-import integration.control.DAOControl;
-import integration.dao.DAO;
-import integration.dao.DAOFactory;
-import model.Helper;
+import integration.dao.PostHelperDAO;
+import integration.dao.HelperDAO;
 import model.PostHelper;
 import service.control.ParserControl;
 import service.json.JSONParser;
@@ -21,14 +19,14 @@ import java.io.PrintWriter;
  * Created by spronghi on 15/09/16.
  */
 public class PostHelperService extends HttpServlet {
-    private DAO<PostHelper> dao;
+    private PostHelperDAO dao;
     private JSONParser<PostHelper> parser;
 
     private PostHelper getPostHelper(HttpServletRequest request){
         PostHelper post = new PostHelper();
 
         post.setId(Integer.parseInt(request.getParameter("id")));
-        post.setHelper(DAOFactory.<Helper>getInstance(DAOControl.HELPER).get(Integer.parseInt(request.getParameter("helper_id"))));
+        post.setHelper(new HelperDAO().get(Integer.parseInt(request.getParameter("helper_id"))));
         post.setTitle(request.getParameter("title"));
         post.setStartDate(DateFormatter.fromRequest(request.getParameter("start")));
         post.setEndDate(DateFormatter.fromRequest(request.getParameter("end")));
@@ -45,7 +43,7 @@ public class PostHelperService extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        dao = DAOFactory.getInstance(DAOControl.POST_HELPER);
+        dao = new PostHelperDAO();
         parser = JSONParserFactory.getInstance(ParserControl.POST_HELPER);
 
         String service = request.getParameter("service");

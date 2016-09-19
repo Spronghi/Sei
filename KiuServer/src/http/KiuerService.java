@@ -1,8 +1,6 @@
 package http;
 
-import integration.control.DAOControl;
-import integration.dao.DAO;
-import integration.dao.DAOFactory;
+import integration.dao.KiuerDAO;
 import model.Kiuer;
 import service.control.ParserControl;
 import service.json.JSONParser;
@@ -20,22 +18,17 @@ import java.io.PrintWriter;
  * Created by spronghi on 15/09/16.
  */
 public class KiuerService extends HttpServlet {
-    private DAO<Kiuer> dao;
+    private KiuerDAO dao;
     private JSONParser<Kiuer> parser;
 
     private Kiuer getKiuer(HttpServletRequest request){
         Kiuer kiuer = new Kiuer();
 
         kiuer.setId(Integer.parseInt(request.getParameter("id")));
-        kiuer.setName(request.getParameter("name"));
-        kiuer.setSurname(request.getParameter("surname"));
-        kiuer.setBirth(request.getParameter("birth"));
-        kiuer.setTelephone(request.getParameter("telephone"));
+        kiuer.setEmail(request.getParameter("email"));
         kiuer.setUsername(request.getParameter("username"));
         kiuer.setPassword(MD5Crypt.crypt(request.getParameter("password")));
-        kiuer.setFeedback(Float.parseFloat(request.getParameter("feedback")));
         kiuer.setFavoriteCity(request.getParameter("favorite_city"));
-        kiuer.setProfileStatus(request.getParameter("profile_status"));
         return kiuer;
     }
 
@@ -46,7 +39,7 @@ public class KiuerService extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        dao = DAOFactory.getInstance(DAOControl.KIUER);
+        dao = new KiuerDAO();
         parser = JSONParserFactory.getInstance(ParserControl.KIUER);
 
         String service = request.getParameter("service");

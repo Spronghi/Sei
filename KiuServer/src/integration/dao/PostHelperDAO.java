@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 /**
  * Created by spronghi on 15/09/16.
  */
-public class PostHelperDAO implements FilterDAO<PostHelper>{
+public class PostHelperDAO {
     private static final String SELECT = "SELECT `id`, `open`, `title`, `city`, `cost`, `start`, `end`, `helper_id` FROM post_helper";
     private static final String SELECT_FROM_ID = "SELECT `id`, `open`, `title`, `city`, `cost`, `start`, `end`, `helper_id` FROM post_helper WHERE `id`=?";
     private static final String INSERT = "INSERT INTO post_helper (open, title, city, cost, start, end, helper_id) VALUES (?,'?','?',?,'?','?',?)";
@@ -46,7 +46,6 @@ public class PostHelperDAO implements FilterDAO<PostHelper>{
         return post;
     }
 
-    @Override
     public PostHelper get(int id) {
         String query = SELECT_FROM_ID;
         query = Replacer.replaceFirst(query, id);
@@ -61,7 +60,6 @@ public class PostHelperDAO implements FilterDAO<PostHelper>{
         return null;
     }
 
-    @Override
     public List<PostHelper> getAll() {
         List<PostHelper> posts = new ArrayList<>();
         ResultSet rs = ConnectorFactory.getConnection().executeQuery(SELECT);
@@ -75,7 +73,6 @@ public class PostHelperDAO implements FilterDAO<PostHelper>{
         return posts;
     }
 
-    @Override
     public void create(PostHelper post) {
         String query = INSERT;
         query = Replacer.replaceFirst(query, post.isOpen());
@@ -88,7 +85,6 @@ public class PostHelperDAO implements FilterDAO<PostHelper>{
         post.setId(ConnectorFactory.getConnection().executeUpdate(query));
     }
 
-    @Override
     public void update(PostHelper post) {
         String query = UPDATE;
         query = Replacer.replaceFirst(query, post.isOpen());
@@ -101,14 +97,12 @@ public class PostHelperDAO implements FilterDAO<PostHelper>{
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public void delete(PostHelper post) {
         String query = DELETE;
         query = Replacer.replaceFirst(query, post.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public List<PostHelper> getAllBy(String flag, Object key){
         List<PostHelper> postList = new ArrayList<>();
         String query="";

@@ -1,12 +1,10 @@
 package http;
 
-import integration.control.DAOControl;
 import integration.control.FilterControl;
-import integration.dao.DAO;
-import integration.dao.DAOFactory;
+import integration.dao.KiuingOperationDAO;
+import integration.dao.OperationDAO;
 import model.KiuingOperation;
 import model.Operation;
-import model.PostKiuer;
 import service.control.ParserControl;
 import service.json.JSONParser;
 import service.json.JSONParserFactory;
@@ -17,14 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.OpenOption;
 import java.util.List;
 
 /**
  * Created by spronghi on 15/09/16.
  */
 public class KiuingOperationService extends HttpServlet {
-    private DAO<KiuingOperation> dao;
+    private KiuingOperationDAO dao;
     private JSONParser<KiuingOperation> parser;
 
     private KiuingOperation getKiuingOperation(HttpServletRequest request){
@@ -33,7 +30,7 @@ public class KiuingOperationService extends HttpServlet {
         operation.setKiuing(Integer.parseInt(request.getParameter("kiuing_id")));
         operation.setDone(Boolean.parseBoolean(request.getParameter("done")));
 
-        List<Operation> operations = DAOFactory.<Operation>getFilterInstance(DAOControl.OPERATION).getAllBy(FilterControl.OPERATION,request.getParameter("operation"));
+        List<Operation> operations = new OperationDAO().getAllBy(FilterControl.OPERATION,request.getParameter("operation"));
         operation.setOperation(operations.iterator().next());
         return operation;
     }
@@ -45,7 +42,7 @@ public class KiuingOperationService extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        dao = DAOFactory.getInstance(DAOControl.KIUING_OPERATION);
+        dao = new KiuingOperationDAO();
         parser = JSONParserFactory.getInstance(ParserControl.KIUING_OPERATION);
 
         String service = request.getParameter("service");

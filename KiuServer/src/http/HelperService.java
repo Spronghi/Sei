@@ -1,8 +1,6 @@
 package http;
 
-import integration.control.DAOControl;
-import integration.dao.DAO;
-import integration.dao.DAOFactory;
+import integration.dao.HelperDAO;
 import model.Helper;
 import service.control.ParserControl;
 import service.json.JSONParser;
@@ -20,22 +18,17 @@ import java.io.PrintWriter;
  * Created by spronghi on 15/09/16.
  */
 public class HelperService extends HttpServlet {
-    private DAO<Helper> dao;
+    private HelperDAO dao;
     private JSONParser<Helper> parser;
 
     private Helper getHelper(HttpServletRequest request){
         Helper helper = new Helper();
 
         helper.setId(Integer.parseInt(request.getParameter("id")));
-        helper.setName(request.getParameter("name"));
-        helper.setSurname(request.getParameter("surname"));
-        helper.setBirth(request.getParameter("birth"));
-        helper.setTelephone(request.getParameter("telephone"));
+        helper.setEmail(request.getParameter("email"));
         helper.setUsername(request.getParameter("username"));
         helper.setPassword(MD5Crypt.crypt(request.getParameter("password")));
-        helper.setFeedback(Float.parseFloat(request.getParameter("feedback")));
         helper.setFavoriteCity(request.getParameter("favorite_city"));
-        helper.setProfileStatus(request.getParameter("profile_status"));
         helper.setFavoriteCost(Double.parseDouble(request.getParameter("favorite_cost")));
         return helper;
     }
@@ -47,7 +40,7 @@ public class HelperService extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        dao = DAOFactory.getInstance(DAOControl.HELPER);
+        dao = new HelperDAO();
         parser = JSONParserFactory.getInstance(ParserControl.HELPER);
 
         String service = request.getParameter("service");

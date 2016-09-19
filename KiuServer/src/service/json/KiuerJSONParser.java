@@ -21,13 +21,8 @@ public class KiuerJSONParser implements JSONParser<Kiuer>{
             kiuer.setId(((Integer)obj.get("id")));
             kiuer.setUsername((String)obj.get("username"));
             kiuer.setPassword((String)obj.get("password"));
-            kiuer.setName((String)obj.get("name"));
-            kiuer.setSurname((String)obj.get("surname"));
-            kiuer.setBirth((String)obj.get("birth"));
-            kiuer.setTelephone((String)obj.get("telephone"));
-            kiuer.setFeedback(((Long)obj.get("feedback")).intValue());
+            kiuer.setEmail(((String)obj.get("email")));
             kiuer.setFavoriteCity(((String)obj.get("favorite_city")));
-            kiuer.setProfileStatus((String)obj.get("profile_status"));
             return kiuer;
         } catch (ParseException e) {
             e.printStackTrace();
@@ -42,12 +37,8 @@ public class KiuerJSONParser implements JSONParser<Kiuer>{
         obj.put("id", kiuer.getId());
         obj.put("username", kiuer.getUsername());
         obj.put("password", kiuer.getPassword());
-        obj.put("name", kiuer.getName());
-        obj.put("surname", kiuer.getSurname());
-        obj.put("birth", DateFormatter.toString(kiuer.getBirth(), "dd-MM-yyyy"));
-        obj.put("telephone", kiuer.getTelephone());
-        obj.put("feedback", kiuer.getFeedback());
-        obj.put("profile_status", kiuer.getProfileStatus());
+        obj.put("email", kiuer.getEmail());
+        obj.put("favorite_city", kiuer.getFavoriteCity());
         return obj;
     }
 

@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 /**
  * Created by spronghi on 15/09/16.
  */
-public class ToKiuerRequestDAO implements FilterDAO<ToKiuerRequest> {
+public class ToKiuerRequestDAO {
     private static final String SELECT = "SELECT `id`, `seen`, `kiuer_id`, `helper_id`, `post_kiuer_id`, `type_id` FROM kiuer_request";
     private static final String SELECT_FROM_ID = "SELECT `id`, `seen`, `kiuer_id`, `helper_id`, `post_kiuer_id`, `type_id` FROM kiuer_request WHERE `id`=?";
     private static final String INSERT = "INSERT INTO kiuer_request (seen, kiuer_id, helper_id, post_kiuer_id, type_id) VALUES (?,?,?,?,?)";
@@ -47,7 +47,6 @@ public class ToKiuerRequestDAO implements FilterDAO<ToKiuerRequest> {
         return request;
     }
 
-    @Override
     public ToKiuerRequest get(int id) {
         String query = SELECT_FROM_ID;
         query = Replacer.replaceFirst(query, id);
@@ -62,7 +61,6 @@ public class ToKiuerRequestDAO implements FilterDAO<ToKiuerRequest> {
         return null;
     }
 
-    @Override
     public List<ToKiuerRequest> getAll() {
         List<ToKiuerRequest> requests = new ArrayList<>();
         ResultSet rs = ConnectorFactory.getConnection().executeQuery(SELECT);
@@ -76,7 +74,6 @@ public class ToKiuerRequestDAO implements FilterDAO<ToKiuerRequest> {
         return requests;
     }
 
-    @Override
     public void create(ToKiuerRequest request) {
         String query = INSERT;
         query = Replacer.replaceFirst(query, request.isSeen());
@@ -87,7 +84,6 @@ public class ToKiuerRequestDAO implements FilterDAO<ToKiuerRequest> {
         request.setId(ConnectorFactory.getConnection().executeUpdate(query));
     }
 
-    @Override
     public void update(ToKiuerRequest request) {
         String query = UPDATE;
         query = Replacer.replaceFirst(query, request.isSeen());
@@ -98,14 +94,12 @@ public class ToKiuerRequestDAO implements FilterDAO<ToKiuerRequest> {
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public void delete(ToKiuerRequest request) {
         String query = DELETE;
         query = Replacer.replaceFirst(query, request.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public List<ToKiuerRequest> getAllBy(String flag, Object key){
         List<ToKiuerRequest> requestList = new ArrayList<>();
         String query="";

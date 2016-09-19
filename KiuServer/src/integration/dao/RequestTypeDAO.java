@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 /**
  * Created by spronghi on 15/09/16.
  */
-public class RequestTypeDAO implements FilterDAO<RequestType> {
+public class RequestTypeDAO {
     private static final String SELECT = "SELECT `id`, `type` FROM request_type";
     private static final String SELECT_FROM_ID = "SELECT `id`, `type` FROM request_type WHERE `id`=?";
     private static final String INSERT = "INSERT INTO request_type (type) VALUES ('?')";
@@ -31,7 +31,6 @@ public class RequestTypeDAO implements FilterDAO<RequestType> {
         return new RequestType(rs.getInt(1),rs.getString(2));
     }
 
-    @Override
     public RequestType get(int id) {
         String query = SELECT_FROM_ID;
         query = Replacer.replaceFirst(query, id);
@@ -46,7 +45,6 @@ public class RequestTypeDAO implements FilterDAO<RequestType> {
         return null;
     }
 
-    @Override
     public List<RequestType> getAll() {
         List<RequestType> types = new ArrayList<>();
         ResultSet rs = ConnectorFactory.getConnection().executeQuery(SELECT);
@@ -60,27 +58,23 @@ public class RequestTypeDAO implements FilterDAO<RequestType> {
         return types;
     }
 
-    @Override
     public void create(RequestType type) {
         String query = INSERT;
         query = Replacer.replaceFirst(query, type.getType());
         type.setId(ConnectorFactory.getConnection().executeUpdate(query));
     }
 
-    @Override
     public void update(RequestType type) {
         String query = UPDATE;
         query = Replacer.replaceFirst(query, type.getType());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public void delete(RequestType type) {
         String query = DELETE;
         query = Replacer.replaceFirst(query, type.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
-    @Override
     public List<RequestType> getAllBy(String flag, Object key){
         List<RequestType> postList = new ArrayList<>();
         String query="";

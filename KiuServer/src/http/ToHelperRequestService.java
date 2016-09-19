@@ -1,9 +1,7 @@
 package http;
 
-import integration.control.DAOControl;
 import integration.control.FilterControl;
-import integration.dao.DAO;
-import integration.dao.DAOFactory;
+import integration.dao.*;
 import model.*;
 import service.control.ParserControl;
 import service.json.JSONParser;
@@ -21,7 +19,7 @@ import java.util.List;
  * Created by spronghi on 15/09/16.
  */
 public class ToHelperRequestService extends HttpServlet {
-    private DAO<ToHelperRequest> dao;
+    private ToHelperRequestDAO dao;
     private JSONParser<ToHelperRequest> parser;
 
     private ToHelperRequest getToHelperRequest(HttpServletRequest request){
@@ -29,11 +27,11 @@ public class ToHelperRequestService extends HttpServlet {
 
         toKiuerRequest.setId(Integer.parseInt(request.getParameter("id")));
         toKiuerRequest.setSeen(Boolean.parseBoolean(request.getParameter("seen")));
-        toKiuerRequest.setAddressee(DAOFactory.<Helper>getInstance(DAOControl.HELPER).get(Integer.parseInt(request.getParameter("addressee_id"))));
-        toKiuerRequest.setSender(DAOFactory.<Kiuer>getInstance(DAOControl.KIUER).get(Integer.parseInt(request.getParameter("sender_id"))));
-        toKiuerRequest.setPost(DAOFactory.<PostKiuer>getInstance(DAOControl.POST_KIUER).get(Integer.parseInt(request.getParameter("post_id"))));
+        toKiuerRequest.setAddressee(new HelperDAO().get(Integer.parseInt(request.getParameter("addressee_id"))));
+        toKiuerRequest.setSender(new KiuerDAO().get(Integer.parseInt(request.getParameter("sender_id"))));
+        toKiuerRequest.setPost(new PostKiuerDAO().get(Integer.parseInt(request.getParameter("post_id"))));
 
-        List<RequestType> type = DAOFactory.<RequestType>getFilterInstance(DAOControl.REQUEST_TYPE).getAllBy(FilterControl.TYPE,request.getParameter("type"));
+        List<RequestType> type = new RequestTypeDAO().getAllBy(FilterControl.TYPE,request.getParameter("type"));
         toKiuerRequest.setType(type.iterator().next());
 
         return toKiuerRequest;
@@ -46,7 +44,7 @@ public class ToHelperRequestService extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        dao = DAOFactory.getInstance(DAOControl.TO_HELPER_REQUEST);
+        dao = new ToHelperRequestDAO();
         parser = JSONParserFactory.getInstance(ParserControl.TO_HELPER_REQUEST);
 
         String service = request.getParameter("service");

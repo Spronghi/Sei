@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 /**
  * Created by spronghi on 15/09/16.
  */
-public class KiuingDAO implements DAO<Kiuing> {
+public class KiuingDAO {
     private static final String SELECT = "SELECT `id`, `post_kiuer_id` FROM kiuing";
     private static final String SELECT_FROM_ID = "SELECT `id`, `post_kiuer_id` FROM kiuing WHERE `id`=?";
     private static final String INSERT = "INSERT INTO kiuing (post_kiuer_id) VALUES ('?')";
@@ -42,7 +42,6 @@ public class KiuingDAO implements DAO<Kiuing> {
         return kiuing;
     }
 
-    @Override
     public Kiuing get(int id) {
         String query = SELECT_FROM_ID;
         query = Replacer.replaceFirst(query, id);
@@ -57,7 +56,6 @@ public class KiuingDAO implements DAO<Kiuing> {
         return null;
     }
 
-    @Override
     public List<Kiuing> getAll() {
         List<Kiuing> agencies = new ArrayList<>();
         ResultSet rs = ConnectorFactory.getConnection().executeQuery(SELECT);
@@ -71,7 +69,6 @@ public class KiuingDAO implements DAO<Kiuing> {
         return agencies;
     }
 
-    @Override
     public void create(Kiuing kiuing) {
         String query = INSERT;
         query = Replacer.replaceFirst(query, kiuing.getPost().getId());
@@ -83,14 +80,12 @@ public class KiuingDAO implements DAO<Kiuing> {
         }
     }
 
-    @Override
     public void update(Kiuing kiuing) {
         String query = UPDATE;
         query = Replacer.replaceFirst(query, kiuing.getPost().getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public void delete(Kiuing kiuing) {
         String query = DELETE;
         query = Replacer.replaceFirst(query, kiuing.getId());

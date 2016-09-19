@@ -1,14 +1,12 @@
 package http;
 
-import integration.control.DAOControl;
-import integration.dao.DAO;
-import integration.dao.DAOFactory;
+import integration.dao.KiuingDAO;
+import integration.dao.PostKiuerDAO;
 import model.Kiuing;
 import model.PostKiuer;
 import service.control.ParserControl;
 import service.json.JSONParser;
 import service.json.JSONParserFactory;
-import service.security.MD5Crypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,13 +19,13 @@ import java.io.PrintWriter;
  * Created by spronghi on 15/09/16.
  */
 public class KiuingService extends HttpServlet {
-    private DAO<Kiuing> dao;
+    private KiuingDAO dao;
     private JSONParser<Kiuing> parser;
 
     private Kiuing getKiuing(HttpServletRequest request){
         Kiuing kiuing = new Kiuing();
         kiuing.setId(Integer.parseInt(request.getParameter("id")));
-        kiuing.setPost(DAOFactory.<PostKiuer>getInstance(DAOControl.POST_KIUER).get(Integer.parseInt(request.getParameter("post_id"))));
+        kiuing.setPost(new PostKiuerDAO().get(Integer.parseInt(request.getParameter("post_id"))));
         return kiuing;
     }
 
@@ -38,7 +36,7 @@ public class KiuingService extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        dao = DAOFactory.getInstance(DAOControl.KIUING);
+        dao = new KiuingDAO();
         parser = JSONParserFactory.getInstance(ParserControl.KIUING);
 
         String service = request.getParameter("service");

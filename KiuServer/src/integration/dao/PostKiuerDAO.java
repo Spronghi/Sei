@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 /**
  * Created by spronghi on 15/09/16.
  */
-public class PostKiuerDAO implements FilterDAO<PostKiuer> {
+public class PostKiuerDAO {
     private static final String SELECT = "SELECT `id`, `open`, `title`, `status`, `duration`, `cost`, `start`, `kiuer_id`, `helper_id`, `place_id` FROM post_kiuer";
     private static final String SELECT_FROM_ID = "SELECT `id`, `open`, `title`, `status`, `duration`, `cost`, `start`, `kiuer_id`, `helper_id`, `place_id` FROM post_kiuer WHERE `id`=?";
     private static final String INSERT = "INSERT INTO post_kiuer (open, title, status, duration, cost, start, kiuer_id, helper_id, place_id) VALUES (?,'?','?',?,?,'?',?,?,?)";
@@ -51,7 +51,6 @@ public class PostKiuerDAO implements FilterDAO<PostKiuer> {
         return post;
     }
 
-    @Override
     public PostKiuer get(int id) {
         String query = SELECT_FROM_ID;
         query = Replacer.replaceFirst(query, id);
@@ -66,7 +65,6 @@ public class PostKiuerDAO implements FilterDAO<PostKiuer> {
         return null;
     }
 
-    @Override
     public List<PostKiuer> getAll() {
         List<PostKiuer> posts = new ArrayList<>();
         ResultSet rs = ConnectorFactory.getConnection().executeQuery(SELECT);
@@ -80,7 +78,6 @@ public class PostKiuerDAO implements FilterDAO<PostKiuer> {
         return posts;
     }
 
-    @Override
     public void create(PostKiuer post) {
         String query = INSERT;
         placeDAO.create(post.getPlace());
@@ -96,7 +93,6 @@ public class PostKiuerDAO implements FilterDAO<PostKiuer> {
         post.setId(ConnectorFactory.getConnection().executeUpdate(query));
     }
 
-    @Override
     public void update(PostKiuer post) {
         String query = UPDATE;
         placeDAO.update(post.getPlace());
@@ -112,14 +108,12 @@ public class PostKiuerDAO implements FilterDAO<PostKiuer> {
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public void delete(PostKiuer post) {
         String query = DELETE;
         query = Replacer.replaceFirst(query, post.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public List<PostKiuer> getAllBy(String flag, Object key){
         List<PostKiuer> postList = new ArrayList<>();
         String query="";

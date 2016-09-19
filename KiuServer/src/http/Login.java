@@ -1,8 +1,8 @@
 package http;
 
-import integration.control.DAOControl;
 import integration.control.FilterControl;
-import integration.dao.DAOFactory;
+import integration.dao.HelperDAO;
+import integration.dao.KiuerDAO;
 import model.Helper;
 import model.Kiuer;
 import service.control.ParserControl;
@@ -32,11 +32,11 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
 
         if(userType.equals(HttpControl.HELPER)){
-            Helper helper  = DAOFactory.<Helper>getFilterInstance(DAOControl.HELPER).getAllBy(FilterControl.USERNAME, username).stream().filter(p->p.getUsername().equalsIgnoreCase(username)).findFirst().get();
+            Helper helper  = new HelperDAO().getAllBy(FilterControl.USERNAME, username).stream().filter(p->p.getUsername().equalsIgnoreCase(username)).findFirst().get();
             if(helper.getPassword().equals(MD5Crypt.crypt(password)))
                 out.println(JSONParserFactory.<Helper>getInstance(ParserControl.HELPER).getJSONObj(helper).toJSONString());
         } else if(userType.equals(HttpControl.KIUER)){
-            Kiuer kiuer  = DAOFactory.<Kiuer>getFilterInstance(DAOControl.KIUER).getAllBy(FilterControl.USERNAME, username).stream().filter(p->p.getUsername().equalsIgnoreCase(username)).findFirst().get();
+            Kiuer kiuer  = new KiuerDAO().getAllBy(FilterControl.USERNAME, username).stream().filter(p->p.getUsername().equalsIgnoreCase(username)).findFirst().get();
             if(kiuer.getPassword().equals(MD5Crypt.crypt(password)))
                 out.println(JSONParserFactory.<Kiuer>getInstance(ParserControl.KIUER).getJSONObj(kiuer).toJSONString());
         } else {

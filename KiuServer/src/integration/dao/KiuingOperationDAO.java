@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 /**
  * Created by spronghi on 15/09/16.
  */
-public class KiuingOperationDAO implements FilterDAO<KiuingOperation>{
+public class KiuingOperationDAO {
     private static final String SELECT = "SELECT `id`, `operation_id`, `done`, `kiuing_id` FROM kiuing_operation";
     private static final String SELECT_FROM_ID = "SELECT `id`, `operation_id`, `done`, `kiuing_id` FROM kiuing_operation WHERE `id`=?";
     private static final String INSERT = "INSERT INTO kiuing_operation (operation_id, done, kiuing_id) VALUES (?,'?',?)";
@@ -42,7 +42,6 @@ public class KiuingOperationDAO implements FilterDAO<KiuingOperation>{
         return kiuingOperation;
     }
 
-    @Override
     public KiuingOperation get(int id) {
         String query = SELECT_FROM_ID;
         query = Replacer.replaceFirst(query, id);
@@ -57,7 +56,6 @@ public class KiuingOperationDAO implements FilterDAO<KiuingOperation>{
         return null;
     }
 
-    @Override
     public List<KiuingOperation> getAll() {
         List<KiuingOperation> agencies = new ArrayList<>();
         ResultSet rs = ConnectorFactory.getConnection().executeQuery(SELECT);
@@ -71,7 +69,6 @@ public class KiuingOperationDAO implements FilterDAO<KiuingOperation>{
         return agencies;
     }
 
-    @Override
     public void create(KiuingOperation kiuingOperation) {
         String query = INSERT;
         query = Replacer.replaceFirst(query, kiuingOperation.getOperation().getId());
@@ -80,7 +77,6 @@ public class KiuingOperationDAO implements FilterDAO<KiuingOperation>{
         kiuingOperation.setId(ConnectorFactory.getConnection().executeUpdate(query));
     }
 
-    @Override
     public void update(KiuingOperation kiuingOperation) {
         String query = UPDATE;
         query = Replacer.replaceFirst(query, kiuingOperation.getOperation().getOperation());
@@ -89,13 +85,11 @@ public class KiuingOperationDAO implements FilterDAO<KiuingOperation>{
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public void delete(KiuingOperation kiuingOperation) {
         String query = DELETE;
         query = Replacer.replaceFirst(query, kiuingOperation.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
-    @Override
     public List<KiuingOperation> getAllBy(String flag, Object key){
         List<KiuingOperation> operationList = new ArrayList<>();
         String query="";

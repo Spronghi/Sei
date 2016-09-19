@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 /**
  * Created by spronghi on 15/09/16.
  */
-public class ToHelperRequestDAO implements FilterDAO<ToHelperRequest> {
+public class ToHelperRequestDAO {
     private static final String SELECT = "SELECT `id`, `seen`, `kiuer_id`, `helper_id`, `post_kiuer_id`, `type_id` FROM helper_request";
     private static final String SELECT_FROM_ID = "SELECT `id`, `seen`, `kiuer_id`, `helper_id`, `post_kiuer_id`, `type_id` FROM helper_request WHERE `id`=?";
     private static final String INSERT = "INSERT INTO helper_request (seen, kiuer_id, helper_id, post_kiuer_id, type_id) VALUES (?,?,?,?,?)";
@@ -47,7 +47,6 @@ public class ToHelperRequestDAO implements FilterDAO<ToHelperRequest> {
         return request;
     }
 
-    @Override
     public ToHelperRequest get(int id) {
         String query = SELECT_FROM_ID;
         query = Replacer.replaceFirst(query, id);
@@ -62,7 +61,6 @@ public class ToHelperRequestDAO implements FilterDAO<ToHelperRequest> {
         return null;
     }
 
-    @Override
     public List<ToHelperRequest> getAll() {
         List<ToHelperRequest> requests = new ArrayList<>();
         ResultSet rs = ConnectorFactory.getConnection().executeQuery(SELECT);
@@ -76,7 +74,6 @@ public class ToHelperRequestDAO implements FilterDAO<ToHelperRequest> {
         return requests;
     }
 
-    @Override
     public void create(ToHelperRequest request) {
         String query = INSERT;
         query = Replacer.replaceFirst(query, request.isSeen());
@@ -87,7 +84,6 @@ public class ToHelperRequestDAO implements FilterDAO<ToHelperRequest> {
         request.setId(ConnectorFactory.getConnection().executeUpdate(query));
     }
 
-    @Override
     public void update(ToHelperRequest request) {
         String query = UPDATE;
         query = Replacer.replaceFirst(query, request.isSeen());
@@ -98,14 +94,12 @@ public class ToHelperRequestDAO implements FilterDAO<ToHelperRequest> {
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public void delete(ToHelperRequest request) {
         String query = DELETE;
         query = Replacer.replaceFirst(query, request.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public List<ToHelperRequest> getAllBy(String flag, Object key){
         List<ToHelperRequest> requestList = new ArrayList<>();
         String query="";

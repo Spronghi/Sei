@@ -1,16 +1,14 @@
 package http;
 
-import integration.control.DAOControl;
-import integration.dao.DAO;
-import integration.dao.DAOFactory;
-import model.Helper;
-import model.Kiuer;
+import integration.dao.HelperDAO;
+import integration.dao.KiuerDAO;
+import integration.dao.PlaceDAO;
+import integration.dao.PostKiuerDAO;
 import model.Place;
 import model.PostKiuer;
 import service.control.ParserControl;
 import service.json.JSONParser;
 import service.json.JSONParserFactory;
-import service.security.MD5Crypt;
 import util.DateFormatter;
 
 import javax.servlet.ServletException;
@@ -24,11 +22,11 @@ import java.io.PrintWriter;
  * Created by spronghi on 15/09/16.
  */
 public class PostKiuerService extends HttpServlet {
-    private DAO<PostKiuer> dao;
+    private PostKiuerDAO dao;
     private JSONParser<PostKiuer> parser;
 
     private PostKiuer getPostKiuer(HttpServletRequest request){
-        Place place = DAOFactory.<Place>getInstance(DAOControl.PLACE).get(Integer.parseInt(request.getParameter("place_id")));
+        Place place = new PlaceDAO().get(Integer.parseInt(request.getParameter("place_id")));
         if(place == null){
             place = new Place();
             place.setId(Integer.parseInt(request.getParameter("place_id")));
@@ -40,8 +38,8 @@ public class PostKiuerService extends HttpServlet {
         PostKiuer post = new PostKiuer();
 
         post.setId(Integer.parseInt(request.getParameter("id")));
-        post.setKiuer(DAOFactory.<Kiuer>getInstance(DAOControl.KIUER).get(Integer.parseInt(request.getParameter("kiuer_id"))));
-        post.setHelper(DAOFactory.<Helper>getInstance(DAOControl.HELPER).get(Integer.parseInt(request.getParameter("helper_id"))));
+        post.setKiuer(new KiuerDAO().get(Integer.parseInt(request.getParameter("kiuer_id"))));
+        post.setHelper(new HelperDAO().get(Integer.parseInt(request.getParameter("helper_id"))));
         post.setTitle(request.getParameter("title"));
         post.setStatus(request.getParameter("status"));
         post.setPlace(place);
@@ -59,7 +57,7 @@ public class PostKiuerService extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        dao = DAOFactory.getInstance(DAOControl.POST_KIUER);
+        dao = new PostKiuerDAO();
         parser = JSONParserFactory.getInstance(ParserControl.POST_KIUER);
 
         String service = request.getParameter("service");

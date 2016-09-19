@@ -1,16 +1,11 @@
 package service.json;
 
-import integration.control.DAOControl;
 import integration.control.FilterControl;
-import integration.dao.DAOFactory;
-import integration.dao.FilterDAO;
-import integration.dao.OperationDAO;
 import model.KiuingOperation;
 import model.Operation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
-import util.DateFormatter;
 
 import java.util.List;
 

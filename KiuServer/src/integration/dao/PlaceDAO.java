@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 /**
  * Created by spronghi on 04/07/16.
  */
-class PlaceDAO implements DAO<Place>{
+public class PlaceDAO {
     private static final String SELECT = "SELECT `id`, `city`, `address`, `location` FROM place";
     private static final String SELECT_FROM_ID = "SELECT `id`, `city`, `address`, `location` FROM place WHERE `id`=?";
     private static final String INSERT = "INSERT INTO place (city, address, location) VALUES ('?','?','?')";
@@ -34,7 +34,6 @@ class PlaceDAO implements DAO<Place>{
         return place;
     }
 
-    @Override
     public Place get(int id) {
         String query = SELECT_FROM_ID;
         query = Replacer.replaceFirst(query, id);
@@ -49,7 +48,6 @@ class PlaceDAO implements DAO<Place>{
         return null;
     }
 
-    @Override
     public List<Place> getAll() {
         List<Place> agencies = new ArrayList<>();
         ResultSet rs = ConnectorFactory.getConnection().executeQuery(SELECT);
@@ -63,7 +61,6 @@ class PlaceDAO implements DAO<Place>{
         return agencies;
     }
 
-    @Override
     public void create(Place place) {
         String query = INSERT;
         query = Replacer.replaceFirst(query, place.getCity());
@@ -72,7 +69,6 @@ class PlaceDAO implements DAO<Place>{
         place.setId(ConnectorFactory.getConnection().executeUpdate(query));
     }
 
-    @Override
     public void update(Place place) {
         String query = UPDATE;
         query = Replacer.replaceFirst(query, place.getCity());
@@ -81,7 +77,6 @@ class PlaceDAO implements DAO<Place>{
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public void delete(Place place) {
         String query = DELETE;
         query = Replacer.replaceFirst(query, place.getId());

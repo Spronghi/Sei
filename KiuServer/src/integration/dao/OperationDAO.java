@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 /**
  * Created by spronghi on 15/09/16.
  */
-public class OperationDAO implements FilterDAO<Operation> {
+public class OperationDAO {
     private static final String SELECT = "SELECT `id`, `operation` FROM operation";
     private static final String SELECT_FROM_ID = "SELECT `id`, `operation` FROM operation WHERE `id`=?";
     private static final String INSERT = "INSERT INTO operation (operation) VALUES ('?')";
@@ -31,7 +31,6 @@ public class OperationDAO implements FilterDAO<Operation> {
         return new Operation(rs.getInt(1),rs.getString(2));
     }
 
-    @Override
     public Operation get(int id) {
         String query = SELECT_FROM_ID;
         query = Replacer.replaceFirst(query, id);
@@ -46,7 +45,6 @@ public class OperationDAO implements FilterDAO<Operation> {
         return null;
     }
 
-    @Override
     public List<Operation> getAll() {
         List<Operation> operations = new ArrayList<>();
         ResultSet rs = ConnectorFactory.getConnection().executeQuery(SELECT);
@@ -60,28 +58,24 @@ public class OperationDAO implements FilterDAO<Operation> {
         return operations;
     }
 
-    @Override
     public void create(Operation operation) {
         String query = INSERT;
         query = Replacer.replaceFirst(query, operation.getOperation());
         operation.setId(ConnectorFactory.getConnection().executeUpdate(query));
     }
 
-    @Override
     public void update(Operation operation) {
         String query = UPDATE;
         query = Replacer.replaceFirst(query, operation.getOperation());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public void delete(Operation operation) {
         String query = DELETE;
         query = Replacer.replaceFirst(query, operation.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 
-    @Override
     public List<Operation> getAllBy(String flag, Object key) {
         List<Operation> operationList = new ArrayList<>();
         String query="";
