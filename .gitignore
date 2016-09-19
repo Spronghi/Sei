@@ -1,5 +1,6 @@
 Kiu/*.iml
 Kiu/*.gradle
+Kiu/gradle.properties
 Kiu/local.properties
 Kiu/.idea/
 Kiu/build/
@@ -9,3 +10,5 @@ Kiu/settings.gradle
 Kiu/gradlew.bat
 Kiu/gradlew
 Kiu/build/
+Kiu/app/app.iml
+Kiu/app/build.gradle
