@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app version="3.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+ 
+    <!-- To save as <CATALINA_HOME>\webapps\helloservlet\WEB-INF\web.xml -->
+    <servlet>
+        <servlet-name>TryConnection</servlet-name>
+        <servlet-class>http.TryConnection</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>http.Login</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>HelperService</servlet-name>
+        <servlet-class>http.HelperService</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>KiuerService</servlet-name>
+        <servlet-class>http.KiuerService</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>KiuingOperationService</servlet-name>
+        <servlet-class>http.KiuingOperationService</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>KiuingService</servlet-name>
+        <servlet-class>http.KiuingService</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>PostHelperService</servlet-name>
+        <servlet-class>http.PostHelperService</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>PostKiuerService</servlet-name>
+        <servlet-class>http.PostKiuerService</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ToHelperRequestService</servlet-name>
+        <servlet-class>http.ToHelperRequestService</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ToKiuerRequestService</servlet-name>
+        <servlet-class>http.ToKiuerRequestService</servlet-class>
+    </servlet>
+
+    <!-- Note: All <servlet> elements MUST be grouped together and
+         placed IN FRONT of the <servlet-mapping> elements -->
+    <servlet-mapping>
+        <servlet-name>TryConnection</servlet-name>
+        <url-pattern>/try</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>KiuerService</servlet-name>
+        <url-pattern>/kiuer</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>HelperService</servlet-name>
+        <url-pattern>/helper</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>KiuingOperation</servlet-name>
+        <url-pattern>/kiuing_operation</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Kiuing</servlet-name>
+        <url-pattern>/kiuing</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PostHelperService</servlet-name>
+        <url-pattern>/post_helper</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PostKiuerService</servlet-name>
+        <url-pattern>/post_kiuer</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ToHelperRequestService</servlet-name>
+        <url-pattern>/to_helper_request</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ToKiuerRequestService</servlet-name>
+        <url-pattern>/to_kiuer_request</url-pattern>
+    </servlet-mapping>
+</web-app>
