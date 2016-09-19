@@ -87,6 +87,12 @@
     <string name="passwordhint">Password</string>
     <string name="loginBtn">Login</string>
     <string name="checkbox_text">Remember me!</string>
-    <string name="login">Don't have an account?</string>
+    <string name="login">Don\'t have an account?</string>
     <string name="link_login">Sign up!</string>
+
+    <string name="opSuccessfully">Operation succesfully!</string>
+    <string name="loginFailed">Wrong username or passworrd!</string>
+    <string name="loginFailedUnchecked">Are you Kiuer or Helper?</string>
+
+    <string name="semola">ImSemola</string>
 </resources>
