@@ -12,15 +12,13 @@ import java.util.Date;
  */
 public class Kiuer {
     private int id;
+    private String email;
     private String username;
-    private String name;
-    private String surname;
-    private Date birth;
-    private String telephone;
-    private float feedback;
-    private String favoriteCity;
-    private String profileStatus;
     private String password;
+    private String favoriteCity;
+
+
+
 
     public Kiuer(){
         id=0;
@@ -44,45 +42,12 @@ public class Kiuer {
         this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public Date getBirth() {
-        return birth;
-    }
-    public String getBirthString(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        return formatter.format(birth);
-    }
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-    public float getFeedback() {
-        return feedback;
-    }
-
-    public void setFeedback(float feedback) {
-        this.feedback = feedback;
-    }
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFavoriteCity() {
@@ -91,22 +56,6 @@ public class Kiuer {
 
     public void setFavoriteCity(String city) {
         this.favoriteCity = city;
-    }
-    public String getProfileStatus() {
-        return profileStatus;
-    }
-
-    public void setProfileStatus(String profileStatus) {
-        this.profileStatus = profileStatus;
-    }
-
-    public void setBirth(String birth){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            this.birth = formatter.parse(birth);
-        } catch (ParseException e) {
-            Log.d("Kiuer",e.getLocalizedMessage());
-        }
     }
 
     public String getPassword() {
@@ -122,14 +71,10 @@ public class Kiuer {
         return "Kiuer{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", birth=" + birth +
-                ", telephone='" + telephone + '\'' +
-                ", feedback=" + feedback +
-                ", favoriteCity='" + favoriteCity + '\'' +
-                ", profileStatus='" + profileStatus + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", favoriteCity='" + favoriteCity + '\'' +
+
                 '}';
     }
 }

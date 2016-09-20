@@ -15,8 +15,6 @@ public class PostKiuer {
     private int id;
     private Kiuer kiuer;
     private Helper helper;
-    private String title;
-    private String status;
     private Place place;
     private Date startDate;
     private int duration;
@@ -49,22 +47,6 @@ public class PostKiuer {
 
     public void setHelper(Helper helper) {
         this.helper = helper;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Place getPlace() {
@@ -130,8 +112,6 @@ public class PostKiuer {
                 "id=" + id +
                 ", kiuer=" + kiuer +
                 ", helper=" + helper +
-                ", title='" + title + '\'' +
-                ", status='" + status + '\'' +
                 ", place=" + place +
                 ", startDate=" + startDate +
                 ", duration=" + duration +
