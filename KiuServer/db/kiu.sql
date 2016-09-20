@@ -75,15 +75,10 @@ DROP TABLE IF EXISTS `kiuer`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `kiuer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL,
-  `surname` varchar(30) NOT NULL,
-  `birth` date DEFAULT NULL,
-  `telephone` varchar(10) NOT NULL,
+  `email` varchar(200) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `feedback` decimal(15,2) NOT NULL,
   `favorite_city` varchar(10) NOT NULL,
-  `profile_status` varchar(500) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 );
@@ -94,15 +89,10 @@ DROP TABLE IF EXISTS `helper`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `helper` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL,
-  `surname` varchar(30) NOT NULL,
-  `birth` date DEFAULT NULL,
-  `telephone` varchar(10) NOT NULL,
+  `email` varchar(200) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `feedback` decimal(15,2) NOT NULL,
   `favorite_city` varchar(10) NOT NULL,
-  `profile_status` varchar(500) NOT NULL,
   `profile_cost` decimal(15,2) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)

@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/home/spronghi/workspace/Sei/Kiu/app/build/intermediates/res/merged/debug/menu/menu_mtoolbar_postlist.xml",
+        "source": "/home/spronghi/workspace/Sei/Kiu/app/src/main/res/menu/menu_mtoolbar_postlist.xml"
+    },
+    {
+        "merged": "/home/spronghi/workspace/Sei/Kiu/app/build/intermediates/res/merged/debug/menu/helper_drawer_menu.xml",
+        "source": "/home/spronghi/workspace/Sei/Kiu/app/src/main/res/menu/helper_drawer_menu.xml"
+    },
+    {
+        "merged": "/home/spronghi/workspace/Sei/Kiu/app/build/intermediates/res/merged/debug/menu/kiuer_drawer_menu.xml",
+        "source": "/home/spronghi/workspace/Sei/Kiu/app/src/main/res/menu/kiuer_drawer_menu.xml"
+    }
+]
