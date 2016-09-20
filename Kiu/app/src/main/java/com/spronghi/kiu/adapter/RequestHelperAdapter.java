@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.spronghi.kiu.R;
-import com.spronghi.kiu.request.HelperRequest;
+import com.spronghi.kiu.request.ToHelperRequest;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ import java.util.List;
  * Created by spronghi on 13/09/16.
  */
 public class RequestHelperAdapter extends RecyclerView.Adapter<RequestHelperAdapter.MyViewHolder> {
-    private List<HelperRequest> list;
+    private List<ToHelperRequest> list;
 
-    public RequestHelperAdapter(List<HelperRequest> list) {
+    public RequestHelperAdapter(List<ToHelperRequest> list) {
         this.list = list;
     }
 
@@ -41,7 +41,7 @@ public class RequestHelperAdapter extends RecyclerView.Adapter<RequestHelperAdap
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        HelperRequest request = list.get(position);
+        ToHelperRequest request = list.get(position);
         holder.sender.setText(request.getSender().getUsername());
         holder.message.setText(request.getMessage());
     }

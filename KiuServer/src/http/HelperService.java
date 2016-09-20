@@ -61,6 +61,9 @@ public class HelperService extends HttpServlet {
             case HttpControl.GET_ALL:
                 responseString = getAll();
                 break;
+            case HttpControl.CITY:
+                responseString = getAllByCity(request);
+                break;
         }
         out.println(responseString);
         out.close();
@@ -94,5 +97,8 @@ public class HelperService extends HttpServlet {
     }
     private String getAll(){
         return parser.getJSONArr(dao.getAll()).toJSONString();
+    }
+    private String getAllByCity(HttpServletRequest request){
+        return parser.getJSONArr(dao.getAllBy(HttpControl.CITY, request.getParameter("city"))).toJSONString();
     }
 }

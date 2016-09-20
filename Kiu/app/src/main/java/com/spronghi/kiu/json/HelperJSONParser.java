@@ -27,13 +27,8 @@ public class HelperJSONParser extends JSONParser<Helper> {
         try {
             helper.setId(obj.getInt("id"));
             helper.setUsername(obj.getString("username"));
-            helper.setName(obj.getString("name"));
-            helper.setSurname(obj.getString("surname"));
-            helper.setBirth(obj.getString("birth"));
-            helper.setTelephone(obj.getString("telephone"));
-            helper.setFeedback((float) obj.getDouble("feedback"));
+            helper.setEmail(obj.getString("email"));
             helper.setFavoriteCity(obj.getString("favorite_city"));
-            helper.setProfileStatus(obj.getString("profile_status"));
             helper.setPassword(obj.getString("password"));
             helper.setFavoriteCost(obj.getDouble("favorite_cost"));
         } catch (JSONException e) {
@@ -48,13 +43,8 @@ public class HelperJSONParser extends JSONParser<Helper> {
         try {
             obj.put("id", helper.getId());
             obj.put("username", helper.getUsername());
-            obj.put("name", helper.getName());
-            obj.put("surname", helper.getSurname());
-            obj.put("birth", helper.getBirth());
-            obj.put("telephone", helper.getTelephone());
-            obj.put("feedback", helper.getFeedback());
+            obj.put("email", helper.getEmail());
             obj.put("favorite_city", helper.getFavoriteCity());
-            obj.put("profile_status", helper.getProfileStatus());
             obj.put("password", helper.getPassword());
             obj.put("favorite_cost", helper.getFavoriteCost());
         } catch (JSONException e) {

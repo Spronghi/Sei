@@ -1,6 +1,7 @@
 package service.json;
 
 import integration.control.FilterControl;
+import integration.dao.OperationDAO;
 import model.KiuingOperation;
 import model.Operation;
 import org.json.simple.JSONArray;
@@ -17,7 +18,7 @@ public class KiuingOperationJSONParser implements JSONParser<KiuingOperation> {
     public KiuingOperation parse(String jsonString) {
         org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
         try {
-            FilterDAO<Operation> operationDAO = DAOFactory.getFilterInstance(DAOControl.OPERATION);
+            OperationDAO operationDAO = new OperationDAO();
             OperationJSONParser operationJSONParser = new OperationJSONParser();
 
             JSONObject obj = (JSONObject) parser.parse(jsonString);

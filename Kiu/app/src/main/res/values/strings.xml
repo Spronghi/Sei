@@ -16,6 +16,7 @@
 
     <string name="post">Post</string>
     <string name="post_status">Post Status</string>
+    <string name="kiuer_post">Kiuer Post</string>
     <string name="city">City</string>
     <string name="address">Address</string>
     <string name="location">Location</string>

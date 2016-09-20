@@ -12,4 +12,6 @@ public class HttpControl {
     public static final String GET_ALL="get_all";
     public static final String KIUER="kiuer";
     public static final String HELPER="helper";
+    public static final String CITY="city";
+    public static final String ADDRESSEE="addressee";
 }

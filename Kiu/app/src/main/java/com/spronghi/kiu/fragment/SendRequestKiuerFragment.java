@@ -22,7 +22,7 @@ import com.spronghi.kiu.adapter.DividerItemDecoration;
 import com.spronghi.kiu.adapter.PostKiuerAdapter;
 import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.model.PostKiuer;
-import com.spronghi.kiu.request.HelperRequest;
+import com.spronghi.kiu.request.ToHelperRequest;
 import com.spronghi.kiu.request.Request;
 import com.spronghi.kiu.runtime.CurrentUser;
 
@@ -74,7 +74,7 @@ public class SendRequestKiuerFragment extends ModelFragment<Helper>{
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HelperRequest request = new HelperRequest(CurrentUser.getKiuer(), helper, post, Request.SEND);
+                ToHelperRequest request = new ToHelperRequest(CurrentUser.getKiuer(), helper, post, Request.SEND);
                 //TO DO send request to kiuer
             }
         });

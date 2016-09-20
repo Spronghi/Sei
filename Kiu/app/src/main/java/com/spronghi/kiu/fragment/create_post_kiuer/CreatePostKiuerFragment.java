@@ -61,8 +61,6 @@ public class CreatePostKiuerFragment extends ModelFragment<PostKiuer> {
                 } else if (statusText.getText().toString().equals("") || statusText.getText().toString().equals(getResources().getString(R.string.ask_for_status))) {
                     Toast.makeText(getActivity(), R.string.ask_for_status, Toast.LENGTH_SHORT).show();
                 } else {
-                    post.setTitle(titleText.getText().toString());
-                    post.setStatus(statusText.getText().toString());
                     ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.CREATE_POST_KIUER_PLACE);
                     modelFragment.setModel(post);
                     manager.beginTransaction()

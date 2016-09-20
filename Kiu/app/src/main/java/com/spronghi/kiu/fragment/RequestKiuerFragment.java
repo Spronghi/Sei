@@ -8,18 +8,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.model.PostKiuer;
-import com.spronghi.kiu.request.KiuerRequest;
+import com.spronghi.kiu.request.ToKiuerRequest;
 
 /**
  * Created by spronghi on 13/09/16.
  */
-public class RequestKiuerFragment extends ModelFragment<KiuerRequest> {
+public class RequestKiuerFragment extends ModelFragment<ToKiuerRequest> {
     private TextView helperText;
     private TextView postText;
     private TextView titleText;
@@ -27,10 +26,10 @@ public class RequestKiuerFragment extends ModelFragment<KiuerRequest> {
     private Button refuseButton;
 
     private Toolbar toolbar;
-    private KiuerRequest request;
+    private ToKiuerRequest request;
 
     @Override
-    public void setModel(KiuerRequest model) {
+    public void setModel(ToKiuerRequest model) {
         request = model;
     }
 
@@ -54,7 +53,6 @@ public class RequestKiuerFragment extends ModelFragment<KiuerRequest> {
     private void setupView() {
         titleText.setText(request.getMessage());
         helperText.setText(request.getSender().getUsername());
-        postText.setText(request.getPost().getTitle());
         final FragmentManager manager = this.getFragmentManager();
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override

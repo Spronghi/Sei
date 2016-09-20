@@ -38,8 +38,6 @@ public class ListPostKiuerFragment extends ModelFragment {
     private RecyclerView recyclerView;
     private PostKiuerAdapter mAdapter;
 
-    // The onCreateView method is called when Fragment should create its View object hierarchy,
-    // either dynamically or via XML layout inflation
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -134,7 +132,8 @@ public class ListPostKiuerFragment extends ModelFragment {
 
     }
     private void populateList(){
-        postList = PostKiuerService.getAll();
+        for(PostKiuer post :PostKiuerService.getAll())
+            postList.add(post);
     }
     private void updateSubtitle(final String subtitle) {
         toolbar.setSubtitle(subtitle);

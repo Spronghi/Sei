@@ -32,11 +32,11 @@ DROP TABLE IF EXISTS `post_kiuer`;
 CREATE TABLE `post_kiuer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `open` boolean NOT NULL DEFAULT 0,
-  `title` varchar(10) NOT NULL,
-  `status` varchar(10) NOT NULL,
   `duration` int(11) NOT NULL,
   `cost` decimal(15,2) NOT NULL,
   `start` datetime NOT NULL,
+  `to_helper_feedback` decimal(15,2) NOT NULL,
+  `to_kiuer_feedback` decimal(15,2) NOT NULL,
   `kiuer_id` int(11) NOT NULL,
   `helper_id` int(11) NOT NULL,
   `place_id` int(11) NOT NULL,
@@ -47,25 +47,6 @@ CREATE TABLE `post_kiuer` (
   CONSTRAINT `post_kiuer_ibfk_1` FOREIGN KEY (`kiuer_id`) REFERENCES `kiuer` (`id`),
   CONSTRAINT `post_kiuer_ibfk_2` FOREIGN KEY (`helper_id`) REFERENCES `helper` (`id`),
   CONSTRAINT `post_kiuer_ibfk_3` FOREIGN KEY (`place_id`) REFERENCES `place` (`id`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-
-DROP TABLE IF EXISTS `post_helper`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `post_helper` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `open` boolean NOT NULL DEFAULT 0,
-  `title` varchar(10) NOT NULL,
-  `city` varchar(10) NOT NULL,
-  `cost` decimal(15,2) NOT NULL,
-  `start` datetime NOT NULL,
-  `end` datetime NOT NULL,
-  `helper_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `helper_id` (`helper_id`),
-  CONSTRAINT `post_helper_ibfk_1` FOREIGN KEY (`helper_id`) REFERENCES `helper` (`id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -153,9 +134,9 @@ DROP TABLE IF EXISTS `kiuing_operation`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `kiuing_operation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `operation_id` varchar(50) NOT NULL,
   `done` boolean NOT NULL DEFAULT 1,
   `kiuing_id` int(11) NOT NULL,
+  `operation_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `kiuing_id` (`kiuing_id`),
   KEY `operation_id` (`operation_id`),

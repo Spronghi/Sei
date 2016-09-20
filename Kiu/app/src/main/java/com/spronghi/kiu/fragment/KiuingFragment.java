@@ -30,7 +30,7 @@ import com.spronghi.kiu.setup.DateFormatter;
 /**
  * Created by spronghi on 14/09/16.
  */
-public class KiuingKiuerFragment extends ModelFragment<Kiuing>{
+public class KiuingFragment extends ModelFragment<Kiuing>{
     private TextView titleText;
     private Button refreshButton;
 
@@ -140,9 +140,9 @@ public class KiuingKiuerFragment extends ModelFragment<Kiuing>{
     public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private GestureDetector gestureDetector;
-        private KiuingKiuerFragment.ClickListener clickListener;
+        private KiuingFragment.ClickListener clickListener;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final KiuingKiuerFragment.ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final KiuingFragment.ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override

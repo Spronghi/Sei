@@ -39,11 +39,6 @@ public class EditHelperFragment extends ModelFragment<Helper>{
     }
     private void setupView(){
         usernameText.setText(helper.getUsername());
-        statusText.setText(helper.getProfileStatus());
-        nameText.setText(helper.getName());
-        surnameText.setText(helper.getSurname());
-        birthText.setText(helper.getBirthString());
-        telephoneText.setText(helper.getTelephone());
         favoriteCityText.setText(helper.getFavoriteCity());
         favoriteCostText.setText(helper.getFavoriteCostString());
         passwordText.setText(helper.getPassword());

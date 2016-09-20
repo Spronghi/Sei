@@ -18,10 +18,11 @@ import java.util.logging.Logger;
 public class HelperDAO{
     private static final String SELECT = "SELECT `id`, `email`, `username`, `password`, `favorite_city`,`profile_cost` FROM helper";
     private static final String SELECT_FROM_ID = "SELECT `id`, `email`, `username`, `password`, `favorite_city`, `profile_cost` FROM helper WHERE `id`=?";
-    private static final String INSERT = "INSERT INTO helper (email, username, password, favorite_city,profile_cost) VALUES ('?','?','?','?',?,)";
+    private static final String INSERT = "INSERT INTO helper (email, username, password, favorite_city,profile_cost) VALUES ('?','?','?','?',?)";
     private static final String UPDATE = "UPDATE helper SET email='?', username='?', password='?', favorite_city='?', profile_cost=? WHERE id=?";
     private static final String DELETE = "DELETE FROM helper WHERE id=?";
     private static final String SELECT_FROM_USERNAME = "SELECT `id`, `email`, `username`, `password`, `favorite_city`,`profile_cost` FROM helper WHERE `username`=\"?\"";
+    private static final String SELECT_FROM_CITY = "SELECT `id`, `email`, `username`, `password`, `favorite_city`,`profile_cost` FROM helper WHERE `favorite_city`=\"?\"";
     private static final Logger logger = Logger.getLogger(HelperDAO.class.getName());
 
     public HelperDAO(){}
@@ -96,6 +97,9 @@ public class HelperDAO{
         String query="";
         if(flag.equals(FilterControl.USERNAME)){
             query = SELECT_FROM_USERNAME;
+            query = Replacer.replaceFirst(query, ((String) key).toLowerCase());
+        } else if(flag.equals(FilterControl.CITY)){
+            query = SELECT_FROM_CITY;
             query = Replacer.replaceFirst(query, ((String) key).toLowerCase());
         }
         ResultSet rs = ConnectorFactory.getConnection().executeQuery(query);

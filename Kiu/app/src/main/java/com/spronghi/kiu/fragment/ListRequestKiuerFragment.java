@@ -24,9 +24,7 @@ import java.util.List;
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.adapter.DividerItemDecoration;
 import com.spronghi.kiu.adapter.RequestKiuerAdapter;
-import com.spronghi.kiu.model.PostKiuer;
-import com.spronghi.kiu.notification.Notification;
-import com.spronghi.kiu.request.KiuerRequest;
+import com.spronghi.kiu.request.ToKiuerRequest;
 import com.spronghi.kiu.request.RequestChecker;
 
 /**
@@ -36,7 +34,7 @@ public class ListRequestKiuerFragment extends ModelFragment {
     public static final String TAG = ListRequestKiuerFragment.class.getSimpleName();
     private Toolbar toolbar;
 
-    private List<KiuerRequest> list = new ArrayList<>();
+    private List<ToKiuerRequest> list = new ArrayList<>();
     private RecyclerView recyclerView;
     private RequestKiuerAdapter adapter;
 
@@ -123,7 +121,7 @@ public class ListRequestKiuerFragment extends ModelFragment {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                ModelFragment<KiuerRequest> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_REQUEST_KIUER);
+                ModelFragment<ToKiuerRequest> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_REQUEST_KIUER);
                 fragment.setModel(list.get(position));
                 getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
             }
@@ -140,7 +138,7 @@ public class ListRequestKiuerFragment extends ModelFragment {
     private void populateList(){
         list.clear();
         RequestChecker checker = new RequestChecker();
-        for(KiuerRequest request : checker.checkForKiuerRequest()){
+        for(ToKiuerRequest request : checker.checkForKiuerRequest()){
             if(!(request.isSeen()))
                 list.add(request);
         }

@@ -1,12 +1,9 @@
 package integration.dao;
 
-import exception.FlagNotFoundException;
 import integration.control.FilterControl;
 import integration.database.ConnectorFactory;
 import integration.util.Replacer;
-import model.Kiuing;
 import model.KiuingOperation;
-import model.PostHelper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

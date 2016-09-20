@@ -1,7 +1,5 @@
 package com.spronghi.kiu.request;
 
-import com.spronghi.kiu.runtime.CurrentUser;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,31 +7,31 @@ import java.util.List;
  * Created by spronghi on 13/09/16.
  */
 public class RequestChecker {
-    private List<KiuerRequest> kiuerRequestList;
-    private List<HelperRequest> helperRequestList;
+    private List<ToKiuerRequest> toKiuerRequestList;
+    private List<ToHelperRequest> toHelperRequestList;
 
     public RequestChecker(){
-        kiuerRequestList = new ArrayList<>();
-        helperRequestList = new ArrayList<>();
+        toKiuerRequestList = new ArrayList<>();
+        toHelperRequestList = new ArrayList<>();
     }
-    public List<KiuerRequest> checkForKiuerRequest(){
+    public List<ToKiuerRequest> checkForKiuerRequest(){
         // TO DO correct populate
         populateKiuerList();
-        return kiuerRequestList;
+        return toKiuerRequestList;
     }
 
-    public List<HelperRequest> checkForHelperRequest(){
+    public List<ToHelperRequest> checkForHelperRequest(){
         // TO DO correct populate
         populateHelperList();
-        return helperRequestList;
+        return toHelperRequestList;
     }
 
     private void populateKiuerList(){
-        //KiuerRequest kiuerRequest = new KiuerRequest(CurrentUser.getHelper(), CurrentUser.getKiuer(), CurrentPost.getPostKiuer(), Request.SEND);
-        //kiuerRequestList.add(kiuerRequest);
+        //ToKiuerRequest kiuerRequest = new ToKiuerRequest(CurrentUser.getHelper(), CurrentUser.getKiuer(), CurrentPost.getPostKiuer(), Request.SEND);
+        //toKiuerRequestList.add(kiuerRequest);
     }
     private void populateHelperList(){
-        //HelperRequest helperRequest = new HelperRequest(CurrentUser.getKiuer(), CurrentUser.getHelper(), CurrentPost.getPostKiuer(), Request.SEND);
-        //helperRequestList.add(helperRequest);
+        //ToHelperRequest helperRequest = new ToHelperRequest(CurrentUser.getKiuer(), CurrentUser.getHelper(), CurrentPost.getPostKiuer(), Request.SEND);
+        //toHelperRequestList.add(helperRequest);
     }
 }

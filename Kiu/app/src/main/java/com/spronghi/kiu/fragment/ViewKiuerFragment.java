@@ -58,12 +58,7 @@ public class ViewKiuerFragment extends ModelFragment<Kiuer> {
 
     private void setupView(){
         usernameText.setText(kiuer.getUsername());
-        statusText.setText(kiuer.getProfileStatus());
-        nameAndSurnameText.setText(kiuer.getName()+" "+kiuer.getSurname());
-        birthText.setText(kiuer.getBirthString());
-        telephoneText.setText(kiuer.getTelephone());
         favoriteCityText.setText(kiuer.getFavoriteCity());
-        feedbackText.setText(kiuer.getFeedback() == 0 ? "No Feedback" : Float.toString(kiuer.getFeedback()));
 
         final FragmentManager manager = this.getFragmentManager();
 

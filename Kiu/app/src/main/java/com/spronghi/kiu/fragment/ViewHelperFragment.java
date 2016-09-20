@@ -62,13 +62,8 @@ public class ViewHelperFragment extends ModelFragment<Helper>{
 
     private void setupView(){
         usernameText.setText(helper.getUsername());
-        statusText.setText(helper.getProfileStatus());
-        nameAndSurnameText.setText(helper.getName()+" "+helper.getSurname());
-        birthText.setText(helper.getBirthString());
-        telephoneText.setText(helper.getTelephone());
         favoriteCityText.setText(helper.getFavoriteCity());
         favoriteCostText.setText(helper.getFavoriteCostString());
-        feedbackText.setText(helper.getFeedback() == 0 ? "No Feedback" : Float.toString(helper.getFeedback()));
 
         final FragmentManager manager = this.getFragmentManager();
 

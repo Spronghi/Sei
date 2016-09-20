@@ -16,11 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.spronghi.kiu.R;
-import com.spronghi.kiu.http.HelperService;
-import com.spronghi.kiu.http.KiuerService;
 import com.spronghi.kiu.http.Login;
-import com.spronghi.kiu.model.Helper;
-import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.runtime.CurrentUser;
 
 /**
@@ -119,7 +115,6 @@ public class LoginActivity extends AppCompatActivity {
         if(kiuerRadioButton.isChecked()){
             CurrentUser.setKiuer(Login.asKiuer(usernameEditText.getText().toString(), passwordEditText.getText().toString()));
             if(CurrentUser.getKiuer() != null){
-                Toast.makeText(context, R.string.opSuccessfully, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -130,7 +125,6 @@ public class LoginActivity extends AppCompatActivity {
         } else if(helperRadioButton.isChecked()){
             CurrentUser.setHelper(Login.asHelper(usernameEditText.getText().toString(), passwordEditText.getText().toString()));
             if(CurrentUser.getHelper() != null) {
-                Toast.makeText(context, R.string.opSuccessfully, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);

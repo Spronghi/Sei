@@ -1,7 +1,11 @@
 package com.spronghi.kiu.fragment;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -11,10 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.spronghi.kiu.R;
-import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostKiuer;
-import com.spronghi.kiu.request.HelperRequest;
-import com.spronghi.kiu.request.KiuerRequest;
+import com.spronghi.kiu.request.ToKiuerRequest;
 import com.spronghi.kiu.request.Request;
 import com.spronghi.kiu.runtime.CurrentUser;
 
@@ -27,7 +29,7 @@ public class SendRequestHelperFragment extends ModelFragment<PostKiuer>{
 
     private Toolbar toolbar;
     private PostKiuer post;
-
+    private ToKiuerRequest request;
     @Override
     public void setModel(PostKiuer model) {
         post = model;
@@ -54,8 +56,9 @@ public class SendRequestHelperFragment extends ModelFragment<PostKiuer>{
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                KiuerRequest request = new KiuerRequest(CurrentUser.getHelper(), post.getKiuer(), post,Request.SEND);
-                //TO DO send request to kiuer
+                request = new ToKiuerRequest(CurrentUser.getHelper(), post.getKiuer(), post,Request.SEND);
+                ConfirmDialog dialog = new ConfirmDialog ();
+                dialog.show(manager.beginTransaction(), "dialog");
             }
         });
     }
@@ -77,5 +80,25 @@ public class SendRequestHelperFragment extends ModelFragment<PostKiuer>{
                 manager.popBackStack();
             }
         });
+    }
+    public static class ConfirmDialog extends DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle("Kiu")
+                    .setMessage("Do you want to send it?")
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {}
+                    })
+                    .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .create();
+        }
     }
 }

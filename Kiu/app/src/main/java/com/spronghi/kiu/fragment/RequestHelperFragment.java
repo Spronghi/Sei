@@ -13,12 +13,12 @@ import android.widget.TextView;
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostKiuer;
-import com.spronghi.kiu.request.HelperRequest;
+import com.spronghi.kiu.request.ToHelperRequest;
 
 /**
  * Created by spronghi on 13/09/16.
  */
-public class RequestHelperFragment extends ModelFragment<HelperRequest>{
+public class RequestHelperFragment extends ModelFragment<ToHelperRequest>{
     private TextView helperText;
     private TextView postText;
     private TextView titleText;
@@ -26,10 +26,10 @@ public class RequestHelperFragment extends ModelFragment<HelperRequest>{
     private Button refuseButton;
 
     private Toolbar toolbar;
-    private HelperRequest request;
+    private ToHelperRequest request;
 
     @Override
-    public void setModel(HelperRequest model) {
+    public void setModel(ToHelperRequest model) {
         request = model;
     }
 
@@ -53,7 +53,6 @@ public class RequestHelperFragment extends ModelFragment<HelperRequest>{
     private void setupView() {
         titleText.setText(request.getMessage());
         helperText.setText(request.getSender().getUsername());
-        postText.setText(request.getPost().getTitle());
         final FragmentManager manager = this.getFragmentManager();
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +82,7 @@ public class RequestHelperFragment extends ModelFragment<HelperRequest>{
         postText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.VIEW_POST_HELPER);
+                ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.VIEW_POST_KIUER);
                 modelFragment.setModel(request.getPost());
                 manager.beginTransaction()
                         .replace(R.id.activity_main_frame_layout, modelFragment, "view_post")

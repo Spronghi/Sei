@@ -62,6 +62,9 @@ public class ToHelperRequestService extends HttpServlet {
             case HttpControl.GET:
                 responseString = get(request);
                 break;
+            case HttpControl.ADDRESSEE:
+                responseString = getAllByAddressee(request);
+                break;
             case HttpControl.GET_ALL:
                 responseString = getAll();
                 break;
@@ -96,5 +99,8 @@ public class ToHelperRequestService extends HttpServlet {
     }
     private String getAll(){
         return parser.getJSONArr(dao.getAll()).toJSONString();
+    }
+    private String getAllByAddressee(HttpServletRequest request){
+        return parser.getJSONArr(dao.getAllBy(FilterControl.HELPER, request.getParameter("addressee_id"))).toJSONString();
     }
 }

@@ -67,8 +67,6 @@ public class ViewPostKiuerFragment extends ModelFragment<PostKiuer>{
     }
 
     private void setupView() {
-        titleText.setText(postKiuer.getTitle());
-        statusText.setText(postKiuer.getStatus());
         kiuerText.setText(postKiuer.getKiuer().getUsername());
         cityText.setText(postKiuer.getPlace().getCity());
         addressText.setText(postKiuer.getPlace().getAddress());

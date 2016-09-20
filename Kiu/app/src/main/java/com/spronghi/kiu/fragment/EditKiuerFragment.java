@@ -38,11 +38,6 @@ public class EditKiuerFragment extends ModelFragment<Kiuer>{
     }
     private void setupView(){
         usernameText.setText(kiuer.getUsername());
-        statusText.setText(kiuer.getProfileStatus());
-        nameText.setText(kiuer.getName());
-        surnameText.setText(kiuer.getSurname());
-        birthText.setText(kiuer.getBirthString());
-        telephoneText.setText(kiuer.getTelephone());
         favoriteCityText.setText(kiuer.getFavoriteCity());
         passwordText.setText(kiuer.getPassword());
 

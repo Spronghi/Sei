@@ -18,8 +18,8 @@ public class PostKiuerService {
         String url = "id="+Integer.toString(post.getId())+"&";
         url += "kiuer_id="+Integer.toString(post.getKiuer().getId())+"&";
         url += "helper_id="+Integer.toString(post.getHelper().getId())+"&";
-        url += "title="+post.getTitle()+"&";
-        url += "status="+post.getStatus()+"&";
+        url += "to_helper_feedback="+Float.toString(post.getToHelperFeedback())+"&";
+        url += "to_kiuer_feedback="+Float.toString(post.getToKiuerFeedback())+"&";
         url += "start="+post.getStartDateRequest()+"&";
         url += "duration="+Integer.toString((post.getDuration()))+"&";
         url += "cost="+Double.toString(post.getCost())+"&";
@@ -77,7 +77,6 @@ public class PostKiuerService {
         String url = "/post_kiuer?";
         url += "service=get_all";
         JSONParser<PostKiuer> parser = JSONParserFactory.getInstance(JSONParserControl.POST_KIUER);
-
         String jsonString = HttpConnector.makeRequest(url);
         return parser.parseArray(jsonString);
     }

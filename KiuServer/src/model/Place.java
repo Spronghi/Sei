@@ -11,6 +11,13 @@ public class Place {
 
     public Place(){}
 
+    public Place(String city, String address, String location) {
+        id = 0;
+        this.city = city;
+        this.address = address;
+        this.location = location;
+    }
+
     public String getAddress() {
         return address;
     }

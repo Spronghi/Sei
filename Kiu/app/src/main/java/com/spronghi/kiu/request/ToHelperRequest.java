@@ -1,8 +1,5 @@
 package com.spronghi.kiu.request;
 
-import android.content.res.Resources;
-
-import com.spronghi.kiu.R;
 import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostKiuer;
@@ -10,21 +7,31 @@ import com.spronghi.kiu.model.PostKiuer;
 /**
  * Created by spronghi on 13/09/16.
  */
-public class KiuerRequest {
+public class ToHelperRequest {
+    private int id;
     private boolean seen;
-    private Kiuer addressee;
-    private Helper sender;
+    private Helper addressee;
+    private Kiuer sender;
     private PostKiuer post;
     private String type;
 
-    private KiuerRequest(){}
+    private ToHelperRequest(){}
 
-    public KiuerRequest(Helper sender, Kiuer addressee, PostKiuer post, String type){
-        seen = false;
+    public ToHelperRequest(Kiuer sender, Helper addressee, PostKiuer post, String type){
+        this.id= 0;
+        this.seen = false;
         this.addressee = addressee;
         this.sender = sender;
         this.post = post;
         this.type = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isSeen() {
@@ -35,19 +42,19 @@ public class KiuerRequest {
         this.seen = seen;
     }
 
-    public Kiuer getAddressee() {
+    public Helper getAddressee() {
         return addressee;
     }
 
-    public void setAddressee(Kiuer addressee) {
+    public void setAddressee(Helper addressee) {
         this.addressee = addressee;
     }
 
-    public Helper getSender() {
+    public Kiuer getSender() {
         return sender;
     }
 
-    public void setSender(Helper sender) {
+    public void setSender(Kiuer sender) {
         this.sender = sender;
     }
 
@@ -68,13 +75,13 @@ public class KiuerRequest {
     }
 
     public String getMessage(){
-        switch(type){
+        switch(this.type){
             case Request.SEND:
-                return "An Helper sent you a request!";
+                return "A Kiuer sent you a request!";
             case Request.ACCEPT:
-                return "An Helper accepted your request!";
+                return "An Kiuer accepted your request!";
             case Request.REFUSE:
-                return "An Helped refused your request!";
+                return "A Kiuer refused your request!";
         }
         return "";
     }

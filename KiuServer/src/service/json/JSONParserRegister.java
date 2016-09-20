@@ -1,6 +1,5 @@
 package service.json;
 
-import model.Place;
 import service.control.ParserControl;
 
 import java.util.HashMap;
@@ -19,7 +18,6 @@ class JSONParserRegister extends ParserControl {
         container.put(KIUING_OPERATION, new KiuingOperationJSONParser());
         container.put(OPERATION, new OperationJSONParser());
         container.put(PLACE, new PlaceJSONParser());
-        container.put(POST_HELPER, new PostHelperJSONParser());
         container.put(POST_KIUER, new PostKiuerJSONParser());
         container.put(REQUEST_TYPE, new RequestTypeJSONParser());
         container.put(TO_HELPER_REQUEST, new ToHelperRequestJSONParser());

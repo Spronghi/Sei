@@ -28,11 +28,11 @@ public class PostKiuerJSONParser implements JSONParser<PostKiuer> {
 
             post.setId(((Integer)obj.get("id")));
             post.setDuration(((Integer)obj.get("duration")));
-            post.setTitle(((String)obj.get("title")));
-            post.setStatus(((String)obj.get("status")));
             post.setCost((Double)obj.get("cost"));
             post.setOpen((Boolean)obj.get("cost"));
             post.setStartDate((String)obj.get("start"));
+            post.setToHelperFeedback((Float)obj.get("to_helper_feedback"));
+            post.setToKiuerFeedback((Float)obj.get("to_kiuer_feedback"));
             post.setPlace(placeJSONParser.parse(((String)obj.get("place"))));
             post.setKiuer(kiuerJSONParser.parse(((String)obj.get("kiuer"))));
             post.setHelper(helperJSONParser.parse(((String)obj.get("helper"))));
@@ -52,12 +52,12 @@ public class PostKiuerJSONParser implements JSONParser<PostKiuer> {
         JSONObject obj = new JSONObject();
 
         obj.put("id", post.getId());
-        obj.put("title", post.getTitle());
-        obj.put("status", post.getStatus());
         obj.put("start", post.getStartDateString());
         obj.put("duration", post.getDuration());
         obj.put("cost", post.getCost());
         obj.put("open", post.isOpen());
+        obj.put("to_helper_feedback", post.getToHelperFeedback());
+        obj.put("to_kiuer_feedback", post.getToKiuerFeedback());
         obj.put("place", placeJSONParser.getJSONObj(post.getPlace()));
         obj.put("kiuer", kiuerJSONParser.getJSONObj(post.getKiuer()));
         obj.put("helper", helperJSONParser.getJSONObj(post.getHelper()));

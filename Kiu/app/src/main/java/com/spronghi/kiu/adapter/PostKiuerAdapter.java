@@ -26,7 +26,7 @@ public class PostKiuerAdapter extends RecyclerView.Adapter<PostKiuerAdapter.MyVi
 
         public MyViewHolder(View view) {
             super(view);
-            username = (TextView) view.findViewById(R.id.fragment_post_kiuer_row_title_text);
+            username = (TextView) view.findViewById(R.id.fragment_post_kiuer_row_username_text);
             startDate = (TextView) view.findViewById(R.id.fragment_post_kiuer_row_start_text);
             cost = (TextView) view.findViewById(R.id.fragment_post_kiuer_row_cost_text);
             location = (TextView) view.findViewById(R.id.fragment_post_kiuer_row_location_text);
@@ -44,7 +44,7 @@ public class PostKiuerAdapter extends RecyclerView.Adapter<PostKiuerAdapter.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PostKiuer post = postsList.get(position);
-        holder.username.setText(post.getTitle());
+        holder.username.setText(post.getKiuer().getUsername());
         holder.startDate.setText("Start: "+post.getStartDateString());
         holder.cost.setText("Cost: "+post.getCostString()+"€");
         holder.location.setText(post.getPlace().getCity()+", "+post.getPlace().getLocation());

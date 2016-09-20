@@ -20,13 +20,8 @@ public class KiuerService {
         String url = "id="+Integer.toString(kiuer.getId())+"&";
         url += "username="+kiuer.getUsername()+"&";
 		url += "password="+kiuer.getPassword()+"&";
-        url += "name="+kiuer.getName()+"&";
-        url += "surname="+kiuer.getSurname()+"&";
-        url += "birth="+ DateFormatter.toStringDate(kiuer.getBirth())+"&";
-        url += "telephone="+kiuer.getTelephone()+"&";
+		url += "email="+kiuer.getEmail()+"&";
         url += "favorite_city="+kiuer.getFavoriteCity()+"&";
-        url += "feedback="+Float.toString(kiuer.getFeedback())+"&";
-        url += "profile_status="+kiuer.getProfileStatus();
         return url;
 
     }

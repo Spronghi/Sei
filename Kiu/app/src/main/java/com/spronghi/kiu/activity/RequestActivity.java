@@ -50,7 +50,7 @@ public class RequestActivity extends AppCompatActivity {
             navigationView.inflateMenu(R.menu.helper_drawer_menu);
 
             if(savedInstanceState==null){
-                getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.LIST_POST_HELPER)).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.LIST_POST_HELPER)).commit();
             }
         }
     }

@@ -3,7 +3,6 @@ package http;
 import integration.dao.KiuingDAO;
 import integration.dao.PostKiuerDAO;
 import model.Kiuing;
-import model.PostKiuer;
 import service.control.ParserControl;
 import service.json.JSONParser;
 import service.json.JSONParserFactory;

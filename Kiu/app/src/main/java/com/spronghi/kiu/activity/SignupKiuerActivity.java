@@ -67,12 +67,7 @@ public class SignupKiuerActivity extends AppCompatActivity {
                     favoriteCityText.setError("Empty");
                 } else {
                     Kiuer kiuer = new Kiuer();
-                    kiuer.setName(nameText.getText().toString());
-                    kiuer.setSurname(surnameText.getText().toString());
-                    kiuer.setProfileStatus(statusText.getText().toString());
                     kiuer.setUsername(usernameText.getText().toString());
-                    kiuer.setBirth(birthText.getText().toString());
-                    kiuer.setTelephone(telephoneText.getText().toString());
                     kiuer.setFavoriteCity(favoriteCityText.getText().toString());
                     kiuer.setPassword("a");
                     KiuerService.create(kiuer);

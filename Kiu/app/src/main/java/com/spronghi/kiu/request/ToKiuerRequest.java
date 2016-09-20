@@ -1,5 +1,8 @@
 package com.spronghi.kiu.request;
 
+import android.content.res.Resources;
+
+import com.spronghi.kiu.R;
 import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostKiuer;
@@ -7,20 +10,30 @@ import com.spronghi.kiu.model.PostKiuer;
 /**
  * Created by spronghi on 13/09/16.
  */
-public class HelperRequest {
+public class ToKiuerRequest {
+    private int id;
     private boolean seen;
-    private Helper addressee;
-    private Kiuer sender;
+    private Kiuer addressee;
+    private Helper sender;
     private PostKiuer post;
     private String type;
-    private HelperRequest(){}
 
-    public HelperRequest(Kiuer sender, Helper addressee, PostKiuer post, String type){
+    private ToKiuerRequest(){}
+
+    public ToKiuerRequest(Helper sender, Kiuer addressee, PostKiuer post, String type){
         seen = false;
         this.addressee = addressee;
         this.sender = sender;
         this.post = post;
         this.type = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isSeen() {
@@ -31,19 +44,19 @@ public class HelperRequest {
         this.seen = seen;
     }
 
-    public Helper getAddressee() {
+    public Kiuer getAddressee() {
         return addressee;
     }
 
-    public void setAddressee(Helper addressee) {
+    public void setAddressee(Kiuer addressee) {
         this.addressee = addressee;
     }
 
-    public Kiuer getSender() {
+    public Helper getSender() {
         return sender;
     }
 
-    public void setSender(Kiuer sender) {
+    public void setSender(Helper sender) {
         this.sender = sender;
     }
 
@@ -64,13 +77,13 @@ public class HelperRequest {
     }
 
     public String getMessage(){
-        switch(this.type){
+        switch(type){
             case Request.SEND:
-                return "A Kiuer sent you a request!";
+                return "An Helper sent you a request!";
             case Request.ACCEPT:
-                return "An Kiuer accepted your request!";
+                return "An Helper accepted your request!";
             case Request.REFUSE:
-                return "A Kiuer refused your request!";
+                return "An Helped refused your request!";
         }
         return "";
     }

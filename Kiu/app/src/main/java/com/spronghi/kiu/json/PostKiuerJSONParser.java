@@ -33,12 +33,12 @@ public class PostKiuerJSONParser extends JSONParser<PostKiuer> {
         JSONParser<Place> placeJSONParser = new PlaceJSONParser();
         try {
             pKiuer.setId(obj.getInt("id"));
-            pKiuer.setTitle(obj.getString("title"));
-            pKiuer.setStatus(obj.getString("status"));
             pKiuer.setStartDate(obj.getString("start"));
             pKiuer.setDuration(obj.getInt("duration"));
             pKiuer.setCost(obj.getDouble("cost"));
             pKiuer.setOpen(obj.getBoolean("open"));
+            pKiuer.setToHelperFeedback(obj.getLong("to_helper_feedback"));
+            pKiuer.setToKiuerFeedback(obj.getLong("to_kiuer_feedback"));
             pKiuer.setKiuer(kiuerJSONParser.parse(obj.getJSONObject("kiuer")));
             pKiuer.setHelper(helperJSONParser.parse(obj.getJSONObject("helper")));
             pKiuer.setPlace(placeJSONParser.parse(obj.getJSONObject("place")));
@@ -57,9 +57,9 @@ public class PostKiuerJSONParser extends JSONParser<PostKiuer> {
         JSONParser<Place> placeJSONParser = new PlaceJSONParser();
         try {
             obj.put("id", pKiuer.getId());
-            obj.put("title", pKiuer.getTitle());
-            obj.put("status", pKiuer.getStatus());
             obj.put("start_date", DateFormatter.toStringDate(pKiuer.getStartDate()));
+            obj.put("to_helper_feedback", pKiuer.getToHelperFeedback());
+            obj.put("to_kiuer_feedback", pKiuer.getToKiuerFeedback());
             obj.put("duration", pKiuer.getDuration());
             obj.put("cost", pKiuer.getCostString());
             obj.put("open", pKiuer.isOpen());

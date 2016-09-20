@@ -12,20 +12,14 @@ import java.util.Date;
  */
 public class Kiuer {
     private int id;
+    private String email;
     private String username;
-    private String name;
-    private String surname;
-    private Date birth;
-    private String telephone;
-    private float feedback;
-    private String favoriteCity;
-    private String profileStatus;
     private String password;
+    private String favoriteCity;
+
 
     public Kiuer(){
         id=0;
-        favoriteCity="";
-        feedback=0;
     }
 
     public int getId() {
@@ -36,77 +30,20 @@ public class Kiuer {
         this.id = id;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public Date getBirth() {
-        return birth;
-    }
-    public String getBirthString(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        return formatter.format(birth);
-    }
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-    public float getFeedback() {
-        return feedback;
-    }
-
-    public void setFeedback(float feedback) {
-        this.feedback = feedback;
-    }
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getFavoriteCity() {
-        return favoriteCity;
-    }
-
-    public void setFavoriteCity(String city) {
-        this.favoriteCity = city;
-    }
-    public String getProfileStatus() {
-        return profileStatus;
-    }
-
-    public void setProfileStatus(String profileStatus) {
-        this.profileStatus = profileStatus;
-    }
-
-    public void setBirth(String birth){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            this.birth = formatter.parse(birth);
-        } catch (ParseException e) {
-            Log.d("Kiuer",e.getLocalizedMessage());
-        }
     }
 
     public String getPassword() {
@@ -117,19 +54,22 @@ public class Kiuer {
         this.password = password;
     }
 
+    public String getFavoriteCity() {
+        return favoriteCity;
+    }
+
+    public void setFavoriteCity(String favoriteCity) {
+        this.favoriteCity = favoriteCity;
+    }
+
     @Override
     public String toString() {
         return "Kiuer{" +
                 "id=" + id +
+                ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", birth=" + birth +
-                ", telephone='" + telephone + '\'' +
-                ", feedback=" + feedback +
-                ", favoriteCity='" + favoriteCity + '\'' +
-                ", profileStatus='" + profileStatus + '\'' +
                 ", password='" + password + '\'' +
+                ", favoriteCity='" + favoriteCity + '\'' +
                 '}';
     }
 }

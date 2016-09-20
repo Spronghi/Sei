@@ -35,14 +35,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/fragment_post_kiuer_row_title_text"
+                android:id="@+id/fragment_post_kiuer_row_username_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="5dp"
                 android:paddingLeft="12dp"
                 android:textSize="20sp"
                 android:textColor="@color/accentColor"
-                android:text="@string/title"
+                android:text="@string/username"
                 />
             <TextView
                 android:id="@+id/fragment_post_kiuer_row_location_text"

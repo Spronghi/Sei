@@ -40,13 +40,13 @@ public class PostKiuerService extends HttpServlet {
         post.setId(Integer.parseInt(request.getParameter("id")));
         post.setKiuer(new KiuerDAO().get(Integer.parseInt(request.getParameter("kiuer_id"))));
         post.setHelper(new HelperDAO().get(Integer.parseInt(request.getParameter("helper_id"))));
-        post.setTitle(request.getParameter("title"));
-        post.setStatus(request.getParameter("status"));
         post.setPlace(place);
         post.setStartDate(DateFormatter.fromRequest(request.getParameter("start")));
         post.setDuration(Integer.parseInt(request.getParameter("duration")));
         post.setCost(Double.parseDouble(request.getParameter("cost")));
         post.setOpen(Boolean.parseBoolean(request.getParameter("open")));
+        post.setToKiuerFeedback(Float.parseFloat(request.getParameter("to_kiuer_feedback")));
+        post.setToHelperFeedback(Float.parseFloat(request.getParameter("to_helper_feedback")));
         return post;
     }
 

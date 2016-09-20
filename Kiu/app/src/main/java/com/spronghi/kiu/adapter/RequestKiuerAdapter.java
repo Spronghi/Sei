@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.spronghi.kiu.R;
-import com.spronghi.kiu.request.KiuerRequest;
+import com.spronghi.kiu.request.ToKiuerRequest;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ import java.util.List;
  * Created by spronghi on 13/09/16.
  */
 public class RequestKiuerAdapter extends RecyclerView.Adapter<RequestKiuerAdapter.MyViewHolder>  {
-    private List<KiuerRequest> list;
+    private List<ToKiuerRequest> list;
 
-    public RequestKiuerAdapter(List<KiuerRequest> list) {
+    public RequestKiuerAdapter(List<ToKiuerRequest> list) {
         this.list = list;
     }
 
@@ -41,7 +41,7 @@ public class RequestKiuerAdapter extends RecyclerView.Adapter<RequestKiuerAdapte
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        KiuerRequest request = list.get(position);
+        ToKiuerRequest request = list.get(position);
         holder.sender.setText(request.getSender().getUsername());
         holder.message.setText(request.getMessage());
     }

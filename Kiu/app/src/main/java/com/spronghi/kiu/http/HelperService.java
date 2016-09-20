@@ -16,13 +16,8 @@ public class HelperService {
         String url = "id="+Integer.toString(helper.getId())+"&";
         url += "username="+helper.getUsername()+"&";
         url += "password="+helper.getPassword()+"&";
-        url += "name="+helper.getName()+"&";
-        url += "surname="+helper.getSurname()+"&";
-        url += "birth="+helper.getBirthString()+"&";
-        url += "telephone="+helper.getTelephone()+"&";
-        url += "feedback="+Float.toString(helper.getFeedback())+"&";
+        url += "email="+helper.getEmail()+"&";
         url += "favorite_city="+helper.getFavoriteCity()+"&";
-        url += "profile_status="+helper.getProfileStatus()+"&";
         url += "favorite_cost="+Double.toString(helper.getFavoriteCost());
         return url;
 

@@ -21,8 +21,7 @@ import android.view.ViewGroup;
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.adapter.DividerItemDecoration;
 import com.spronghi.kiu.adapter.RequestHelperAdapter;
-import com.spronghi.kiu.adapter.RequestKiuerAdapter;
-import com.spronghi.kiu.request.HelperRequest;
+import com.spronghi.kiu.request.ToHelperRequest;
 import com.spronghi.kiu.request.RequestChecker;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class ListRequestHelperFragment extends  ModelFragment{
     public static final String TAG = ListRequestHelperFragment.class.getSimpleName();
     private Toolbar toolbar;
 
-    private List<HelperRequest> list = new ArrayList<>();
+    private List<ToHelperRequest> list = new ArrayList<>();
     private RecyclerView recyclerView;
     private RequestHelperAdapter adapter;
 
@@ -120,7 +119,7 @@ public class ListRequestHelperFragment extends  ModelFragment{
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                ModelFragment<HelperRequest> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_REQUEST_HELPER);
+                ModelFragment<ToHelperRequest> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_REQUEST_HELPER);
                 fragment.setModel(list.get(position));
                 getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
             }
@@ -137,7 +136,7 @@ public class ListRequestHelperFragment extends  ModelFragment{
     private void populateList(){
         list.clear();
         RequestChecker checker = new RequestChecker();
-        for(HelperRequest request : checker.checkForHelperRequest()){
+        for(ToHelperRequest request : checker.checkForHelperRequest()){
             if(!(request.isSeen()))
                 list.add(request);
         }

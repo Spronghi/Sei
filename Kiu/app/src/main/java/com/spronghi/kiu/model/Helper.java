@@ -19,4 +19,11 @@ public class Helper extends Kiuer{
     public void setFavoriteCost(double favoriteCost){
         this.favoriteCost = favoriteCost;
     }
+
+    @Override
+    public String toString() {
+        return "Helper{" +
+                "favoriteCost=" + favoriteCost +
+                '}';
+    }
 }

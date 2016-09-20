@@ -17,6 +17,12 @@ import com.spronghi.kiu.activity.MainActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/*
+*   usage :
+*   Intent s = new Intent(this, NotificationService.class);
+*   startService(s);
+*/
+
 public class NotificationService extends Service {
 
     private Timer timer = new Timer();
