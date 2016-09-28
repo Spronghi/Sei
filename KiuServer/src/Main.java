@@ -1,13 +1,12 @@
 import integration.control.FilterControl;
-import integration.dao.HelperDAO;
-import integration.dao.KiuerDAO;
-import integration.dao.OperationDAO;
-import integration.dao.PostKiuerDAO;
+import integration.dao.*;
 import model.*;
 import service.control.ParserControl;
 import service.json.JSONParserFactory;
 import service.security.MD5Crypt;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -15,6 +14,10 @@ import java.util.List;
  */
 public class Main {
     public static void main(String [] args){
+        KiuingDAO dao = new KiuingDAO();
+        Kiuing kiuing = dao.get(6);
+
+        System.out.println(JSONParserFactory.<Kiuing>getInstance(ParserControl.KIUING).getJSONObj(kiuing).toJSONString());
     }
 
     private static void populateDB(){
@@ -35,16 +38,6 @@ public class Main {
         helper.setFavoriteCost(5);
         new HelperDAO().create(helper);
 
-        Operation a = new Operation(0, "accept");
-        new OperationDAO().create(a);
-
-        a = new Operation(0, "refuse");
-        new OperationDAO().create(a);
-
-        a = new Operation(0, "request");
-        new OperationDAO().create(a);
-
-
         PostKiuer post = new PostKiuer();
         post.setHelper(new HelperDAO().get(1));
         post.setKiuer(new KiuerDAO().get(1));
@@ -53,5 +46,14 @@ public class Main {
         post.setPlace(new Place("Lecce", "ViaRonzoli", "PizzeriaRonzoli"));
 
         new PostKiuerDAO().create(post);
+
+        RequestType type =  new RequestType(0,"request");
+        new RequestTypeDAO().create(type);
+
+        type =  new RequestType(0,"accept");
+        new RequestTypeDAO().create(type);
+
+        type =  new RequestType(0,"refuse");
+        new RequestTypeDAO().create(type);
     }
 }

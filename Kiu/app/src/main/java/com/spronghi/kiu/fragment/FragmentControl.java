@@ -16,10 +16,13 @@ public class FragmentControl {
     public static final String LIST_POST_KIUER = "list_post_kiuer";
     public static final String LIST_REQUEST_KIUER = "list_request_kiuer";
     public static final String LIST_REQUEST_HELPER = "list_request_helper";
+    public static final String LIST_USER_KIUER = "list_user_kiuer";
+    public static final String LIST_USER_HELPER = "list_user_helper";
     public static final String VIEW_REQUEST_HELPER = "view_request_helper";
     public static final String VIEW_REQUEST_KIUER = "view_request_kiuer";
     public static final String SEND_REQUEST_HELPER = "send_request_helper";
     public static final String SEND_REQUEST_KIUER = "send_request_kiuer";
-    public static final String KIUING_KIUER = "kiuing_kiuer";
+    public static final String KIUING = "kiuing";
+    public static final String LIST_KIUING = "list_kiuing";
 
 }

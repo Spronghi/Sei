@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.spronghi.kiu.R;
+import com.spronghi.kiu.http.ToKiuerRequestService;
 import com.spronghi.kiu.model.PostKiuer;
 import com.spronghi.kiu.request.ToKiuerRequest;
 import com.spronghi.kiu.request.Request;
@@ -29,7 +30,8 @@ public class SendRequestHelperFragment extends ModelFragment<PostKiuer>{
 
     private Toolbar toolbar;
     private PostKiuer post;
-    private ToKiuerRequest request;
+    private static FragmentManager manager;
+    private static ToKiuerRequest request;
     @Override
     public void setModel(PostKiuer model) {
         post = model;
@@ -50,9 +52,9 @@ public class SendRequestHelperFragment extends ModelFragment<PostKiuer>{
     }
 
     private void setupView() {
-        titleText.setText(titleText.getText()+" " + post.getKiuer().getUsername());
+        titleText.setText(titleText.getText().toString()+" " + post.getKiuer().getUsername());
 
-        final FragmentManager manager = this.getFragmentManager();
+        manager = this.getFragmentManager();
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +65,7 @@ public class SendRequestHelperFragment extends ModelFragment<PostKiuer>{
         });
     }
     private void setupToolbar() {
-        final FragmentManager manager = this.getFragmentManager();
+        manager = this.getFragmentManager();
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -95,7 +97,12 @@ public class SendRequestHelperFragment extends ModelFragment<PostKiuer>{
                     .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            ToKiuerRequestService.create(request);
 
+                            manager.beginTransaction()
+                                    .replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.LIST_POST_KIUER), "edit_helper")
+                                    .addToBackStack(null)
+                                    .commit();
                         }
                     })
                     .create();

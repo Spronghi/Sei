@@ -63,6 +63,9 @@ public class KiuingOperationService extends HttpServlet {
             case HttpControl.GET_ALL:
                 responseString = getAll();
                 break;
+            case HttpControl.KIUING:
+                responseString = getAllByKiuing(request);
+                break;
         }
         out.println(responseString);
         out.close();
@@ -94,5 +97,8 @@ public class KiuingOperationService extends HttpServlet {
     }
     private String getAll(){
         return parser.getJSONArr(dao.getAll()).toJSONString();
+    }
+    private String getAllByKiuing(HttpServletRequest request){
+        return parser.getJSONArr(dao.getAllBy(FilterControl.KIUING, request.getParameter("kiuing_id"))).toJSONString();
     }
 }

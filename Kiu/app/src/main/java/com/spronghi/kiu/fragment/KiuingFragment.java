@@ -11,6 +11,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -22,10 +23,14 @@ import android.widget.TextView;
 
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.adapter.DividerItemDecoration;
-import com.spronghi.kiu.adapter.KiuingAdapter;
+import com.spronghi.kiu.adapter.KiuingOpearationAdapter;
 import com.spronghi.kiu.kiuing.Kiuing;
+import com.spronghi.kiu.kiuing.KiuingOperation;
 import com.spronghi.kiu.runtime.CurrentUser;
 import com.spronghi.kiu.setup.DateFormatter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by spronghi on 14/09/16.
@@ -33,9 +38,10 @@ import com.spronghi.kiu.setup.DateFormatter;
 public class KiuingFragment extends ModelFragment<Kiuing>{
     private TextView titleText;
     private Button refreshButton;
+    private List<KiuingOperation> operationList = new ArrayList<>();
 
     private RecyclerView recyclerView;
-    private KiuingAdapter adapter;
+    private KiuingOpearationAdapter adapter;
     private Toolbar toolbar;
     private Kiuing kiuing;
 
@@ -54,25 +60,30 @@ public class KiuingFragment extends ModelFragment<Kiuing>{
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_kiuing_recycler_view);
 
-        //kiuing = CurrentKiuing.getKiuing();
-
-        setupView();
-        setupToolbar();
+        Log.d("kiuing", kiuing.toString());
         setupList();
+        setupToolbar();
+        setupView();
 
         return layout;
     }
 
     private void setupView() {
-        if(kiuing!=null) {
-            String minutes = DateFormatter.minusNow(kiuing.getPost().getStartDate());
-            if (minutes.equals(DateFormatter.BEFORE)) {
-                titleText.setText(getResources().getString(R.string.kiuiung_started));
-            } else {
-                titleText.setText(minutes + " " + getResources().getString(R.string.minutes_for_begin));
+        String minutes = DateFormatter.minusNow(kiuing.getPost().getStartDate());
+        String started = DateFormatter.minusNow(kiuing.getPost().getStartDate(), kiuing.getPost().getDuration());
+
+        if(started.equals(DateFormatter.AFTER)){
+            titleText.setText(getResources().getString(R.string.kiuiung_started));
+            for(KiuingOperation operation : kiuing.getOperationList()){
+                operationList.add(operation);
             }
-            refreshButton.setEnabled(true);
+            adapter.notifyDataSetChanged();
+        } else if(minutes.equals(DateFormatter.BEFORE)){
+            titleText.setText(getResources().getString(R.string.kiuiung_finished));
+        } else {
+            titleText.setText(minutes + " " + getResources().getString(R.string.minutes_for_begin));
         }
+        refreshButton.setEnabled(true);
 
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +91,10 @@ public class KiuingFragment extends ModelFragment<Kiuing>{
                 String minutes = DateFormatter.minusNow(kiuing.getPost().getStartDate());
                 if(minutes.equals(DateFormatter.BEFORE)){
                     titleText.setText(getResources().getString(R.string.kiuiung_started));
-                    kiuing.checkForOperations();
+                    operationList.clear();
+                    for(KiuingOperation operation : kiuing.getOperationList()){
+                        operationList.add(operation);
+                    }
                     adapter.notifyDataSetChanged();
                 } else {
                     titleText.setText(minutes + " "+getResources().getString(R.string.minutes_for_begin));
@@ -90,7 +104,7 @@ public class KiuingFragment extends ModelFragment<Kiuing>{
     }
 
     private void setupList(){
-        adapter = new KiuingAdapter(kiuing);
+        adapter = new KiuingOpearationAdapter(operationList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

@@ -13,7 +13,13 @@ import android.support.v7.app.NotificationCompat;
 
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.activity.MainActivity;
+import com.spronghi.kiu.http.ToHelperRequestService;
+import com.spronghi.kiu.http.ToKiuerRequestService;
+import com.spronghi.kiu.request.ToHelperRequest;
+import com.spronghi.kiu.request.ToKiuerRequest;
+import com.spronghi.kiu.runtime.CurrentUser;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,11 +40,10 @@ public class NotificationService extends Service {
     }
 
     private void startservice() {
-        System.out.println("Servizio Avviato MADAFFAKKA!");
         timer.scheduleAtFixedRate( new TimerTask() {
             public void run() {
-                System.out.println("Creo una notifica!");
-//Do whatever you want to do every “INTERVAL"
+                //Do whatever you want to do every “INTERVAL"
+                /*
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext());
                 mBuilder.setSmallIcon(R.drawable.logo);
                 mBuilder.setContentTitle("Notification Alert, Click Me!");
@@ -47,18 +52,35 @@ public class NotificationService extends Service {
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
                 stackBuilder.addParentStack(MainActivity.class);
 
-// Adds the Intent that starts the Activity to the top of the stack
+                // Adds the Intent that starts the Activity to the top of the stack
                 stackBuilder.addNextIntent(resultIntent);
                 PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
                 mBuilder.setContentIntent(resultPendingIntent);
 
                 NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-// notificationID allows you to update the notification later on.
                 int notificationID = 00001;
                 mNotificationManager.notify(notificationID, mBuilder.build());
+                */
+                // notificationID allows you to update the notification later on.
+                if(CurrentUser.isKiuer()){
+                    List<ToKiuerRequest> list = ToKiuerRequestService.getAllByAddressee(CurrentUser.getKiuer());
+                    for(ToKiuerRequest request : list) {
+                        if (!(request.isSeen())){
+                            Notification.sendNotification(getApplicationContext(), request.getType());
+                            break;
+                        }
+                    }
+                } else {
+                    List<ToHelperRequest> list = ToHelperRequestService.getAllByAddressee(CurrentUser.getHelper());
+                    for(ToHelperRequest request : list){
+                        if(!(request.isSeen())) {
+                            Notification.sendNotification(getApplicationContext(), request.getType());
+                            break;
+                        }
+                    }
+                }
             }
-        }, 0, 10000);
+        }, 0, 100000);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.spronghi.kiu.notification;
+package com.spronghi.kiu.backgroundservice;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;

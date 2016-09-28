@@ -27,7 +27,6 @@ public class KiuingJSONParser extends JSONParser<Kiuing>{
     public Kiuing parse(JSONObject json) {
         Kiuing kiuing = new Kiuing();
         JSONParser<PostKiuer> postJSONParser = new PostKiuerJSONParser();
-        JSONParser<KiuingOperation> operationJSONParser = new KiuingOperationJSONParser();
 
         try {
             kiuing.setId(json.getInt("id"));

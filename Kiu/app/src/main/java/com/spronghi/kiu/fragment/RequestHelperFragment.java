@@ -3,6 +3,7 @@ package com.spronghi.kiu.fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,9 +12,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.spronghi.kiu.R;
+import com.spronghi.kiu.http.KiuingService;
+import com.spronghi.kiu.http.PostKiuerService;
+import com.spronghi.kiu.http.ToHelperRequestService;
+import com.spronghi.kiu.http.ToKiuerRequestService;
+import com.spronghi.kiu.kiuing.Kiuing;
 import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostKiuer;
+import com.spronghi.kiu.request.Request;
 import com.spronghi.kiu.request.ToHelperRequest;
+import com.spronghi.kiu.request.ToKiuerRequest;
 
 /**
  * Created by spronghi on 13/09/16.
@@ -54,18 +62,47 @@ public class RequestHelperFragment extends ModelFragment<ToHelperRequest>{
         titleText.setText(request.getMessage());
         helperText.setText(request.getSender().getUsername());
         final FragmentManager manager = this.getFragmentManager();
+        if(request.getType().equals(Request.REFUSE)){
+            acceptButton.setVisibility(View.INVISIBLE);
+            refuseButton.setVisibility(View.INVISIBLE);
+            request.setSeen(true);
+            ToHelperRequestService.update(request);
+        } else if(request.getType().equals(Request.ACCEPT)){
+            acceptButton.setVisibility(View.INVISIBLE);
+            request.setSeen(true);
+            ToHelperRequestService.update(request);
+
+            refuseButton.setText("Go to the Kiuing");
+            refuseButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ModelFragment<Kiuing> fragment = FragmentFactory.getInstance(FragmentControl.KIUING);
+                    fragment.setModel(KiuingService.getAllByPostKiuer(request.getPost()).iterator().next());
+                    manager.beginTransaction().replace(R.id.activity_main_frame_layout, fragment).commit();
+                }
+            });
+        }
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TO DO accept and delete request
-                //TO DO send to the helper an accepted notification
-                //TO DO add the helper and the price to the post and update it
+                request.setSeen(true);
+                ToHelperRequestService.update(request);
+                request.getPost().setHelper(request.getAddressee());
+                PostKiuerService.update(request.getPost());
+                ToKiuerRequest toKiuerRequest = new ToKiuerRequest(request.getAddressee(), request.getSender(), request.getPost(), Request.ACCEPT);
+                ToKiuerRequestService.create(toKiuerRequest);
+                //TO DO open kiuing
+                manager.beginTransaction().replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.LIST_REQUEST_HELPER)).commit();
             }
         });
         refuseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TO DO refuse and delete request
+                request.setSeen(true);
+                ToHelperRequestService.update(request);
+                ToKiuerRequest toKiuerRequest = new ToKiuerRequest(request.getAddressee(), request.getSender(), request.getPost(), Request.REFUSE);
+                ToKiuerRequestService.create(toKiuerRequest);
+                manager.beginTransaction().replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.LIST_REQUEST_HELPER)).commit();
             }
         });
         helperText.setOnClickListener(new View.OnClickListener() {

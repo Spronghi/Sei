@@ -16,6 +16,8 @@ class JSONParserRegister extends JSONParserControl {
         container.put(KIUING, new KiuingJSONParser());
         container.put(POST_KIUER, new PostKiuerJSONParser());
         container.put(PLACE, new PlaceJSONParser());
+        container.put(TO_HELPER_REQUEST, new ToHelperRequestJSONParser());
+        container.put(TO_KIUER_REQUEST, new ToKiuerRequestJSONParser());
     }
     static JSONParser<?> getParser(String key){
         return container.get(key);

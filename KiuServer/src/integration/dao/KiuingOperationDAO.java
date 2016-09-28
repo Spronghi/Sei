@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 public class KiuingOperationDAO {
     private static final String SELECT = "SELECT `id`, `operation_id`, `done`, `kiuing_id` FROM kiuing_operation";
     private static final String SELECT_FROM_ID = "SELECT `id`, `operation_id`, `done`, `kiuing_id` FROM kiuing_operation WHERE `id`=?";
-    private static final String INSERT = "INSERT INTO kiuing_operation (operation_id, done, kiuing_id) VALUES (?,'?',?)";
+    private static final String INSERT = "INSERT INTO kiuing_operation (operation_id, done, kiuing_id) VALUES (?,?,?)";
     private static final String UPDATE = "UPDATE kiuing_operation SET operation_id=?, done=?, kiuing_id=? WHERE id=?";
     private static final String DELETE = "DELETE FROM kiuing_operation WHERE id=?";
     private static final String SELECT_FROM_KIUING = "SELECT `id`, `operation_id`, `done`, `kiuing_id` FROM kiuing_operation WHERE `kiuing_id`=?";
@@ -79,6 +80,7 @@ public class KiuingOperationDAO {
         query = Replacer.replaceFirst(query, kiuingOperation.getOperation().getOperation());
         query = Replacer.replaceFirst(query, kiuingOperation.isDone());
         query = Replacer.replaceFirst(query, kiuingOperation.getKiuing());
+        query = Replacer.replaceFirst(query, kiuingOperation.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 

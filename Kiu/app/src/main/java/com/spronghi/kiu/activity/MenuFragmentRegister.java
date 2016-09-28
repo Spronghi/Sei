@@ -17,14 +17,14 @@ public class MenuFragmentRegister extends FragmentControl {
         container.put(R.id.id_kiuer_drawer_menu_icon_kiuer, LIST_POST_KIUER);
         //container.put(R.id.id_kiuer_drawer_menu_icon_helper, LIST_POST_HELPER);
         container.put(R.id.id_kiuer_drawer_menu_icon_requests, LIST_REQUEST_KIUER);
-        //TO DO container.put(R.id.id_kiuer_drawer_menu_icon_friends, );
-        container.put(R.id.id_kiuer_drawer_menu_icon_kiuing, KIUING_KIUER);
+        container.put(R.id.id_kiuer_drawer_menu_icon_posts, LIST_USER_KIUER);
+        container.put(R.id.id_kiuer_drawer_menu_icon_kiuing, LIST_KIUING);
 
         container.put(R.id.id_helper_drawer_menu_icon_kiuer, LIST_POST_KIUER);
         //container.put(R.id.id_helper_drawer_menu_icon_helper, LIST_POST_HELPER);
         container.put(R.id.id_helper_drawer_menu_icon_requests, LIST_REQUEST_HELPER);
-        //TO DO container.put(R.id.id_helper_drawer_menu_icon_friends, );
-        //TO DO container.put(R.id.id_helper_drawer_menu_icon_kiuing, );
+        container.put(R.id.id_helper_drawer_menu_icon_posts, LIST_USER_HELPER);
+        container.put(R.id.id_helper_drawer_menu_icon_kiuing, LIST_KIUING);
     }
     static public String getKey(int id) {
         return container.get(id);

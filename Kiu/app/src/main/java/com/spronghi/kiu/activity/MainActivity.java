@@ -1,5 +1,6 @@
 package com.spronghi.kiu.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,12 +10,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import com.spronghi.kiu.R;
+import com.spronghi.kiu.backgroundservice.Notification;
+import com.spronghi.kiu.backgroundservice.NotificationService;
 import com.spronghi.kiu.fragment.FragmentControl;
 import com.spronghi.kiu.fragment.FragmentFactory;
 import com.spronghi.kiu.fragment.ModelFragment;
+import com.spronghi.kiu.http.KiuingService;
+import com.spronghi.kiu.http.ToHelperRequestService;
+import com.spronghi.kiu.http.ToKiuerRequestService;
+import com.spronghi.kiu.kiuing.Kiuing;
 import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.model.Kiuer;
+import com.spronghi.kiu.request.ToHelperRequest;
+import com.spronghi.kiu.request.ToKiuerRequest;
 import com.spronghi.kiu.runtime.CurrentUser;
+
+import java.util.List;
 
 
 /**
@@ -37,13 +48,17 @@ public class MainActivity extends AppCompatActivity {
         setupMenu(savedInstanceState);
         setupDrawerContent(navigationView);
         //setupUsernameText();
-    }
 
+        startService(new Intent(this, NotificationService.class));
+    }
+    public static void stopService(){
+        stopService();
+    }
     private void setupMenu(Bundle savedInstanceState){
         if(CurrentUser.isKiuer()){
             navigationView.inflateMenu(R.menu.kiuer_drawer_menu);
             if(savedInstanceState==null){
-                //getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.LIST_POST_HELPER)).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.LIST_POST_KIUER)).commit();
             }
         } else {
             navigationView.inflateMenu(R.menu.helper_drawer_menu);
@@ -76,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -87,8 +103,19 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
     private void selectDrawerItem(MenuItem menuItem) {
-        ModelFragment fragment = FragmentFactory.getInstance(MenuFragmentRegister.getKey(menuItem.getItemId()));
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
+        if (menuItem.getItemId() == R.id.id_kiuer_drawer_menu_icon_posts) {
+            ModelFragment<Kiuer> fragment = FragmentFactory.getInstance(MenuFragmentRegister.getKey(menuItem.getItemId()));
+            fragment.setModel(CurrentUser.getKiuer());
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
+        } else if(menuItem.getItemId() == R.id.id_helper_drawer_menu_icon_posts){
+            ModelFragment<Helper> fragment = FragmentFactory.getInstance(MenuFragmentRegister.getKey(menuItem.getItemId()));
+            fragment.setModel(CurrentUser.getHelper());
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
+        } else {
+            ModelFragment fragment = FragmentFactory.getInstance(MenuFragmentRegister.getKey(menuItem.getItemId()));
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
+        }
+
 
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());

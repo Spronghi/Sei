@@ -132,6 +132,7 @@ public class ListPostKiuerFragment extends ModelFragment {
 
     }
     private void populateList(){
+        postList.clear();
         for(PostKiuer post :PostKiuerService.getAll())
             postList.add(post);
     }

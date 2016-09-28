@@ -1,5 +1,9 @@
 package com.spronghi.kiu.request;
 
+import com.spronghi.kiu.http.ToHelperRequestService;
+import com.spronghi.kiu.http.ToKiuerRequestService;
+import com.spronghi.kiu.runtime.CurrentUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,31 +11,29 @@ import java.util.List;
  * Created by spronghi on 13/09/16.
  */
 public class RequestChecker {
-    private List<ToKiuerRequest> toKiuerRequestList;
-    private List<ToHelperRequest> toHelperRequestList;
+    private List<ToKiuerRequest> toKiuerRequests;
+    private List<ToHelperRequest> toHelperRequests;
 
     public RequestChecker(){
-        toKiuerRequestList = new ArrayList<>();
-        toHelperRequestList = new ArrayList<>();
+        toHelperRequests = new ArrayList<>();
+        toKiuerRequests = new ArrayList<>();
     }
     public List<ToKiuerRequest> checkForKiuerRequest(){
-        // TO DO correct populate
-        populateKiuerList();
-        return toKiuerRequestList;
+        toKiuerRequests.clear();
+        for(ToKiuerRequest request : ToKiuerRequestService.getAllByAddressee(CurrentUser.getKiuer())){
+            if(!(request.isSeen())){
+                toKiuerRequests.add(request);
+            }
+        }
+        return toKiuerRequests;
     }
 
     public List<ToHelperRequest> checkForHelperRequest(){
-        // TO DO correct populate
-        populateHelperList();
-        return toHelperRequestList;
-    }
-
-    private void populateKiuerList(){
-        //ToKiuerRequest kiuerRequest = new ToKiuerRequest(CurrentUser.getHelper(), CurrentUser.getKiuer(), CurrentPost.getPostKiuer(), Request.SEND);
-        //toKiuerRequestList.add(kiuerRequest);
-    }
-    private void populateHelperList(){
-        //ToHelperRequest helperRequest = new ToHelperRequest(CurrentUser.getKiuer(), CurrentUser.getHelper(), CurrentPost.getPostKiuer(), Request.SEND);
-        //toHelperRequestList.add(helperRequest);
+        for(ToHelperRequest request : ToHelperRequestService.getAllByAddressee(CurrentUser.getHelper())){
+            if(!(request.isSeen())){
+                toHelperRequests.add(request);
+            }
+        }
+        return toHelperRequests;
     }
 }

@@ -22,6 +22,7 @@ public class KiuingDAO {
     private static final String INSERT = "INSERT INTO kiuing (post_kiuer_id) VALUES ('?')";
     private static final String UPDATE = "UPDATE kiuing SET post_kiuer_id='?' WHERE id=?";
     private static final String DELETE = "DELETE FROM kiuing WHERE id=?";
+    private static final String SELECT_FROM_POST = "SELECT `id`, `post_kiuer_id` FROM kiuing WHERE `post_kiuer_id`=?";
     private static final Logger logger = Logger.getLogger(KiuingDAO.class.getName());
 
     private KiuingOperationDAO kiuingOperationDAO;
@@ -90,5 +91,24 @@ public class KiuingDAO {
         String query = DELETE;
         query = Replacer.replaceFirst(query, kiuing.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
+    }
+
+    public List<Kiuing> getAllBy(String flag, Object key){
+        List<Kiuing> kiuingList = new ArrayList<>();
+        String query="";
+        if(flag.equals(FilterControl.POST_KIUER)){
+            query = SELECT_FROM_POST;
+            query = Replacer.replaceFirst(query, (String) key);
+        }
+        ResultSet rs = ConnectorFactory.getConnection().executeQuery(query);
+
+        try{
+            while(rs.next()) {
+                kiuingList.add(setKiuing(rs));
+            }
+        } catch(SQLException e){
+            logger.log(Level.WARNING, e.toString());
+        }
+        return kiuingList;
     }
 }

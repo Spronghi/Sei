@@ -1,5 +1,6 @@
 package http;
 
+import integration.control.FilterControl;
 import integration.dao.KiuingDAO;
 import integration.dao.PostKiuerDAO;
 import model.Kiuing;
@@ -24,7 +25,7 @@ public class KiuingService extends HttpServlet {
     private Kiuing getKiuing(HttpServletRequest request){
         Kiuing kiuing = new Kiuing();
         kiuing.setId(Integer.parseInt(request.getParameter("id")));
-        kiuing.setPost(new PostKiuerDAO().get(Integer.parseInt(request.getParameter("post_id"))));
+        kiuing.setPost(new PostKiuerDAO().get(Integer.parseInt(request.getParameter("kiuer_post_id"))));
         return kiuing;
     }
 
@@ -55,6 +56,9 @@ public class KiuingService extends HttpServlet {
                 break;
             case HttpControl.GET_ALL:
                 responseString = getAll();
+                break;
+            case HttpControl.POST_KIUER:
+                responseString = getAllByPostKiuer(request);
                 break;
         }
         out.println(responseString);
@@ -88,4 +92,9 @@ public class KiuingService extends HttpServlet {
     private String getAll(){
         return parser.getJSONArr(dao.getAll()).toJSONString();
     }
+
+    private String getAllByPostKiuer(HttpServletRequest request){
+        return parser.getJSONArr(dao.getAllBy(FilterControl.POST_KIUER, request.getParameter("post_kiuer_id"))).toJSONString();
+    }
+
 }

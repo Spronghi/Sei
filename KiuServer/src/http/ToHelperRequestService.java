@@ -23,18 +23,18 @@ public class ToHelperRequestService extends HttpServlet {
     private JSONParser<ToHelperRequest> parser;
 
     private ToHelperRequest getToHelperRequest(HttpServletRequest request){
-        ToHelperRequest toKiuerRequest = new ToHelperRequest();
+        ToHelperRequest toHelperRequest = new ToHelperRequest();
 
-        toKiuerRequest.setId(Integer.parseInt(request.getParameter("id")));
-        toKiuerRequest.setSeen(Boolean.parseBoolean(request.getParameter("seen")));
-        toKiuerRequest.setAddressee(new HelperDAO().get(Integer.parseInt(request.getParameter("addressee_id"))));
-        toKiuerRequest.setSender(new KiuerDAO().get(Integer.parseInt(request.getParameter("sender_id"))));
-        toKiuerRequest.setPost(new PostKiuerDAO().get(Integer.parseInt(request.getParameter("post_id"))));
+        toHelperRequest.setId(Integer.parseInt(request.getParameter("id")));
+        toHelperRequest.setSeen(Boolean.parseBoolean(request.getParameter("seen")));
+        toHelperRequest.setAddressee(new HelperDAO().get(Integer.parseInt(request.getParameter("addressee_id"))));
+        toHelperRequest.setSender(new KiuerDAO().get(Integer.parseInt(request.getParameter("sender_id"))));
+        toHelperRequest.setPost(new PostKiuerDAO().get(Integer.parseInt(request.getParameter("post_id"))));
 
         List<RequestType> type = new RequestTypeDAO().getAllBy(FilterControl.TYPE,request.getParameter("type"));
-        toKiuerRequest.setType(type.iterator().next());
+        toHelperRequest.setType(type.stream().filter(p->p.getType().equals(request.getParameter("type"))).findFirst().get());
 
-        return toKiuerRequest;
+        return toHelperRequest;
     }
 
     @Override
@@ -80,18 +80,18 @@ public class ToHelperRequestService extends HttpServlet {
     }
 
     private String create(HttpServletRequest request){
-        ToHelperRequest toKiuerRequest = getToHelperRequest(request);
-        dao.create(toKiuerRequest);
-        return parser.getJSONObj(toKiuerRequest).toJSONString();
+        ToHelperRequest toHelperRequest = getToHelperRequest(request);
+        dao.create(toHelperRequest);
+        return parser.getJSONObj(toHelperRequest).toJSONString();
     }
     private String update(HttpServletRequest request){
-        ToHelperRequest toKiuerRequest = getToHelperRequest(request);
-        dao.update(toKiuerRequest);
+        ToHelperRequest toHelperRequest = getToHelperRequest(request);
+        dao.update(toHelperRequest);
         return JSONParser.getSuccessJSON(true).toJSONString();
     }
     private String delete(HttpServletRequest request){
-        ToHelperRequest toKiuerRequest = getToHelperRequest(request);
-        dao.delete(toKiuerRequest);
+        ToHelperRequest toHelperRequest = getToHelperRequest(request);
+        dao.delete(toHelperRequest);
         return JSONParser.getSuccessJSON(true).toJSONString();
     }
     private String get(HttpServletRequest request){

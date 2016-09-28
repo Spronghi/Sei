@@ -1,5 +1,6 @@
 package http;
 
+import integration.control.FilterControl;
 import integration.dao.HelperDAO;
 import integration.dao.KiuerDAO;
 import integration.dao.PlaceDAO;
@@ -78,6 +79,12 @@ public class PostKiuerService extends HttpServlet {
             case HttpControl.GET_ALL:
                 responseString = getAll();
                 break;
+            case HttpControl.HELPER:
+                responseString = getAllByHelper(request);
+                break;
+            case HttpControl.KIUER:
+                responseString = getAllByKiuer(request);
+                break;
         }
         out.println(responseString);
         out.close();
@@ -109,5 +116,11 @@ public class PostKiuerService extends HttpServlet {
     }
     private String getAll(){
         return parser.getJSONArr(dao.getAll()).toJSONString();
+    }
+    private String getAllByHelper(HttpServletRequest request){
+        return parser.getJSONArr(dao.getAllBy(FilterControl.HELPER, request.getParameter("helper_id"))).toJSONString();
+    }
+    private String getAllByKiuer(HttpServletRequest request){
+        return parser.getJSONArr(dao.getAllBy(FilterControl.KIUER, request.getParameter("kiuer_id"))).toJSONString();
     }
 }

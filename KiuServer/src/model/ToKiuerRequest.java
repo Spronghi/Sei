@@ -58,4 +58,16 @@ public class ToKiuerRequest {
     public void setType(RequestType type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "ToKiuerRequest{" +
+                "id=" + id +
+                ", seen=" + seen +
+                ", addressee=" + addressee +
+                ", sender=" + sender +
+                ", post=" + post +
+                ", type=" + type +
+                '}';
+    }
 }

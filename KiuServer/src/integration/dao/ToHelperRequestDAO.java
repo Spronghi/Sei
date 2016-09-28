@@ -91,6 +91,7 @@ public class ToHelperRequestDAO {
         query = Replacer.replaceFirst(query, request.getAddressee().getId());
         query = Replacer.replaceFirst(query, request.getPost().getId());
         query = Replacer.replaceFirst(query, request.getType().getId());
+        query = Replacer.replaceFirst(query, request.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 

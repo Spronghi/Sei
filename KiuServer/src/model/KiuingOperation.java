@@ -47,4 +47,14 @@ public class KiuingOperation {
     public void setKiuing(int kiuingId) {
         this.kiuingId = kiuingId;
     }
+
+    @Override
+    public String toString() {
+        return "KiuingOperation{" +
+                "id=" + id +
+                ", done=" + done +
+                ", operation=" + operation +
+                ", kiuingId=" + kiuingId +
+                '}';
+    }
 }

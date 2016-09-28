@@ -9,9 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -21,36 +19,41 @@ import android.view.ViewGroup;
 
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.adapter.DividerItemDecoration;
-import com.spronghi.kiu.adapter.RequestHelperAdapter;
-import com.spronghi.kiu.request.ToHelperRequest;
-import com.spronghi.kiu.request.RequestChecker;
+import com.spronghi.kiu.adapter.KiuingAdapter;
+import com.spronghi.kiu.http.KiuerService;
+import com.spronghi.kiu.http.KiuingService;
+import com.spronghi.kiu.http.PostKiuerService;
+import com.spronghi.kiu.kiuing.Kiuing;
+import com.spronghi.kiu.model.PostKiuer;
+import com.spronghi.kiu.runtime.CurrentUser;
+import com.spronghi.kiu.setup.DateFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by spronghi on 13/09/16.
+ * Created by spronghi on 28/09/16.
  */
-public class ListRequestHelperFragment extends  ModelFragment{
-    public static final String TAG = ListRequestHelperFragment.class.getSimpleName();
+public class ListKiuingFragment extends ModelFragment{
+    public static final String TAG = ListKiuingFragment.class.getSimpleName();
     private Toolbar toolbar;
 
-    private List<ToHelperRequest> list = new ArrayList<>();
+    private List<Kiuing> list = new ArrayList<>();
     private RecyclerView recyclerView;
-    private RequestHelperAdapter adapter;
+    private KiuingAdapter adapter;
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     // either dynamically or via XML layout inflation
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        final View layout = inflater.inflate(R.layout.fragment_post_list, parent, false);
-        toolbar = (Toolbar) layout.findViewById(R.id.fragment_post_list_toolbar);
+        final View layout = inflater.inflate(R.layout.fragment_kiuing_list, parent, false);
+        toolbar = (Toolbar) layout.findViewById(R.id.fragment_kiuing_list_toolbar);
         setupToolbar();
 
-        recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_post_list_recycler_view);
+        recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_kiuing_list_recycler_view);
 
-        adapter = new RequestHelperAdapter(list);
+        adapter = new KiuingAdapter(list, this.getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -62,7 +65,7 @@ public class ListRequestHelperFragment extends  ModelFragment{
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                ModelFragment<ToHelperRequest> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_REQUEST_HELPER);
+                ModelFragment<Kiuing> fragment = FragmentFactory.getInstance(FragmentControl.KIUING);
                 fragment.setModel(list.get(position));
                 getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
             }
@@ -78,12 +81,24 @@ public class ListRequestHelperFragment extends  ModelFragment{
     }
     private void populateList(){
         list.clear();
-        RequestChecker checker = new RequestChecker();
-        for(ToHelperRequest request : checker.checkForHelperRequest()){
-            if(!(request.isSeen()))
-                list.add(request);
+        List<PostKiuer> postList;
+        list.add(KiuingService.get(1));
+        if(CurrentUser.isKiuer()){
+            postList = PostKiuerService.getAllByKiuer(CurrentUser.getKiuer());
+        } else {
+            postList = PostKiuerService.getAllByHelper(CurrentUser.getHelper());
         }
 
+        List<Kiuing> kiuingList;
+        for(PostKiuer post : postList){
+            String minutes = DateFormatter.minusNow(post.getStartDate());
+            if(!(minutes.equals(DateFormatter.BEFORE))){
+                kiuingList = KiuingService.getAllByPostKiuer(post);
+                for(Kiuing kiuing : kiuingList) {
+                    list.add(kiuing);
+                }
+            }
+        }
     }
     private void updateSubtitle(final String subtitle) {
         toolbar.setSubtitle(subtitle);
@@ -104,9 +119,9 @@ public class ListRequestHelperFragment extends  ModelFragment{
     public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private GestureDetector gestureDetector;
-        private ListRequestHelperFragment.ClickListener clickListener;
+        private ListKiuingFragment.ClickListener clickListener;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ListRequestHelperFragment.ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ListKiuingFragment.ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override

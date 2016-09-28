@@ -1,8 +1,11 @@
 package com.spronghi.kiu.http;
 
+import android.util.Log;
+
 import com.spronghi.kiu.json.JSONParser;
 import com.spronghi.kiu.json.JSONParserControl;
 import com.spronghi.kiu.json.JSONParserFactory;
+import com.spronghi.kiu.kiuing.Kiuing;
 import com.spronghi.kiu.kiuing.KiuingOperation;
 
 import java.util.List;
@@ -26,7 +29,6 @@ public class KiuingOperationService {
         JSONParser<KiuingOperation> parser = JSONParserFactory.getInstance(JSONParserControl.KIUING_OPERATION);
         String jsonString = HttpConnector.makeRequest(url);
         operation.setId(parser.parse(jsonString).getId());
-
     }
 
     public static boolean delete(KiuingOperation operation){
@@ -65,6 +67,17 @@ public class KiuingOperationService {
         JSONParser<KiuingOperation> parser = JSONParserFactory.getInstance(JSONParserControl.KIUING_OPERATION);
 
         String jsonString = HttpConnector.makeRequest(url);
+        return parser.parseArray(jsonString);
+    }
+
+    public static List<KiuingOperation> getAllByKiuing(Kiuing kiuing){
+        String url = "/kiuing_operation?";
+        url += "service=kiuing&";
+        url += "kiuing_id="+Integer.toString(kiuing.getId());
+        JSONParser<KiuingOperation> parser = JSONParserFactory.getInstance(JSONParserControl.KIUING_OPERATION);
+
+        String jsonString = HttpConnector.makeRequest(url);
+        Log.d("kiuing", jsonString);
         return parser.parseArray(jsonString);
     }
 }

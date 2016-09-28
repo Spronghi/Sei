@@ -15,7 +15,6 @@ import com.spronghi.kiu.fragment.FragmentFactory;
 import com.spronghi.kiu.fragment.ModelFragment;
 import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.model.Kiuer;
-import com.spronghi.kiu.notification.Notification;
 import com.spronghi.kiu.runtime.CurrentUser;
 
 /**

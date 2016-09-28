@@ -74,6 +74,7 @@ public class PlaceDAO {
         query = Replacer.replaceFirst(query, place.getCity());
         query = Replacer.replaceFirst(query, place.getAddress());
         query = Replacer.replaceFirst(query, place.getLocation());
+        query = Replacer.replaceFirst(query, place.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 

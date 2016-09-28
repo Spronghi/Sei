@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -47,65 +48,7 @@ public class ListRequestKiuerFragment extends ModelFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         final View layout = inflater.inflate(R.layout.fragment_post_list, parent, false);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_post_list_toolbar);
-
-        toolbar.setLogo(R.mipmap.ic_logo);
-        toolbar.setTitle(R.string.requests);
-        toolbar.inflateMenu(R.menu.menu_mtoolbar_postlist);
-
-        MenuItem searchItem = toolbar.getMenu().findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        if (searchItem != null) {
-            searchView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d(TAG, "Search clicked!");
-                }
-            });
-            searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-                @Override
-                public boolean onClose() {
-                    Log.d(TAG, "Search closed!");
-                    return false;
-                }
-            });
-            searchView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d(TAG, "Search click!");
-                }
-            });
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    //setListContent(query);
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    Log.d(TAG, "Query text changed!" + newText);
-                    return false;
-                }
-            });
-            searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
-                @Override
-                public boolean onSuggestionSelect(int position) {
-                    return false;
-                }
-
-                @Override
-                public boolean onSuggestionClick(int position) {
-                    return false;
-                }
-            });
-        }
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                return false;
-            }
-        });
-
+        setupToolbar();
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_post_list_recycler_view);
 
@@ -138,9 +81,9 @@ public class ListRequestKiuerFragment extends ModelFragment {
     private void populateList(){
         list.clear();
         RequestChecker checker = new RequestChecker();
-        for(ToKiuerRequest request : checker.checkForKiuerRequest()){
-            if(!(request.isSeen()))
-                list.add(request);
+        List<ToKiuerRequest> newRequests = checker.checkForKiuerRequest();
+        for(ToKiuerRequest request : newRequests){
+            list.add(request);
         }
 
     }
@@ -154,7 +97,25 @@ public class ListRequestKiuerFragment extends ModelFragment {
     public void setModel(Object model) {
 
     }
+    private void setupToolbar() {
+        final FragmentManager manager = this.getFragmentManager();
 
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return false;
+            }
+        });
+
+        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                manager.popBackStack();
+            }
+        });
+    }
     public interface ClickListener {
         void onClick(View view, int position);
         void onLongClick(View view, int position);

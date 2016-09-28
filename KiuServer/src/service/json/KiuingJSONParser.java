@@ -35,7 +35,7 @@ public class KiuingJSONParser implements JSONParser<Kiuing> {
         JSONObject obj = new JSONObject();
 
         obj.put("id", kiuing.getId());
-        obj.put("post", postKiuerJSONParser.getJSONObj(kiuing.getPost()).toJSONString());
+        obj.put("post", postKiuerJSONParser.getJSONObj(kiuing.getPost()));
 
         return obj;
     }

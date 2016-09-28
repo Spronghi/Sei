@@ -23,7 +23,7 @@ public class ToHelperRequestService {
     }
 
     public static void create(ToHelperRequest request){
-        String url = "/request_helper?";
+        String url = "/to_helper_request?";
         url += "service=create&";
         url += getParameterString(request);
 
@@ -33,7 +33,7 @@ public class ToHelperRequestService {
     }
 
     public static boolean delete(ToHelperRequest request){
-        String url ="/request_helper?";
+        String url ="/to_helper_request?";
         url += "service=delete&";
         url += getParameterString(request);
 
@@ -43,7 +43,7 @@ public class ToHelperRequestService {
     }
 
     public static boolean update(ToHelperRequest request){
-        String url ="/request_helper?";
+        String url ="/to_helper_request?";
         url += "service=update&";
         url += getParameterString(request);
 
@@ -54,7 +54,7 @@ public class ToHelperRequestService {
 
 
     public static ToHelperRequest get(int id){
-        String url = "/request_helper?";
+        String url = "/to_helper_request?";
         url += "service=get&";
         url += "id="+id;
         JSONParser<ToHelperRequest> parser = JSONParserFactory.getInstance(JSONParserControl.TO_HELPER_REQUEST);
@@ -64,14 +64,14 @@ public class ToHelperRequestService {
     }
 
     public static List<ToHelperRequest> getAll(){
-        String url = "/request_helper?";
+        String url = "/to_helper_request?";
         url += "service=get_all";
         JSONParser<ToHelperRequest> parser = JSONParserFactory.getInstance(JSONParserControl.TO_HELPER_REQUEST);
         String jsonString = HttpConnector.makeRequest(url);
         return parser.parseArray(jsonString);
     }
     public static List<ToHelperRequest> getAllByAddressee(Helper addressee){
-        String url = "/request_helper?";
+        String url = "/to_helper_request?";
         url += "service=addressee&";
         url += "addressee_id="+Integer.toString(addressee.getId());
         JSONParser<ToHelperRequest> parser = JSONParserFactory.getInstance(JSONParserControl.TO_HELPER_REQUEST);

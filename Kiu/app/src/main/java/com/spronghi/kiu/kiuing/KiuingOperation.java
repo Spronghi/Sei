@@ -40,11 +40,35 @@ public class KiuingOperation {
         this.operation = operation;
     }
 
+    public String getOperationMessage(){
+        if(operation.equals(Kiuing.FINISHED)){
+            return "finished the Kiu";
+        } else if(operation.equals(Kiuing.GOING)){
+            return "is going";
+        } else if(operation.equals(Kiuing.ARRIVED)){
+            return "arrived";
+        } else if(operation.equals(Kiuing.KIUING)){
+            return "is Kiuing";
+        } else {
+            return "is lost";
+        }
+
+    }
     public int getKiuing() {
         return kiuingId;
     }
 
     public void setKiuing(int kiuingId) {
         this.kiuingId = kiuingId;
+    }
+
+    @Override
+    public String toString() {
+        return "KiuingOperation{" +
+                "id=" + id +
+                ", done=" + done +
+                ", operation='" + operation + '\'' +
+                ", kiuingId=" + kiuingId +
+                '}';
     }
 }

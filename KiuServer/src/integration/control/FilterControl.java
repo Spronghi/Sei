@@ -6,6 +6,7 @@ package integration.control;
 public class FilterControl {
     public final static String USERNAME = "username";
     public final static String KIUER = "kiuer";
+    public final static String POST_KIUER = "post_kiuer";
     public final static String HELPER = "helper";
     public final static String KIUING = "kiuing";
     public final static String OPERATION = "operation";

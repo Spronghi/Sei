@@ -1,8 +1,7 @@
 package com.spronghi.kiu.request;
 
-import android.content.res.Resources;
+import android.util.Log;
 
-import com.spronghi.kiu.R;
 import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostKiuer;
@@ -18,7 +17,9 @@ public class ToKiuerRequest {
     private PostKiuer post;
     private String type;
 
-    private ToKiuerRequest(){}
+    private ToKiuerRequest(){
+        seen = false;
+    }
 
     public ToKiuerRequest(Helper sender, Kiuer addressee, PostKiuer post, String type){
         seen = false;
@@ -77,14 +78,26 @@ public class ToKiuerRequest {
     }
 
     public String getMessage(){
-        switch(type){
-            case Request.SEND:
-                return "An Helper sent you a request!";
-            case Request.ACCEPT:
-                return "An Helper accepted your request!";
-            case Request.REFUSE:
-                return "An Helped refused your request!";
-        }
-        return "";
+        Log.d("request", type);
+        if(type.contains(Request.SEND))
+            return "An Helper sent you a request!";
+        else if(type.contains(Request.ACCEPT))
+            return "An Helper accepted your request!";
+        else if(type.contains(Request.REFUSE))
+            return "An Helped refused your request!";
+        else
+            return "No Request type found";
+    }
+
+    @Override
+    public String toString() {
+        return "ToKiuerRequest{" +
+                "id=" + id +
+                ", seen=" + seen +
+                ", addressee=" + addressee +
+                ", sender=" + sender +
+                ", post=" + post +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

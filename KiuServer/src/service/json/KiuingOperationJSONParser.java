@@ -19,7 +19,6 @@ public class KiuingOperationJSONParser implements JSONParser<KiuingOperation> {
         org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
         try {
             OperationDAO operationDAO = new OperationDAO();
-            OperationJSONParser operationJSONParser = new OperationJSONParser();
 
             JSONObject obj = (JSONObject) parser.parse(jsonString);
             KiuingOperation operation = new KiuingOperation();
@@ -40,7 +39,6 @@ public class KiuingOperationJSONParser implements JSONParser<KiuingOperation> {
 
     @Override
     public JSONObject getJSONObj(KiuingOperation operation) {
-        OperationJSONParser operationJSONParser = new OperationJSONParser();
         JSONObject obj = new JSONObject();
 
         obj.put("id", operation.getId());

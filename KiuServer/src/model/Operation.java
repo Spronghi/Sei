@@ -27,4 +27,12 @@ public class Operation {
     public void setOperation(String operation) {
         this.operation = operation;
     }
+
+    @Override
+    public String toString() {
+        return "Operation{" +
+                "id=" + id +
+                ", operation='" + operation + '\'' +
+                '}';
+    }
 }

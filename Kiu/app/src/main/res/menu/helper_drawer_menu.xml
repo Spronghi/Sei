@@ -10,6 +10,10 @@
             android:icon="@drawable/ic_accessibility_black_24dp"
             android:title="@string/drawable_text_kiuer" />
         <item
+            android:id="@+id/id_helper_drawer_menu_icon_posts"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="@string/drawable_text_posts" />
+        <item
             android:id="@+id/id_helper_drawer_menu_icon_requests"
             android:icon="@drawable/ic_compare_arrows_black_24dp"
             android:title="@string/drawable_text_requests" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_kiuing_row"
+    android:id="@+id/fragment_kiuing_operation_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:focusable="true"
@@ -22,20 +22,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/fragment_kiuing_row_location"
+                android:id="@+id/fragment_kiuing_operation_row_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/accentColor"
+                android:drawableLeft="@drawable/ic_clear_black_24dp"
                 android:drawablePadding="5dp"
-                android:paddingLeft="12dp"
-                android:textSize="20dp"
-                android:text="@string/location"
-                />
-            <TextView
-                android:id="@+id/fragment_kiuing_row_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="5dp"
+                android:drawableTint="@android:color/holo_red_light"
+                android:paddingTop="5dp"
                 android:paddingLeft="12dp"
                 android:textSize="15dp"
                 android:text="@string/message"

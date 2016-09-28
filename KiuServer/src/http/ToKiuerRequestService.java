@@ -28,11 +28,11 @@ public class ToKiuerRequestService extends HttpServlet {
         toKiuerRequest.setId(Integer.parseInt(request.getParameter("id")));
         toKiuerRequest.setSeen(Boolean.parseBoolean(request.getParameter("seen")));
         toKiuerRequest.setSender(new HelperDAO().get(Integer.parseInt(request.getParameter("sender_id"))));
-        toKiuerRequest.setAddressee(new KiuerDAO().get(Integer.parseInt(request.getParameter("addresse_id"))));
+        toKiuerRequest.setAddressee(new KiuerDAO().get(Integer.parseInt(request.getParameter("addressee_id"))));
         toKiuerRequest.setPost(new PostKiuerDAO().get(Integer.parseInt(request.getParameter("post_id"))));
 
         List<RequestType> type = new RequestTypeDAO().getAllBy(FilterControl.TYPE,request.getParameter("type"));
-        toKiuerRequest.setType(type.iterator().next());
+        toKiuerRequest.setType(type.stream().filter(p->p.getType().equals(request.getParameter("type"))).findFirst().get());
 
         return toKiuerRequest;
     }
@@ -65,6 +65,9 @@ public class ToKiuerRequestService extends HttpServlet {
             case HttpControl.GET_ALL:
                 responseString = getAll();
                 break;
+            case HttpControl.ADDRESSEE:
+                responseString = getAllByAddressee(request);
+                break;
         }
         out.println(responseString);
         out.close();
@@ -96,5 +99,8 @@ public class ToKiuerRequestService extends HttpServlet {
     }
     private String getAll(){
         return parser.getJSONArr(dao.getAll()).toJSONString();
+    }
+    private String getAllByAddressee(HttpServletRequest request){
+        return parser.getJSONArr(dao.getAllBy(FilterControl.KIUER, request.getParameter("addressee_id"))).toJSONString();
     }
 }

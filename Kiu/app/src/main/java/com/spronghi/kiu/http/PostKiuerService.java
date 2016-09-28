@@ -5,6 +5,8 @@ import android.util.Log;
 import com.spronghi.kiu.json.JSONParser;
 import com.spronghi.kiu.json.JSONParserControl;
 import com.spronghi.kiu.json.JSONParserFactory;
+import com.spronghi.kiu.model.Helper;
+import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostKiuer;
 
 import java.util.List;
@@ -76,6 +78,22 @@ public class PostKiuerService {
     public static List<PostKiuer> getAll(){
         String url = "/post_kiuer?";
         url += "service=get_all";
+        JSONParser<PostKiuer> parser = JSONParserFactory.getInstance(JSONParserControl.POST_KIUER);
+        String jsonString = HttpConnector.makeRequest(url);
+        return parser.parseArray(jsonString);
+    }
+    public static List<PostKiuer> getAllByHelper(Helper helper){
+        String url = "/post_kiuer?";
+        url += "service=helper&";
+        url += "helper_id="+Integer.toString(helper.getId());
+        JSONParser<PostKiuer> parser = JSONParserFactory.getInstance(JSONParserControl.POST_KIUER);
+        String jsonString = HttpConnector.makeRequest(url);
+        return parser.parseArray(jsonString);
+    }
+    public static List<PostKiuer> getAllByKiuer(Kiuer kiuer){
+        String url = "/post_kiuer?";
+        url += "service=kiuer&";
+        url += "kiuer_id="+Integer.toString(kiuer.getId());
         JSONParser<PostKiuer> parser = JSONParserFactory.getInstance(JSONParserControl.POST_KIUER);
         String jsonString = HttpConnector.makeRequest(url);
         return parser.parseArray(jsonString);
