@@ -100,6 +100,8 @@ public class ListRequestKiuerFragment extends ModelFragment {
     private void setupToolbar() {
         final FragmentManager manager = this.getFragmentManager();
 
+        toolbar.setTitle(getContext().getResources().getString(R.string.requests));
+
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {

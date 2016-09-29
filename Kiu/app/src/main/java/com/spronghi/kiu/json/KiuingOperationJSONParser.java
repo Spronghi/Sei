@@ -26,7 +26,7 @@ public class KiuingOperationJSONParser extends JSONParser<KiuingOperation>{
         KiuingOperation operation = new KiuingOperation();
         try {
             operation.setId(json.getInt("id"));
-            operation.setDone(json.getBoolean("seen"));
+            operation.setDone(json.getBoolean("done"));
             operation.setKiuing(json.getInt("kiuing_id"));
             operation.setOperation(json.getString("operation"));
         } catch (JSONException e) {

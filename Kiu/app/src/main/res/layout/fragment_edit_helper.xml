@@ -23,11 +23,11 @@
             android:layout_marginTop="65dp">
 
 
-        <ImageButton
+            <ImageButton
                 android:id="@+id/fragment_edit_helper_profile_photo"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@mipmap/ic_face_white"
+                android:src="@mipmap/ic_account_circle_white_24dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/profile_image_circular"
@@ -35,33 +35,6 @@
                 android:padding="20dp"
                 android:scaleType="centerCrop"
                 />
-
-            <EditText
-                android:id="@+id/fragment_edit_helper_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="76dp"
-                android:layout_marginLeft="175dp"
-                android:background="@android:color/transparent"
-                android:textColor="#fff"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:hint="@string/helper"
-                android:textColorHint="@color/textIconColor"/>
-
-            <EditText
-                android:id="@+id/fragment_edit_helper_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/fragment_edit_helper_username"
-                android:background="@android:color/transparent"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="175dp"
-                android:text="@string/profile_status"
-                android:textColor="#fff"
-                android:textSize="14sp"
-                android:hint="@string/helper"
-                android:textColorHint="@color/textIconColor"/>
         </RelativeLayout>
 
 
@@ -78,13 +51,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@color/darkPrimaryColor"
-                android:textColor="#fff"
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/name"
-                android:hint="@string/helper"
-                android:textColorHint="@color/textIconColor"/>
+                android:hint="@string/name"
+                android:textColor="@color/textIconColor"
+                android:textColorHint="@color/textIconColor"
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/fragment_edit_helper_surname"
@@ -97,48 +70,8 @@
                 android:elevation="4dp"
                 android:padding="20dp"
                 android:hint="@string/surname"
-                android:textColorHint="@color/textIconColor"/>
-
-            <EditText
-                android:id="@+id/fragment_edit_helper_password"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/darkPrimaryColor"
-                android:textColor="#fff"
-                android:layout_margin="5dp"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:hint="@string/passwordhint"
-                android:textColorHint="@color/textIconColor"/>
-
-            <EditText
-                android:id="@+id/fragment_edit_helper_birth"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/darkPrimaryColor"
-                android:textColor="#fff"
-                android:layout_margin="5dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginTop="3dp"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:hint="@string/birth"
-                android:textColorHint="@color/textIconColor"/>
-
-            <EditText
-                android:id="@+id/fragment_edit_helper_telephone"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/darkPrimaryColor"
-                android:textColor="#fff"
-                android:layout_margin="5dp"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:hint="@string/telephone"
-                android:textColorHint="@color/textIconColor"/>
+                android:textColorHint="@color/textIconColor"
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/fragment_edit_helper_favorite_city"
@@ -153,7 +86,9 @@
                 android:elevation="4dp"
                 android:padding="20dp"
                 android:hint="@string/favorite_city"
-                android:textColorHint="@color/textIconColor"/>
+                android:textColorHint="@color/textIconColor"
+                android:inputType="text"/>
+
             <EditText
                 android:id="@+id/fragment_edit_helper_favorite_cost"
                 android:layout_width="fill_parent"
@@ -167,7 +102,68 @@
                 android:elevation="4dp"
                 android:padding="20dp"
                 android:hint="@string/favorite_cost"
-                android:textColorHint="@color/textIconColor"/>
+                android:textColorHint="@color/textIconColor"
+                android:inputType="numberDecimal"/>
+
+            <EditText
+                android:id="@+id/fragment_edit_helper_email"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/darkPrimaryColor"
+                android:textColor="#fff"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:hint="@string/email"
+                android:textColorHint="@color/textIconColor"
+                android:inputType="textWebEmailAddress"/>
+
+            <EditText
+                android:id="@+id/fragment_edit_helper_username"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:textColor="@color/textIconColor"
+                android:hint="@string/username"
+                android:textColorHint="@color/textIconColor"
+                android:background="@color/darkPrimaryColor"
+                android:inputType="textEmailSubject"/>
+
+            <EditText
+                android:id="@+id/fragment_edit_helper_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/darkPrimaryColor"
+                android:textColor="#fff"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:hint="@string/passwordhint"
+                android:textColorHint="@color/textIconColor"
+                android:inputType="textPassword"/>
+
+            <EditText
+                android:id="@+id/fragment_edit_helper_cpassword"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/darkPrimaryColor"
+                android:textColor="#fff"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:hint="@string/confirm_password"
+                android:textColorHint="@color/textIconColor"
+                android:inputType="textPassword"/>
 
             <Button
                 android:id="@+id/fragment_edit_helper_ok_button"

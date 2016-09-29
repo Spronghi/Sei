@@ -11,10 +11,12 @@
     <string name="telephone">Telephone</string>
     <string name="feedback">Feedback</string>
     <string name="favorite_city">Favorite City</string>
+    <string name="email">Email</string>
     <string name="favorite_cost">Favorite Cost</string>
     <string name="profile_status">Profile Status</string>
     <string name="closed_post">Closed Posts</string>
     <string name="open_post">Open Posts</string>
+    <string name="confirm_password">Confirm Password</string>
 
 
     <string name="post">Post</string>
@@ -87,6 +89,8 @@
     <string name="minutes_for_begin">minutes for the beginning of the Kiuing</string>
     <string name="kiuiung_started">Kiuing has started!</string>
     <string name="kiuiung_finished">Kiuing is finished!</string>
+    <string name="your_posts">Your Posts</string>
+    <string name="kiuing">Kiuing</string>
 
     <string name="usernamehint">Username</string>
     <string name="passwordhint">Password</string>

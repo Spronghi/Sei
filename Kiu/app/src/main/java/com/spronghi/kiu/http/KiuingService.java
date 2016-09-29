@@ -30,8 +30,6 @@ public class KiuingService {
         kiuing.setId(parser.parse(jsonString).getId());
 
         kiuing.setOperationList(KiuingOperationService.getAllByKiuing(kiuing));
-        Log.d("kiuing", jsonString);
-        Log.d("kiuing", kiuing.toString());
     }
 
     public static boolean delete(Kiuing kiuing){
@@ -62,7 +60,6 @@ public class KiuingService {
 
         String jsonString = HttpConnector.makeRequest(url);
         Kiuing kiuing = parser.parse(jsonString);
-        Log.d("kiuing", jsonString);
         kiuing.setOperationList(KiuingOperationService.getAllByKiuing(kiuing));
 
         return kiuing;

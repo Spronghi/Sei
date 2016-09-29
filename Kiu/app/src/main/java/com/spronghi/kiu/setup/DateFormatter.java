@@ -35,24 +35,4 @@ public enum DateFormatter {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         return formatter.format(date);
     }
-    public static String minusNow(Date start){
-        Date now = new Date();
-
-        if(start.before(now)) {
-            return BEFORE;
-        }
-        long diff = start.getTime() - now.getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("mm");
-        return formatter.format(new Date(diff));
-    }
-    public static String minusNow(Date start, int duration){
-        Date now = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(start);
-        calendar.add(Calendar.MINUTE, duration);
-        if(calendar.before(now)) {
-            return BEFORE;
-        }
-        return AFTER;
-    }
 }

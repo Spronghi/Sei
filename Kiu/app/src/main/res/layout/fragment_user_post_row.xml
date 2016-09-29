@@ -67,7 +67,7 @@
             <RatingBar
                 android:id="@+id/fragment_user_post_row_rating_bar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="39dp"
                 android:isIndicator="true"
                 android:numStars="5"
                 android:scaleX="0.5"

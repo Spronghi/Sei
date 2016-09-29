@@ -9,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.spronghi.kiu.R;
+
 import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.runtime.CurrentUser;
-import com.spronghi.kiu.setup.SetupView;
+
 
 /**
  * Created by spronghi on 08/09/16.
@@ -22,14 +25,12 @@ import com.spronghi.kiu.setup.SetupView;
 public class ViewKiuerFragment extends ModelFragment<Kiuer> {
     private ImageView actionIcon;
     private TextView usernameText;
-    private TextView statusText;
-    private TextView nameAndSurnameText;
-    private TextView birthText;
-    private TextView telephoneText;
+    private TextView email;
     private TextView favoriteCityText;
-    private TextView feedbackText;
+    private RatingBar feedbackBar;
     private Toolbar toolbar;
     private Kiuer kiuer;
+    private LinearLayout ratingLinearLayout;
 
     @Override
     public void setModel(Kiuer kiuer){
@@ -41,14 +42,20 @@ public class ViewKiuerFragment extends ModelFragment<Kiuer> {
         final View layout = inflater.inflate(R.layout.fragment_view_kiuer, parent, false);
 
         usernameText = (TextView) layout.findViewById(R.id.fragment_view_kiuer_username);
-        statusText = (TextView) layout.findViewById(R.id.fragment_view_kiuer_status);
-        nameAndSurnameText = (TextView) layout.findViewById(R.id.fragment_view_kiuer_name_and_surname);
-        birthText = (TextView) layout.findViewById(R.id.fragment_view_kiuer_birth);
-        telephoneText = (TextView) layout.findViewById(R.id.fragment_view_kiuer_telephone);
+        email = (TextView) layout.findViewById(R.id.fragment_view_kiuer_email);
         favoriteCityText = (TextView) layout.findViewById(R.id.fragment_view_kiuer_favorite_city);
-        feedbackText = (TextView) layout.findViewById(R.id.fragment_view_kiuer_feedback);
+        feedbackBar = (RatingBar) layout.findViewById(R.id.fragment_view_kiuer_ratingbar);
         actionIcon = (ImageView) layout.findViewById(R.id.fragment_view_kiuer_action_icon);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_view_kiuer_toolbar);
+        ratingLinearLayout = (LinearLayout)  layout.findViewById(R.id.fragment_view_kiuer_feedback_linearlayout);
+
+
+        ratingLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TO DO
+            }
+        });
 
         setupToolbar();
         setupView();
@@ -58,7 +65,9 @@ public class ViewKiuerFragment extends ModelFragment<Kiuer> {
 
     private void setupView(){
         usernameText.setText(kiuer.getUsername());
+        email.setText(kiuer.getEmail());
         favoriteCityText.setText(kiuer.getFavoriteCity());
+        //feedbackBar.setRating(QUALCOSA);
 
         final FragmentManager manager = this.getFragmentManager();
 

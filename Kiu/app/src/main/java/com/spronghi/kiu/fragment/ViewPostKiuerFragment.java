@@ -8,19 +8,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spronghi.kiu.R;
+
 import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostKiuer;
 import com.spronghi.kiu.runtime.CurrentUser;
+
 
 /**
  * Created by spronghi on 08/09/16.
  */
 public class ViewPostKiuerFragment extends ModelFragment<PostKiuer>{
     private TextView titleText;
-    private TextView statusText;
     private TextView kiuerText;
     private TextView cityText;
     private TextView addressText;
@@ -44,6 +46,7 @@ public class ViewPostKiuerFragment extends ModelFragment<PostKiuer>{
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         final View layout = inflater.inflate(R.layout.fragment_view_post_kiuer, parent, false);
 
+        titleText = (TextView) layout.findViewById(R.id.fragment_view_post_kiuer_title);
         kiuerText = (TextView) layout.findViewById(R.id.fragment_view_post_kiuer_kiuer);
         cityText = (TextView) layout.findViewById(R.id.fragment_view_post_kiuer_city);
         addressText = (TextView) layout.findViewById(R.id.fragment_view_post_kiuer_address);
@@ -62,6 +65,7 @@ public class ViewPostKiuerFragment extends ModelFragment<PostKiuer>{
     }
 
     private void setupView() {
+        titleText.setText("");
         kiuerText.setText(postKiuer.getKiuer().getUsername());
         cityText.setText(postKiuer.getPlace().getCity());
         addressText.setText(postKiuer.getPlace().getAddress());

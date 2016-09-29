@@ -9,12 +9,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.spronghi.kiu.R;
+
 import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.runtime.CurrentUser;
-import com.spronghi.kiu.setup.SetupView;
+
 
 /**
  * Created by spronghi on 08/09/16.
@@ -23,13 +26,11 @@ public class ViewHelperFragment extends ModelFragment<Helper>{
     private final static String TAG = "ViewHelperFragment";
     private ImageView actionIcon;
     private TextView usernameText;
-    private TextView statusText;
-    private TextView nameAndSurnameText;
-    private TextView birthText;
-    private TextView telephoneText;
+    private TextView email;
     private TextView favoriteCityText;
     private TextView favoriteCostText;
-    private TextView feedbackText;
+    private RatingBar feedbackBar;
+    private LinearLayout ratingLinearLayout;
     private Toolbar toolbar;
 
     private Helper helper;
@@ -44,15 +45,21 @@ public class ViewHelperFragment extends ModelFragment<Helper>{
         final View layout = inflater.inflate(R.layout.fragment_view_helper, parent, false);
 
         usernameText = (TextView) layout.findViewById(R.id.fragment_view_helper_username);
-        statusText = (TextView) layout.findViewById(R.id.fragment_view_helper_status);
-        nameAndSurnameText = (TextView) layout.findViewById(R.id.fragment_view_helper_name_and_surname);
-        birthText = (TextView) layout.findViewById(R.id.fragment_view_helper_birth);
-        telephoneText = (TextView) layout.findViewById(R.id.fragment_view_helper_telephone);
+        email = (TextView) layout.findViewById(R.id.fragment_view_helper_email);
         favoriteCityText = (TextView) layout.findViewById(R.id.fragment_view_helper_favorite_city);
         favoriteCostText = (TextView) layout.findViewById(R.id.fragment_view_helper_favorite_cost);
-        feedbackText = (TextView) layout.findViewById(R.id.fragment_view_helper_feedback);
+        feedbackBar = (RatingBar) layout.findViewById(R.id.fragment_view_helper_ratingbar);
         actionIcon = (ImageView) layout.findViewById(R.id.fragment_view_helper_action_icon);
+        ratingLinearLayout = (LinearLayout) layout.findViewById(R.id.fragment_view_helper_feedback_linearlayout);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_view_helper_toolbar);
+
+
+        ratingLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TO DO
+            }
+        });
 
         setupToolbar();
         setupView();
@@ -62,8 +69,10 @@ public class ViewHelperFragment extends ModelFragment<Helper>{
 
     private void setupView(){
         usernameText.setText(helper.getUsername());
+        email.setText(helper.getEmail());
         favoriteCityText.setText(helper.getFavoriteCity());
         favoriteCostText.setText(helper.getFavoriteCostString());
+        //feedbackBar.setRating(QUALCOSA);
 
         final FragmentManager manager = this.getFragmentManager();
 

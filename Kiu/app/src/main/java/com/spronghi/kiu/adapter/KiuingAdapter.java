@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.kiuing.Kiuing;
+import com.spronghi.kiu.kiuing.KiuingOperation;
+import com.spronghi.kiu.kiuing.KiuingUtil;
 import com.spronghi.kiu.setup.DateFormatter;
 
 import java.util.List;
@@ -39,7 +41,7 @@ public class KiuingAdapter extends RecyclerView.Adapter<KiuingAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_kiuing_operation_row, parent, false);
+                .inflate(R.layout.fragment_kiuing_row, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -48,15 +50,12 @@ public class KiuingAdapter extends RecyclerView.Adapter<KiuingAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.location.setText(operationList.get(position).getPost().getPlace().getLocation());
 
-        String minutes = DateFormatter.minusNow(operationList.get(position).getPost().getStartDate());
-        String started = DateFormatter.minusNow(operationList.get(position).getPost().getStartDate(), operationList.get(position).getPost().getDuration());
-
-        if(started.equals(DateFormatter.AFTER)){
+        if(KiuingUtil.isStarted(operationList.get(position))) {
             holder.message.setText(context.getResources().getString(R.string.kiuiung_started));
-        } else if(minutes.equals(DateFormatter.BEFORE)){
+        } else if(KiuingUtil.isFinished(operationList.get(position))){
             holder.message.setText(context.getResources().getString(R.string.kiuiung_finished));
         } else {
-            holder.message.setText(minutes + " " + context.getResources().getString(R.string.minutes_for_begin));
+            holder.message.setText(KiuingUtil.minutesToStart(operationList.get(position)) + " " + context.getResources().getString(R.string.minutes_for_begin));
         }
     }
 

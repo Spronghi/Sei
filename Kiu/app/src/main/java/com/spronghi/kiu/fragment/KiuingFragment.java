@@ -24,8 +24,11 @@ import android.widget.TextView;
 import com.spronghi.kiu.R;
 import com.spronghi.kiu.adapter.DividerItemDecoration;
 import com.spronghi.kiu.adapter.KiuingOpearationAdapter;
+import com.spronghi.kiu.http.KiuingOperationService;
+import com.spronghi.kiu.http.KiuingService;
 import com.spronghi.kiu.kiuing.Kiuing;
 import com.spronghi.kiu.kiuing.KiuingOperation;
+import com.spronghi.kiu.kiuing.KiuingUtil;
 import com.spronghi.kiu.runtime.CurrentUser;
 import com.spronghi.kiu.setup.DateFormatter;
 
@@ -39,11 +42,11 @@ public class KiuingFragment extends ModelFragment<Kiuing>{
     private TextView titleText;
     private Button refreshButton;
     private List<KiuingOperation> operationList = new ArrayList<>();
-
+    private static KiuingOperation operation;
     private RecyclerView recyclerView;
     private KiuingOpearationAdapter adapter;
     private Toolbar toolbar;
-    private Kiuing kiuing;
+    private static Kiuing kiuing;
 
     @Override
     public void setModel(Kiuing model) {
@@ -60,51 +63,41 @@ public class KiuingFragment extends ModelFragment<Kiuing>{
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_kiuing_recycler_view);
 
-        Log.d("kiuing", kiuing.toString());
         setupList();
         setupToolbar();
         setupView();
 
         return layout;
     }
-
-    private void setupView() {
-        String minutes = DateFormatter.minusNow(kiuing.getPost().getStartDate());
-        String started = DateFormatter.minusNow(kiuing.getPost().getStartDate(), kiuing.getPost().getDuration());
-
-        if(started.equals(DateFormatter.AFTER)){
+    private void setupKiuing(){
+        if(KiuingUtil.isFinished(kiuing)){
+            titleText.setText(getResources().getString(R.string.kiuiung_finished));
+        } else if(KiuingUtil.isStarted(kiuing)) {
             titleText.setText(getResources().getString(R.string.kiuiung_started));
+            operationList.clear();
             for(KiuingOperation operation : kiuing.getOperationList()){
                 operationList.add(operation);
             }
             adapter.notifyDataSetChanged();
-        } else if(minutes.equals(DateFormatter.BEFORE)){
-            titleText.setText(getResources().getString(R.string.kiuiung_finished));
         } else {
-            titleText.setText(minutes + " " + getResources().getString(R.string.minutes_for_begin));
+            titleText.setText(KiuingUtil.minutesToStart(kiuing) + " " + getResources().getString(R.string.minutes_for_begin));
         }
+    }
+    private void setupView() {
+        setupKiuing();
         refreshButton.setEnabled(true);
 
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String minutes = DateFormatter.minusNow(kiuing.getPost().getStartDate());
-                if(minutes.equals(DateFormatter.BEFORE)){
-                    titleText.setText(getResources().getString(R.string.kiuiung_started));
-                    operationList.clear();
-                    for(KiuingOperation operation : kiuing.getOperationList()){
-                        operationList.add(operation);
-                    }
-                    adapter.notifyDataSetChanged();
-                } else {
-                    titleText.setText(minutes + " "+getResources().getString(R.string.minutes_for_begin));
-                }
+                setupKiuing();
             }
         });
     }
 
     private void setupList(){
-        adapter = new KiuingOpearationAdapter(operationList);
+        adapter = new KiuingOpearationAdapter(operationList, kiuing.getPost().getHelper().getUsername());
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -115,6 +108,7 @@ public class KiuingFragment extends ModelFragment<Kiuing>{
             @Override
             public void onClick(View view, int position) {
                 if(!(CurrentUser.isKiuer())) {
+                    operation = operationList.get(position);
                     ConfirmDialog dialog = new ConfirmDialog ();
                     dialog.show(manager.beginTransaction(), "dialog");
                 }
@@ -208,7 +202,8 @@ public class KiuingFragment extends ModelFragment<Kiuing>{
                     .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            // TO DO send the requesto to the kiuer
+                            operation.setDone(true);
+                            KiuingOperationService.update(operation);
                         }
                     })
                     .create();

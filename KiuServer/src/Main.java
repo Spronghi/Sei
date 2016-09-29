@@ -2,6 +2,7 @@ import integration.control.FilterControl;
 import integration.dao.*;
 import model.*;
 import service.control.ParserControl;
+import service.json.JSONParser;
 import service.json.JSONParserFactory;
 import service.security.MD5Crypt;
 
@@ -14,10 +15,13 @@ import java.util.List;
  */
 public class Main {
     public static void main(String [] args){
-        KiuingDAO dao = new KiuingDAO();
-        Kiuing kiuing = dao.get(6);
+        PostKiuerDAO dao = new PostKiuerDAO();
+        PostKiuer post = dao.get(1);
+        System.out.println(post.toString());
 
-        System.out.println(JSONParserFactory.<Kiuing>getInstance(ParserControl.KIUING).getJSONObj(kiuing).toJSONString());
+        post.setDuration(10);
+        dao.update(post);
+
     }
 
     private static void populateDB(){

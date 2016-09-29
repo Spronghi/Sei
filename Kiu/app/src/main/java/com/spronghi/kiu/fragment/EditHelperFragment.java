@@ -11,8 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.spronghi.kiu.R;
+
 import com.spronghi.kiu.model.Helper;
-import com.spronghi.kiu.setup.SetupView;
+
 
 /**
  * Created by spronghi on 08/09/16.
@@ -20,14 +21,11 @@ import com.spronghi.kiu.setup.SetupView;
 public class EditHelperFragment extends ModelFragment<Helper>{
     private final static String TAG = "ViewHelperFragment";
     private EditText usernameText;
-    private EditText statusText;
-    private EditText nameText;
-    private EditText surnameText;
-    private EditText birthText;
-    private EditText telephoneText;
+    private EditText password;
+    private EditText confPass;
+    private EditText email;
     private EditText favoriteCityText;
     private EditText favoriteCostText;
-    private EditText passwordText;
     private Button okButton;
     private Toolbar toolbar;
 
@@ -39,9 +37,12 @@ public class EditHelperFragment extends ModelFragment<Helper>{
     }
     private void setupView(){
         usernameText.setText(helper.getUsername());
+        password.setText(helper.getPassword());
+        password.setText(helper.getPassword());
+        confPass.setText(helper.getPassword());
         favoriteCityText.setText(helper.getFavoriteCity());
         favoriteCostText.setText(helper.getFavoriteCostString());
-        passwordText.setText(helper.getPassword());
+        email.setText(helper.getEmail());
 
     }
     @Override
@@ -49,14 +50,11 @@ public class EditHelperFragment extends ModelFragment<Helper>{
         final View layout = inflater.inflate(R.layout.fragment_edit_helper, parent, false);
 
         usernameText = (EditText) layout.findViewById(R.id.fragment_edit_helper_username);
-        statusText = (EditText) layout.findViewById(R.id.fragment_edit_helper_status);
-        nameText = (EditText) layout.findViewById(R.id.fragment_edit_helper_name);
-        surnameText = (EditText) layout.findViewById(R.id.fragment_edit_helper_surname);
-        birthText = (EditText) layout.findViewById(R.id.fragment_edit_helper_birth);
-        telephoneText = (EditText) layout.findViewById(R.id.fragment_edit_helper_telephone);
+        password = (EditText) layout.findViewById(R.id.fragment_edit_helper_password);
+        confPass = (EditText) layout.findViewById(R.id.fragment_edit_helper_cpassword);
+        email = (EditText) layout.findViewById(R.id.fragment_edit_helper_email);
         favoriteCityText = (EditText) layout.findViewById(R.id.fragment_edit_helper_favorite_city);
         favoriteCostText = (EditText) layout.findViewById(R.id.fragment_edit_helper_favorite_cost);
-        passwordText = (EditText) layout.findViewById(R.id.fragment_edit_helper_password);
         okButton = (Button) layout.findViewById(R.id.fragment_edit_helper_ok_button);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_edit_helper_toolbar);
 

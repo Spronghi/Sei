@@ -17,6 +17,7 @@ public class KiuingOperationService {
     private static String getParamaterString(KiuingOperation operation){
         String url = "id="+Integer.toString(operation.getId())+"&";
         url += "done="+Boolean.toString(operation.isDone())+"&";
+        url += "operation="+operation.getOperation()+"&";
         url += "kiuing_id="+Integer.toString(operation.getKiuing());
         return url;
     }
@@ -77,7 +78,6 @@ public class KiuingOperationService {
         JSONParser<KiuingOperation> parser = JSONParserFactory.getInstance(JSONParserControl.KIUING_OPERATION);
 
         String jsonString = HttpConnector.makeRequest(url);
-        Log.d("kiuing", jsonString);
         return parser.parseArray(jsonString);
     }
 }

@@ -65,6 +65,7 @@ public class ListKiuerUserPostFragment extends ModelFragment<Kiuer> {
     }
     private void setupToolbar() {
         final FragmentManager manager = this.getFragmentManager();
+        toolbar.setTitle(getContext().getResources().getString(R.string.your_posts));
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -99,9 +100,7 @@ public class ListKiuerUserPostFragment extends ModelFragment<Kiuer> {
             }
 
             @Override
-            public void onLongClick(View view, int position) {
-
-            }
+            public void onLongClick(View view, int position) {}
         }));
     }
 
@@ -117,6 +116,10 @@ public class ListKiuerUserPostFragment extends ModelFragment<Kiuer> {
                 closedPostList.add(post);
             }
         }
+
+        if(openPostList.isEmpty())
+            openRecyclerView.setPadding(0,0,0,10);
+
     }
 
     private void setClosedRecyclerView(){

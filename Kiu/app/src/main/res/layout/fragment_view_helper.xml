@@ -27,12 +27,12 @@
                 android:id="@+id/fragment_view_helper_profile_photo"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@mipmap/ic_face_white"
+                android:src="@mipmap/ic_account_circle_white_24dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/profile_image_circular"
                 android:elevation="5dp"
-                android:padding="20dp"
+                android:padding="5dp"
                 android:scaleType="centerCrop"
                 />
 
@@ -60,21 +60,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="76dp"
                 android:layout_marginLeft="175dp"
-                android:text="@string/helper"
+                android:text="@string/username"
                 android:textColor="#fff"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/fragment_view_helper_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/fragment_view_helper_username"
-                android:layout_marginLeft="175dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/profile_status"
-                android:textColor="#fff"
-                android:textSize="14sp" />
         </RelativeLayout>
 
 
@@ -86,80 +76,79 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/fragment_view_helper_name_and_surname"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@color/darkPrimaryColor"
-                android:textColor="#fff"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:text="@string/name_and_surname" />
-
-            <TextView
-                android:id="@+id/fragment_view_helper_birth"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginTop="3dp"
-                android:background="@color/darkPrimaryColor"
-                android:textColor="#fff"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:text="@string/birth" />
-
-            <TextView
-                android:id="@+id/fragment_view_helper_telephone"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@color/darkPrimaryColor"
-                android:textColor="#fff"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:text="@string/telephone" />
-
-            <TextView
                 android:id="@+id/fragment_view_helper_favorite_city"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/darkPrimaryColor"
+                android:textColor="#fff"
                 android:layout_margin="5dp"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
-                android:background="@color/darkPrimaryColor"
-                android:textColor="#fff"
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/favorite_city" />
+                android:hint="@string/favorite_city"
+                android:textColorHint="@color/textIconColor" />
+
             <TextView
                 android:id="@+id/fragment_view_helper_favorite_cost"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/darkPrimaryColor"
+                android:textColor="#fff"
                 android:layout_margin="5dp"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
-                android:background="@color/darkPrimaryColor"
-                android:textColor="#fff"
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/favorite_cost" />
+                android:hint="@string/favorite_cost"
+                android:textColorHint="@color/textIconColor" />
+
             <TextView
-                android:id="@+id/fragment_view_helper_feedback"
+                android:id="@+id/fragment_view_helper_email"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:background="@color/darkPrimaryColor"
                 android:textColor="#fff"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="@string/feedback" />
+                android:hint="@string/email"
+                android:textColorHint="@color/textIconColor" />
+
+            <LinearLayout
+                android:id="@+id/fragment_view_helper_feedback_linearlayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/darkPrimaryColor"
+                android:layout_margin="5dp"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_view_helper_feedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textIconColor"
+                    android:clickable="true"
+                    android:text="@string/feedback"
+                    android:layout_gravity="center"/>
+
+                <RatingBar
+                    android:id="@+id/fragment_view_helper_ratingbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:layout_marginLeft="25dp"
+                    android:isIndicator="true"
+                    android:progressTint="@color/accentColor"
+                    android:secondaryProgressTint="@color/accentColor" />
+            </LinearLayout>
 
         </LinearLayout>
     </RelativeLayout>

@@ -77,7 +77,7 @@ public class KiuingOperationDAO {
 
     public void update(KiuingOperation kiuingOperation) {
         String query = UPDATE;
-        query = Replacer.replaceFirst(query, kiuingOperation.getOperation().getOperation());
+        query = Replacer.replaceFirst(query, kiuingOperation.getOperation().getId());
         query = Replacer.replaceFirst(query, kiuingOperation.isDone());
         query = Replacer.replaceFirst(query, kiuingOperation.getKiuing());
         query = Replacer.replaceFirst(query, kiuingOperation.getId());

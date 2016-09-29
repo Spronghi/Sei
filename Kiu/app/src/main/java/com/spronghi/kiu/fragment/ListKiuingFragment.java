@@ -24,6 +24,8 @@ import com.spronghi.kiu.http.KiuerService;
 import com.spronghi.kiu.http.KiuingService;
 import com.spronghi.kiu.http.PostKiuerService;
 import com.spronghi.kiu.kiuing.Kiuing;
+import com.spronghi.kiu.kiuing.KiuingOperation;
+import com.spronghi.kiu.kiuing.KiuingUtil;
 import com.spronghi.kiu.model.PostKiuer;
 import com.spronghi.kiu.runtime.CurrentUser;
 import com.spronghi.kiu.setup.DateFormatter;
@@ -82,20 +84,26 @@ public class ListKiuingFragment extends ModelFragment{
     private void populateList(){
         list.clear();
         List<PostKiuer> postList;
-        list.add(KiuingService.get(1));
+
         if(CurrentUser.isKiuer()){
             postList = PostKiuerService.getAllByKiuer(CurrentUser.getKiuer());
         } else {
             postList = PostKiuerService.getAllByHelper(CurrentUser.getHelper());
         }
 
-        List<Kiuing> kiuingList;
+
         for(PostKiuer post : postList){
-            String minutes = DateFormatter.minusNow(post.getStartDate());
-            if(!(minutes.equals(DateFormatter.BEFORE))){
-                kiuingList = KiuingService.getAllByPostKiuer(post);
-                for(Kiuing kiuing : kiuingList) {
-                    list.add(kiuing);
+            if(!post.isOpen()){
+                for(Kiuing kiuing : KiuingService.getAllByPostKiuer(post)) {
+                    if(!(KiuingUtil.isFinished(kiuing))){
+                        boolean finished = false;
+                        for(KiuingOperation operation : kiuing.getOperationList()){
+                            if(operation.getOperation().equals(Kiuing.FINISHED) && operation.isDone())
+                                finished = true;
+                        }
+                        if(!finished)
+                            list.add(kiuing);
+                    }
                 }
             }
         }
@@ -165,6 +173,7 @@ public class ListKiuingFragment extends ModelFragment{
     }
     private void setupToolbar() {
         final FragmentManager manager = this.getFragmentManager();
+        toolbar.setTitle(R.string.kiuing);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

@@ -16,9 +16,10 @@ import java.util.List;
  */
 public class KiuingOpearationAdapter extends RecyclerView.Adapter<KiuingOpearationAdapter.MyViewHolder>{
     private List<KiuingOperation> operationList;
-
-    public KiuingOpearationAdapter(List<KiuingOperation> operationList) {
+    private String username;
+    public KiuingOpearationAdapter(List<KiuingOperation> operationList, String username) {
         this.operationList = operationList;
+        this.username = username;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -26,7 +27,7 @@ public class KiuingOpearationAdapter extends RecyclerView.Adapter<KiuingOpearati
 
         public MyViewHolder(View view) {
             super(view);
-            message = (TextView) view.findViewById(R.id.fragment_kiuing_row_text);
+            message = (TextView) view.findViewById(R.id.fragment_kiuing_operation_row_text);
 
         }
     }
@@ -42,11 +43,11 @@ public class KiuingOpearationAdapter extends RecyclerView.Adapter<KiuingOpearati
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if(operationList.get(position).isDone()) {
-            holder.message.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_done_black_24dp, 0, 0, 0);
+            holder.message.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_done_green_24dp, 0, 0, 0);
         } else {
-            holder.message.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_clear_black_24dp, 0, 0, 0);
+            holder.message.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_clear_red_24dp, 0, 0, 0);
         }
-        holder.message.setText(operationList.get(position).getOperationMessage());
+        holder.message.setText(username +" "+ operationList.get(position).getOperationMessage());
     }
 
     @Override
