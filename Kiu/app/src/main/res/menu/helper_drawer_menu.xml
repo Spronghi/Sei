@@ -2,10 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/id_helper_drawer_menu_icon_helper"
-            android:icon="@drawable/ic_directions_run_black_24dp"
-            android:title="@string/drawable_text_helper" />
-        <item
             android:id="@+id/id_helper_drawer_menu_icon_kiuer"
             android:icon="@drawable/ic_accessibility_black_24dp"
             android:title="@string/drawable_text_kiuer" />

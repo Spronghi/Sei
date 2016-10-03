@@ -66,6 +66,8 @@
     <string name="searchBtn">Search</string>
     <string name="posts">Posts</string>
     <string name="wait_for_me">Wait For Me</string>
+    <string name="rate_it">Rate it!</string>
+    <string name="successfully_rated">Successfully Rated!</string>
 
     <string name="request_post_kiuer">A Kiuer sent you a request!</string>
     <string name="request_post_helper">An Helper sent you a request!</string>

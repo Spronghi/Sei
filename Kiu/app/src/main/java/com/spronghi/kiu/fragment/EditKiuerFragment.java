@@ -36,8 +36,6 @@ public class EditKiuerFragment extends ModelFragment<Kiuer>{
     }
     private void setupView(){
         usernameText.setText(kiuer.getUsername());
-        password.setText(kiuer.getPassword());
-        confPass.setText(kiuer.getPassword());
         email.setText(kiuer.getEmail());
         favoriteCityText.setText(kiuer.getFavoriteCity());
     }

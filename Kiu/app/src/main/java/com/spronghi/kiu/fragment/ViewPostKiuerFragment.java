@@ -3,6 +3,7 @@ package com.spronghi.kiu.fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,8 +60,18 @@ public class ViewPostKiuerFragment extends ModelFragment<PostKiuer>{
 
         setupToolbar();
         setupView();
-        if(!(CurrentUser.isKiuer()))
-            setupRequestButton();
+
+        if (!(CurrentUser.isKiuer())){
+            if(postKiuer.isOpen()){
+                setupRequestButton();
+            } else if(postKiuer.getToHelperFeedback() == 0 && CurrentUser.getHelper().getUsername().equals(postKiuer.getHelper().getUsername())){
+                setupRateHelperButton();
+            }
+        } else if(postKiuer.getToKiuerFeedback() == 0 && !(postKiuer.isOpen()) && CurrentUser.getKiuer().getUsername().equals(postKiuer.getKiuer().getUsername())){
+            setupRateKiuerButton();
+        }
+
+
         return layout;
     }
 
@@ -103,6 +114,42 @@ public class ViewPostKiuerFragment extends ModelFragment<PostKiuer>{
             }
         });
     }
+    private void setupRateKiuerButton(){
+        requestButton.setVisibility(View.VISIBLE);
+        requestButton.setClickable(true);
+        requestButton.setText(getContext().getString(R.string.rate_it));
+        final FragmentManager manager = this.getFragmentManager();
+        requestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.FEEDBACK);
+                modelFragment.setModel(postKiuer);
+                manager.beginTransaction()
+                        .replace(R.id.activity_main_frame_layout, modelFragment, "send_request")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+    }
+
+    private void setupRateHelperButton(){
+        requestButton.setVisibility(View.VISIBLE);
+        requestButton.setClickable(true);
+        requestButton.setText(getContext().getString(R.string.rate_it));
+        final FragmentManager manager = this.getFragmentManager();
+        requestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.FEEDBACK);
+                modelFragment.setModel(postKiuer);
+                manager.beginTransaction()
+                        .replace(R.id.activity_main_frame_layout, modelFragment, "send_request")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+    }
+
     private void setupToolbar() {
         final FragmentManager manager = this.getFragmentManager();
 
