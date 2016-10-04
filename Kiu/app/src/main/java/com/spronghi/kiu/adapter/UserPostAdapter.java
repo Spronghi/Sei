@@ -1,6 +1,7 @@
 package com.spronghi.kiu.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +51,10 @@ public class UserPostAdapter extends RecyclerView.Adapter<UserPostAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PostKiuer post = postsList.get(position);
         if(isKiuer){
+            Log.d("feedback_row", Float.toString(post.getToKiuerFeedback()));
             holder.bar.setRating(post.getToKiuerFeedback());
         } else {
+            Log.d("feedback_row", Float.toString(post.getToHelperFeedback()));
             holder.bar.setRating(post.getToHelperFeedback());
         }
         holder.startDate.setText("Start: "+post.getStartDateString());

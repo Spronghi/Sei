@@ -62,6 +62,7 @@
     <string name="drawable_text_posts">Posts</string>
     <string name="drawable_text_friends">Friends</string>
     <string name="drawable_text_kiuing">Kiuing</string>
+    <string name="drawable_text_your_profile">Your Profile</string>
 
     <string name="searchBtn">Search</string>
     <string name="posts">Posts</string>

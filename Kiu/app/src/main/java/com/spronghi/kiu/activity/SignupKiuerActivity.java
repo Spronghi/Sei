@@ -16,6 +16,7 @@ import com.spronghi.kiu.R;
 
 import com.spronghi.kiu.http.KiuerService;
 import com.spronghi.kiu.model.Kiuer;
+import com.spronghi.kiu.runtime.CurrentUser;
 
 
 /**
@@ -60,15 +61,24 @@ public class SignupKiuerActivity extends AppCompatActivity {
                     password.setError("Not equals");
                     confPass.setError("Not equals");
                 } else {
-                    Kiuer kiuer = new Kiuer();
-                    kiuer.setUsername(usernameText.getText().toString());
-                    kiuer.setFavoriteCity(favoriteCityText.getText().toString());
-                    kiuer.setPassword(password.getText().toString());
-                    KiuerService.create(kiuer);
+                    Kiuer kiuer = KiuerService.getByUsername(usernameText.getText().toString());
+                    if(kiuer != null){
+                        usernameText.setError("Username already exists");
+                    } else {
+                        kiuer = new Kiuer();
+                        kiuer.setUsername(usernameText.getText().toString());
+                        kiuer.setFavoriteCity(favoriteCityText.getText().toString());
+                        kiuer.setPassword(password.getText().toString());
+                        kiuer.setEmail(email.getText().toString());
+                        KiuerService.create(kiuer);
 
-                    Intent intent = new Intent(SignupKiuerActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    SignupKiuerActivity.this.finish();
+                        CurrentUser.setKiuer(kiuer);
+                        CurrentUser.setIsKiuer(true);
+
+                        Intent intent = new Intent(SignupKiuerActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        SignupKiuerActivity.this.finish();
+                    }
                 }
             }
         });

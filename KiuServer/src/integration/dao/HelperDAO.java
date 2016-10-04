@@ -83,6 +83,7 @@ public class HelperDAO{
         query = Replacer.replaceFirst(query, helper.getPassword());
         query = Replacer.replaceFirst(query, helper.getFavoriteCity());
         query = Replacer.replaceFirst(query, helper.getFavoriteCost());
+        query = Replacer.replaceFirst(query, helper.getId());
         ConnectorFactory.getConnection().executeUpdate(query);
     }
 

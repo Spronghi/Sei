@@ -132,6 +132,8 @@ public class PostKiuer {
                 ", duration=" + duration +
                 ", cost=" + cost +
                 ", open=" + open +
+                ", toHelperFeedback=" + toHelperFeedback +
+                ", toKiuerFeedback=" + toKiuerFeedback +
                 '}';
     }
 }

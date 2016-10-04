@@ -19,7 +19,7 @@ public class Login {
         url += "password="+password;
         JSONParser<Kiuer> parser = JSONParserFactory.getInstance(JSONParserControl.KIUER);
         String jsonString = HttpConnector.makeRequest(url);
-        Log.d("http",jsonString);
+        Log.d("login",jsonString);
         return parser.parse(jsonString);
     }
     public static Helper asHelper(String username, String password){
@@ -29,7 +29,7 @@ public class Login {
         url += "password="+password;
         JSONParser<Helper> parser = JSONParserFactory.getInstance(JSONParserControl.HELPER);
         String jsonString = HttpConnector.makeRequest(url);
-        Log.d("http",jsonString);
+        Log.d("login",jsonString);
         return parser.parse(jsonString);
     }
 }

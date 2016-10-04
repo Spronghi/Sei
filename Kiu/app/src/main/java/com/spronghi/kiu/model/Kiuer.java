@@ -1,5 +1,7 @@
 package com.spronghi.kiu.model;
 
+import android.util.Log;
+
 /**
  * Created by spronghi on 08/09/16.
  */
@@ -52,5 +54,16 @@ public class Kiuer {
 
     public void setFavoriteCity(String favoriteCity) {
         this.favoriteCity = favoriteCity;
+    }
+
+    @Override
+    public String toString() {
+        return "Kiuer{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", favoriteCity='" + favoriteCity + '\'' +
+                '}';
     }
 }

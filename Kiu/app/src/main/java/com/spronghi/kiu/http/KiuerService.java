@@ -21,7 +21,7 @@ public class KiuerService {
         url += "username="+kiuer.getUsername()+"&";
 		url += "password="+kiuer.getPassword()+"&";
 		url += "email="+kiuer.getEmail()+"&";
-        url += "favorite_city="+kiuer.getFavoriteCity()+"&";
+        url += "favorite_city="+kiuer.getFavoriteCity();
         return url;
 
     }
@@ -81,5 +81,12 @@ public class KiuerService {
         String jsonString = HttpConnector.makeRequest(url);
         return parser.<Kiuer>parseArray(jsonString);
     }
-
+    public static double getFeedback(Kiuer kiuer){
+        String url ="/kiuer?";
+        url += "service=feedback&";
+        url += getParameterString(kiuer);
+        JSONParser<Kiuer> parser = JSONParserFactory.getInstance(JSONParserControl.KIUER);
+        String jsonString = HttpConnector.makeRequest(url);
+        return parser.parseFeedback(jsonString);
+    }
 }

@@ -1,5 +1,7 @@
 package com.spronghi.kiu.http;
 
+import android.util.Log;
+
 import com.spronghi.kiu.json.JSONParser;
 import com.spronghi.kiu.json.JSONParserControl;
 import com.spronghi.kiu.json.JSONParserFactory;
@@ -77,5 +79,20 @@ public class HelperService {
         String jsonString = HttpConnector.makeRequest(url);
         return parser.<Helper>parseArray(jsonString);
     }
-
+    public static List<Helper> getAllByCity(String city){
+        String url = "/helper?";
+        url += "service=city&";
+        url += "city="+city;
+        JSONParser<Helper> parser = JSONParserFactory.getInstance(JSONParserControl.HELPER);
+        String jsonString = HttpConnector.makeRequest(url);
+        return parser.<Helper>parseArray(jsonString);
+    }
+    public static double getFeedback(Helper helper){
+        String url ="/helper?";
+        url += "service=feedback&";
+        url += getParameterString(helper);
+        JSONParser<Helper> parser = JSONParserFactory.getInstance(JSONParserControl.HELPER);
+        String jsonString = HttpConnector.makeRequest(url);
+        return parser.parseFeedback(jsonString);
+    }
 }

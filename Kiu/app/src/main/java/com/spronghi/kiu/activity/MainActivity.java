@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -27,7 +28,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private TextView usernameText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +36,28 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.activity_main_navigation_view);
-        usernameText = (TextView) findViewById(R.id.activity_main_menu_username_text);
 
         setupMenu(savedInstanceState);
         setupDrawerContent(navigationView);
-        //setupUsernameText();
 
         startService(new Intent(this, NotificationService.class));
     }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
     public static void stopService(){
         stopService();
     }
@@ -55,36 +69,15 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             navigationView.inflateMenu(R.menu.helper_drawer_menu);
-
             if(savedInstanceState==null){
                 getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.LIST_POST_KIUER)).commit();
             }
         }
     }
-    private void setupUsernameText(){
-        if(CurrentUser.isKiuer()){
-            usernameText.setText(CurrentUser.getKiuer().getUsername());
-            usernameText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ModelFragment<Kiuer> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_KIUER);
-                    fragment.setModel(CurrentUser.getKiuer());
-                    getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).commit();
-                }
-            });
-        } else {
-            usernameText.setText(CurrentUser.getHelper().getUsername());
-            usernameText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ModelFragment<Helper> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_KIUER);
-                    fragment.setModel(CurrentUser.getHelper());
-                    getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).commit();
-                }
-            });
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
-
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -104,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
             ModelFragment<Helper> fragment = FragmentFactory.getInstance(MenuFragmentRegister.getKey(menuItem.getItemId()));
             fragment.setModel(CurrentUser.getHelper());
             getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
+        } else if(menuItem.getItemId() == R.id.id_helper_drawer_menu_icon_your_profile){
+            ModelFragment<Helper> fragment = FragmentFactory.getInstance(MenuFragmentRegister.getKey(menuItem.getItemId()));
+            fragment.setModel(CurrentUser.getHelper());
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
+        } else if(menuItem.getItemId() == R.id.id_kiuer_drawer_menu_icon_your_profile){
+            ModelFragment<Kiuer> fragment = FragmentFactory.getInstance(MenuFragmentRegister.getKey(menuItem.getItemId()));
+            fragment.setModel(CurrentUser.getKiuer());
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
         } else {
             ModelFragment fragment = FragmentFactory.getInstance(MenuFragmentRegister.getKey(menuItem.getItemId()));
             getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
@@ -114,21 +115,7 @@ public class MainActivity extends AppCompatActivity {
         setTitle(menuItem.getTitle());
         drawerLayout.closeDrawers();
     }
-    private void setupIconColor(NavigationView navigationView){
-    }
-    @Override
-    protected void onStart(){
-        super.onStart();
-    }
+    private void setupIconColor(NavigationView navigationView){}
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
 }
 

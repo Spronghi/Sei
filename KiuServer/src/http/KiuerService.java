@@ -1,7 +1,12 @@
 package http;
 
+import integration.control.FilterControl;
 import integration.dao.KiuerDAO;
+import integration.dao.PostKiuerDAO;
+import model.Helper;
 import model.Kiuer;
+import model.PostKiuer;
+import org.json.simple.JSONObject;
 import service.control.ParserControl;
 import service.json.JSONParser;
 import service.json.JSONParserFactory;
@@ -13,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * Created by spronghi on 15/09/16.
@@ -63,6 +69,9 @@ public class KiuerService extends HttpServlet {
             case HttpControl.GET_ALL:
                 responseString = getAll();
                 break;
+            case HttpControl.FEEDBACK:
+                responseString = getFeedback(request);
+                break;
         }
         out.println(responseString);
         out.close();
@@ -76,13 +85,11 @@ public class KiuerService extends HttpServlet {
 
     private String create(HttpServletRequest request){
         Kiuer kiuer = getKiuer(request);
-        kiuer.setPassword(MD5Crypt.crypt(kiuer.getPassword()));
         dao.create(kiuer);
         return parser.getJSONObj(kiuer).toJSONString();
     }
     private String update(HttpServletRequest request){
         Kiuer kiuer = getKiuer(request);
-        kiuer.setPassword(MD5Crypt.crypt(kiuer.getPassword()));
         dao.update(kiuer);
         return JSONParser.getSuccessJSON(true).toJSONString();
     }
@@ -96,5 +103,24 @@ public class KiuerService extends HttpServlet {
     }
     private String getAll(){
         return parser.getJSONArr(dao.getAll()).toJSONString();
+    }
+
+    private String getFeedback(HttpServletRequest request){
+        PostKiuerDAO postDAO = new PostKiuerDAO();
+        JSONObject jsonObject = new JSONObject();
+        List<PostKiuer> postList = postDAO.getAllBy(FilterControl.KIUER, Integer.toString(getKiuer(request).getId()));
+        int i = 0;
+        float feedback = 0;
+        for(PostKiuer post : postList) {
+            if(post.getToKiuerFeedback() != 0){
+                feedback += post.getToKiuerFeedback();
+                i++;
+            }
+        }
+        if(feedback != 0){
+            feedback = feedback / i;
+        }
+        jsonObject.put("feedback", Float.toString(feedback));
+        return jsonObject.toJSONString();
     }
 }

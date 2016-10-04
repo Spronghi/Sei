@@ -16,4 +16,5 @@ public class HttpControl {
     public static final String CITY="city";
     public static final String ADDRESSEE="addressee";
     public static final String KIUING="kiuing";
+    public static final String FEEDBACK="feedback";
 }

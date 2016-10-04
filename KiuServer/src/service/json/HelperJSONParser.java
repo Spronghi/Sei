@@ -24,7 +24,7 @@ public class HelperJSONParser implements JSONParser<Helper> {
             helper.setPassword((String)obj.get("password"));
             helper.setEmail((String)obj.get("email"));
             helper.setFavoriteCity(((String)obj.get("favorite_city")));
-            helper.setFavoriteCost(((Double)obj.get("feedback")));
+            helper.setFavoriteCost(((Double)obj.get("favorite_cost")));
             return helper;
         } catch (ParseException e) {
             e.printStackTrace();
@@ -40,6 +40,7 @@ public class HelperJSONParser implements JSONParser<Helper> {
         obj.put("username", helper.getUsername());
         obj.put("password", helper.getPassword());
         obj.put("email", helper.getEmail());
+        obj.put("favorite_city", helper.getFavoriteCity());
         obj.put("favorite_cost", helper.getFavoriteCost());
         return obj;
     }

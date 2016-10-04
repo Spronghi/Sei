@@ -3,6 +3,7 @@ package com.spronghi.kiu.fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.spronghi.kiu.R;
 
+import com.spronghi.kiu.http.KiuerService;
 import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.runtime.CurrentUser;
 
@@ -49,11 +51,16 @@ public class ViewKiuerFragment extends ModelFragment<Kiuer> {
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_view_kiuer_toolbar);
         ratingLinearLayout = (LinearLayout)  layout.findViewById(R.id.fragment_view_kiuer_feedback_linearlayout);
 
-
+        final FragmentManager manager = this.getFragmentManager();
         ratingLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TO DO
+                ModelFragment<Kiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.LIST_USER_KIUER);
+                modelFragment.setModel(kiuer);
+                manager.beginTransaction()
+                        .replace(R.id.activity_main_frame_layout, modelFragment, "list_post_kiuer")
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -64,10 +71,11 @@ public class ViewKiuerFragment extends ModelFragment<Kiuer> {
     }
 
     private void setupView(){
+        Log.d("feedback", Float.toString((float) KiuerService.getFeedback(kiuer)));
         usernameText.setText(kiuer.getUsername());
         email.setText(kiuer.getEmail());
         favoriteCityText.setText(kiuer.getFavoriteCity());
-        //feedbackBar.setRating(QUALCOSA);
+        feedbackBar.setRating((float) KiuerService.getFeedback(kiuer));
 
         final FragmentManager manager = this.getFragmentManager();
 

@@ -1,7 +1,11 @@
 package http;
 
+import integration.control.FilterControl;
 import integration.dao.HelperDAO;
+import integration.dao.PostKiuerDAO;
 import model.Helper;
+import model.PostKiuer;
+import org.json.simple.JSONObject;
 import service.control.ParserControl;
 import service.json.JSONParser;
 import service.json.JSONParserFactory;
@@ -13,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * Created by spronghi on 15/09/16.
@@ -64,6 +69,9 @@ public class HelperService extends HttpServlet {
             case HttpControl.CITY:
                 responseString = getAllByCity(request);
                 break;
+            case HttpControl.FEEDBACK:
+                responseString = getFeedback(request);
+                break;
         }
         out.println(responseString);
         out.close();
@@ -77,13 +85,11 @@ public class HelperService extends HttpServlet {
 
     private String create(HttpServletRequest request){
         Helper helper = getHelper(request);
-        helper.setPassword(MD5Crypt.crypt(helper.getPassword()));
         dao.create(helper);
         return parser.getJSONObj(helper).toJSONString();
     }
     private String update(HttpServletRequest request){
         Helper helper = getHelper(request);
-        helper.setPassword(MD5Crypt.crypt(helper.getPassword()));
         dao.update(helper);
         return JSONParser.getSuccessJSON(true).toJSONString();
     }
@@ -100,5 +106,23 @@ public class HelperService extends HttpServlet {
     }
     private String getAllByCity(HttpServletRequest request){
         return parser.getJSONArr(dao.getAllBy(HttpControl.CITY, request.getParameter("city"))).toJSONString();
+    }
+    private String getFeedback(HttpServletRequest request){
+        PostKiuerDAO postDAO = new PostKiuerDAO();
+        JSONObject jsonObject = new JSONObject();
+        List<PostKiuer> postList = postDAO.getAllBy(FilterControl.HELPER, Integer.toString(getHelper(request).getId()));
+        int i = 0;
+        float feedback = 0;
+        for(PostKiuer post : postList) {
+            if(post.getToHelperFeedback() != 0){
+                feedback += post.getToHelperFeedback();
+                i++;
+            }
+        }
+        if(feedback != 0){
+            feedback = feedback / i;
+        }
+        jsonObject.put("feedback", Float.toString(feedback));
+        return jsonObject.toJSONString();
     }
 }

@@ -21,5 +21,9 @@
             android:id="@+id/id_kiuer_drawer_menu_icon_kiuing"
             android:icon="@drawable/ic_transfer_within_a_station_black_24dp"
             android:title="@string/drawable_text_kiuing" />
+        <item
+            android:id="@+id/id_kiuer_drawer_menu_icon_your_profile"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="@string/drawable_text_your_profile" />
     </group>
 </menu>

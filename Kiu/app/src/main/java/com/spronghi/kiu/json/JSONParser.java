@@ -1,6 +1,8 @@
 package com.spronghi.kiu.json;
 
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +35,14 @@ public abstract class JSONParser<T> {
             return list;
         } catch (JSONException e) {
             return new ArrayList<>();
+        }
+    }
+    public double parseFeedback(String jsonString){
+        try {
+            JSONObject obj = new JSONObject(jsonString);
+            return obj.getDouble("feedback");
+        } catch (JSONException e) {
+            return 0.0;
         }
     }
 }

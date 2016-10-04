@@ -25,5 +25,6 @@ public class FragmentControl {
     public static final String KIUING = "kiuing";
     public static final String LIST_KIUING = "list_kiuing";
     public static final String FEEDBACK = "feedback";
+    public static final String LIST_HELPER = "list_helper";
 
 }

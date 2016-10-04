@@ -34,6 +34,7 @@ public class HelperJSONParser extends JSONParser<Helper> {
         } catch (JSONException e) {
             Log.d("JSON", e.getLocalizedMessage());
         }
+        Log.d("helper", helper.toString());
         return helper;
     }
 

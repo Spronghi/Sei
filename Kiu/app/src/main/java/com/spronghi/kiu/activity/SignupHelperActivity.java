@@ -14,6 +14,7 @@ import com.spronghi.kiu.R;
 
 import com.spronghi.kiu.http.HelperService;
 import com.spronghi.kiu.model.Helper;
+import com.spronghi.kiu.runtime.CurrentUser;
 
 
 /**
@@ -62,16 +63,26 @@ public class SignupHelperActivity  extends AppCompatActivity {
                     password.setError("Not equals");
                     confPass.setError("Not equals");
                 } else {
-                    Helper helper = new Helper();
-                    helper.setUsername(usernameText.getText().toString());
-                    helper.setFavoriteCity(favoriteCityText.getText().toString());
-                    helper.setFavoriteCost(Double.parseDouble(favoriteCostText.getText().toString()));
-                    helper.setPassword(password.getText().toString());
-                    HelperService.create(helper);
+                    Helper helper = HelperService.getByUsername(usernameText.getText().toString());
+                    if(helper != null){
+                        usernameText.setError("Username already exists");
+                    } else {
+                        helper = new Helper();
+                        helper.setUsername(usernameText.getText().toString());
+                        helper.setFavoriteCity(favoriteCityText.getText().toString());
+                        helper.setFavoriteCost(Double.parseDouble(favoriteCostText.getText().toString()));
+                        helper.setPassword(password.getText().toString());
+                        helper.setEmail(email.getText().toString());
+                        HelperService.create(helper);
 
-                    Intent intent = new Intent(SignupHelperActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    SignupHelperActivity.this.finish();
+                        CurrentUser.setHelper(helper);
+                        CurrentUser.setIsKiuer(false);
+
+                        Intent intent = new Intent(SignupHelperActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        SignupHelperActivity.this.finish();
+                    }
+
                 }
             }
         });

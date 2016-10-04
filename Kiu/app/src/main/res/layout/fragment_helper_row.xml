@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_user_post_row"
+    android:id="@+id/fragment_helper_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:focusable="true"
@@ -18,11 +18,11 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/fragment_user_post_row_photo"
+            android:id="@+id/fragment_helper_row_photo"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_below="@+id/activity_main_menu_profile_image"
-            android:src="@mipmap/ic_face_white"
+            android:src="@mipmap/ic_account_circle_white_24dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/profile_image_circular"
             android:elevation="5dp"
@@ -34,50 +34,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <TextView
-                android:id="@+id/fragment_user_post_row_location_text"
+                android:id="@+id/fragment_helper_row_username_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingLeft="12dp"
+                android:textSize="20sp"
+                android:textColor="@color/accentColor"
+                android:text="@string/username"
+                />
+            <TextView
+                android:id="@+id/fragment_helper_row_favorite_city_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="5dp"
                 android:paddingLeft="12dp"
                 android:textSize="15sp"
-                android:text="@string/address"
+                android:text="@string/favorite_city"
                 />
 
             <TextView
-                android:id="@+id/fragment_user_post_row_start_text"
+                android:id="@+id/fragment_helper_row_favorite_cost_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="5dp"
                 android:paddingLeft="12dp"
                 android:textSize="15sp"
-                android:text="@string/start"
+                android:text="@string/favorite_cost"
                 />
 
-            <TextView
-                android:id="@+id/fragment_user_post_row_cost_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:paddingLeft="12dp"
-                android:textSize="15sp"
-                android:text="@string/cost"
-                />
-            <RatingBar
-                android:id="@+id/fragment_user_post_row_rating_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:clickable="false"
-                android:isIndicator="true"
-                android:progressTint="@color/accentColor"
-                android:stepSize="0.5"
-                android:numStars="5"
-                android:scaleX="0.5"
-                android:scaleY="0.5"
-                android:transformPivotX="0dp"
-                android:transformPivotY="0dp"
-                />
         </LinearLayout>
     </LinearLayout>
 

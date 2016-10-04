@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.spronghi.kiu.R;
 
+import com.spronghi.kiu.http.HelperService;
+import com.spronghi.kiu.http.KiuerService;
 import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.runtime.CurrentUser;
 
@@ -53,11 +55,16 @@ public class ViewHelperFragment extends ModelFragment<Helper>{
         ratingLinearLayout = (LinearLayout) layout.findViewById(R.id.fragment_view_helper_feedback_linearlayout);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_view_helper_toolbar);
 
-
+        final FragmentManager manager = this.getFragmentManager();
         ratingLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TO DO
+                ModelFragment<Helper> modelFragment = FragmentFactory.getInstance(FragmentControl.LIST_USER_HELPER);
+                modelFragment.setModel(helper);
+                manager.beginTransaction()
+                        .replace(R.id.activity_main_frame_layout, modelFragment, "list_post_helper")
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -68,11 +75,13 @@ public class ViewHelperFragment extends ModelFragment<Helper>{
     }
 
     private void setupView(){
+        Log.d("feedback", Float.toString((float) HelperService.getFeedback(helper)));
+
         usernameText.setText(helper.getUsername());
         email.setText(helper.getEmail());
         favoriteCityText.setText(helper.getFavoriteCity());
         favoriteCostText.setText(helper.getFavoriteCostString());
-        //feedbackBar.setRating(QUALCOSA);
+        feedbackBar.setRating((float) HelperService.getFeedback(helper));
 
         final FragmentManager manager = this.getFragmentManager();
 
