@@ -3,6 +3,8 @@ package com.spronghi.kiu.http;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.spronghi.kiu.setup.StringFormatter;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -18,15 +20,15 @@ import java.util.concurrent.ExecutionException;
  * Created by spronghi on 30/08/16.
  */
 class HttpConnector {
-    private static final String HOST_IP = "192.168.1.2";
+    private static final String HOST_IP = "192.168.43.134";
     private static final String SERVER_ADDRESS = "http://"+HOST_IP+":8080/kiu";
     private static String url;
 
     public static String makeRequest(String service){
         try {
-            url = SERVER_ADDRESS+service;
+            url = StringFormatter.formatURL(SERVER_ADDRESS+service);
             Log.d("http", url);
-            return new HttpAsyncConnector().execute().get();
+            return StringFormatter.formatJSON(new HttpAsyncConnector().execute().get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

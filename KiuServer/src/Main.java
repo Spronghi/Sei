@@ -16,22 +16,6 @@ import java.util.List;
  */
 public class Main {
     public static void main(String [] args){
-        PostKiuerDAO postDAO = new PostKiuerDAO();
-        JSONObject jsonObject = new JSONObject();
-        List<PostKiuer> postList = postDAO.getAllBy(FilterControl.HELPER, Integer.toString(new HelperDAO().get(1).getId()));
-        int i = 0;
-        float feedback = 0;
-        for(PostKiuer post : postList) {
-            if(post.getToHelperFeedback() != 0){
-                feedback += post.getToHelperFeedback();
-                i++;
-            }
-        }
-        if(feedback != 0){
-            feedback = feedback / i;
-        }
-        jsonObject.put("feedback", Float.toString(feedback));
-        System.out.println(jsonObject.toJSONString());
 
     }
 
@@ -44,14 +28,25 @@ public class Main {
         kiuer.setFavoriteCity("Lecce");
         new KiuerDAO().create(kiuer);
 
+        HelperDAO helperDao = new HelperDAO();
         Helper helper = new Helper();
+        helper.setFavoriteCost(0.0);
+        helper.setPassword(MD5Crypt.crypt("dioporcomerdoso"));
+        helper.setUsername("nobody");
+        helper.setEmail("nobody@nobody.com");
+        helper.setFavoriteCity("nobody");
+        helper.setId(3);
+
+        helperDao.create(helper);
+
+        helper = new Helper();
         helper.setId(0);
         helper.setEmail("madassa@gmail.com");
         helper.setUsername("b");
         helper.setPassword(MD5Crypt.crypt("b"));
         helper.setFavoriteCity("Lecce");
         helper.setFavoriteCost(5);
-        new HelperDAO().create(helper);
+        helperDao.create(helper);
 
         PostKiuer post = new PostKiuer();
         post.setHelper(new HelperDAO().get(1));

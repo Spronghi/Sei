@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ import com.spronghi.kiu.adapter.DividerItemDecoration;
 import com.spronghi.kiu.adapter.PostKiuerAdapter;
 import com.spronghi.kiu.http.PostKiuerService;
 import com.spronghi.kiu.model.PostKiuer;
+import com.spronghi.kiu.runtime.CurrentUser;
 
 /**
  * Created by MatteoSemolaArena on 09/09/2016.
@@ -33,7 +35,7 @@ import com.spronghi.kiu.model.PostKiuer;
 public class ListPostKiuerFragment extends ModelFragment {
     public static final String TAG = ListPostKiuerFragment.class.getSimpleName();
     private Toolbar toolbar;
-
+    private FloatingActionButton fab;
     private List<PostKiuer> postList = new ArrayList<>();
     private RecyclerView recyclerView;
     private PostKiuerAdapter mAdapter;
@@ -42,8 +44,30 @@ public class ListPostKiuerFragment extends ModelFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         final View layout = inflater.inflate(R.layout.fragment_post_list, parent, false);
-        toolbar = (Toolbar) layout.findViewById(R.id.fragment_post_list_toolbar);
 
+        toolbar = (Toolbar) layout.findViewById(R.id.fragment_post_list_toolbar);
+        fab = (FloatingActionButton) layout.findViewById(R.id.fragment_post_list_fab);
+        recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_post_list_recycler_view);
+
+        setupToolbar();
+        setupRecyclerView();
+        setupFab();
+
+        return layout;
+
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setRetainInstance(true);
+    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {}
+
+    @Override
+    public void setModel(Object model) {}
+
+    private void setupToolbar(){
         toolbar.setLogo(R.mipmap.ic_logo);
         toolbar.setTitle(R.string.posts);
         toolbar.inflateMenu(R.menu.menu_mtoolbar_postlist);
@@ -101,10 +125,8 @@ public class ListPostKiuerFragment extends ModelFragment {
                 return false;
             }
         });
-
-
-        recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_post_list_recycler_view);
-
+    }
+    private void setupRecyclerView(){
         mAdapter = new PostKiuerAdapter(postList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -119,16 +141,30 @@ public class ListPostKiuerFragment extends ModelFragment {
             public void onClick(View view, int position) {
                 ModelFragment<PostKiuer> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_POST_KIUER);
                 fragment.setModel(postList.get(position));
-                getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
 
             @Override
-            public void onLongClick(View view, int position) {
-
-            }
+            public void onLongClick(View view, int position) {}
         }));
-
-        return layout;
+    }
+    private void setupFab(){
+        if(CurrentUser.isKiuer()){
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.CREATE_POST_KIUER))
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
+        } else {
+            fab.setVisibility(View.INVISIBLE);
+            fab.setClickable(false);
+        }
 
     }
     private void populateList(){
@@ -139,13 +175,7 @@ public class ListPostKiuerFragment extends ModelFragment {
     private void updateSubtitle(final String subtitle) {
         toolbar.setSubtitle(subtitle);
     }
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {}
 
-    @Override
-    public void setModel(Object model) {
-
-    }
 
     public interface ClickListener {
         void onClick(View view, int position);
@@ -195,9 +225,5 @@ public class ListPostKiuerFragment extends ModelFragment {
         }
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        setRetainInstance(true);
-    }
+
 }

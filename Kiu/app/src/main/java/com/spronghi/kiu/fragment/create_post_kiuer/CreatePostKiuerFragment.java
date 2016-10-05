@@ -3,6 +3,7 @@ package com.spronghi.kiu.fragment.create_post_kiuer;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.spronghi.kiu.R;
 import com.spronghi.kiu.fragment.FragmentControl;
 import com.spronghi.kiu.fragment.FragmentFactory;
 import com.spronghi.kiu.fragment.ModelFragment;
+import com.spronghi.kiu.http.HelperService;
+import com.spronghi.kiu.model.Helper;
 import com.spronghi.kiu.model.PostKiuer;
 import com.spronghi.kiu.runtime.CurrentUser;
 import com.spronghi.kiu.setup.SetupView;
@@ -25,49 +28,34 @@ import com.spronghi.kiu.setup.SetupView;
 public class CreatePostKiuerFragment extends ModelFragment<PostKiuer> {
     private PostKiuer post;
 
-    private EditText titleText;
-    private EditText statusText;
     private Toolbar toolbar;
     private Button button;
 
-
-
     @Override
     public void setModel(PostKiuer model) {
-        post=model;
+        post = model;
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         final View layout = inflater.inflate(R.layout.fragment_create_post, parent, false);
 
-        titleText = (EditText) layout.findViewById(R.id.fragment_create_post_title_text);
-        statusText = (EditText) layout.findViewById(R.id.fragment_create_post_status_text);
         button = (Button) layout.findViewById(R.id.fragment_create_post_title_button);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_create_post_toolbar);
 
         setupView();
         setupToolbar();
 
-        SetupView.clearEditText(titleText);
-        SetupView.clearEditText(statusText);
-
         final FragmentManager manager = this.getFragmentManager();
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (titleText.getText().toString().equals("") || titleText.getText().toString().equals(getResources().getString(R.string.ask_for_title))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_title, Toast.LENGTH_SHORT).show();
-                } else if (statusText.getText().toString().equals("") || statusText.getText().toString().equals(getResources().getString(R.string.ask_for_status))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_status, Toast.LENGTH_SHORT).show();
-                } else {
-                    ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.CREATE_POST_KIUER_PLACE);
-                    modelFragment.setModel(post);
-                    manager.beginTransaction()
-                            .replace(R.id.activity_main_frame_layout, modelFragment, "create_post_place")
-                            .addToBackStack(null)
-                            .commit();
-                }
+                ModelFragment<PostKiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.CREATE_POST_KIUER_PLACE);
+                modelFragment.setModel(post);
+                manager.beginTransaction()
+                        .replace(R.id.activity_main_frame_layout, modelFragment, "create_post_place")
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -77,6 +65,7 @@ public class CreatePostKiuerFragment extends ModelFragment<PostKiuer> {
         if(post==null)
             post = new PostKiuer();
 
+        post.setHelper(HelperService.get(3));
         post.setKiuer(CurrentUser.getKiuer());
         post.setOpen(true);
     }

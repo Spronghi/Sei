@@ -3,6 +3,7 @@ package com.spronghi.kiu.fragment.create_post_kiuer;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,12 +56,12 @@ public class PlaceCreatePostKiuerFragment extends ModelFragment<PostKiuer>{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cityText.getText().toString().equals("") || cityText.getText().toString().equals(getResources().getString(R.string.ask_for_city))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_city, Toast.LENGTH_SHORT).show();
-                } else if (locationText.getText().toString().equals("") || locationText.getText().toString().equals(getResources().getString(R.string.ask_for_location))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_location, Toast.LENGTH_SHORT).show();
-                } else if (addressText.getText().toString().equals("") || addressText.getText().toString().equals(getResources().getString(R.string.ask_for_address))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_address, Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(cityText.getText().toString())){
+                    cityText.setError("Empty");
+                } else if(TextUtils.isEmpty(locationText.getText().toString())){
+                    locationText.setError("Empty");
+                } else if(TextUtils.isEmpty(addressText.getText().toString())){
+                    addressText.setError("Empty");
                 } else {
                     Place place = new Place();
                     place.setCity(cityText.getText().toString());

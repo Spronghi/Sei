@@ -13,35 +13,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <RelativeLayout
-            android:id="@+id/fragment_view_post_kiuer_main_layout"
-            android:layout_width="match_parent"
-            android:layout_height="135dp"
-            android:background="@color/accentColor"
-            android:elevation="4dp"
-            android:paddingBottom="24dp"
-            android:layout_marginTop="65dp">
-
-            <TextView
-                android:id="@+id/fragment_view_post_kiuer_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="52dp"
-                android:text="@string/post"
-                android:textColor="#fff"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-
-        </RelativeLayout>
 
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fragment_view_post_kiuer_main_layout"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="65dp"
             android:layout_marginBottom="5dp"
             android:orientation="vertical">
 

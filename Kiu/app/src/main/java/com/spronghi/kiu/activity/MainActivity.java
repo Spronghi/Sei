@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setupMenu(savedInstanceState);
         setupDrawerContent(navigationView);
 
-        startService(new Intent(this, NotificationService.class));
+        //startService(new Intent(this, NotificationService.class));
     }
 
     @Override

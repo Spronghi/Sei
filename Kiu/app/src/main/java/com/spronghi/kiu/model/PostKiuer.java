@@ -27,6 +27,8 @@ public class PostKiuer {
         id = 0;
         open = true;
         place = new Place();
+        toHelperFeedback = 0;
+        toKiuerFeedback = 0;
     }
     public int getId() {
         return id;

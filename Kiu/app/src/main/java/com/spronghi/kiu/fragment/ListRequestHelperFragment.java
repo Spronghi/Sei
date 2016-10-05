@@ -44,11 +44,11 @@ public class ListRequestHelperFragment extends  ModelFragment{
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        final View layout = inflater.inflate(R.layout.fragment_post_list, parent, false);
-        toolbar = (Toolbar) layout.findViewById(R.id.fragment_post_list_toolbar);
+        final View layout = inflater.inflate(R.layout.fragment_request_list, parent, false);
+        toolbar = (Toolbar) layout.findViewById(R.id.fragment_request_list_toolbar);
         setupToolbar();
 
-        recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_post_list_recycler_view);
+        recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_request_list_recycler_view);
 
         adapter = new RequestHelperAdapter(list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

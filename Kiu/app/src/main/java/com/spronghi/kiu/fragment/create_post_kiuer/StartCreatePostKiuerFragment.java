@@ -3,6 +3,7 @@ package com.spronghi.kiu.fragment.create_post_kiuer;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,10 +56,10 @@ public class StartCreatePostKiuerFragment extends ModelFragment<PostKiuer>{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (startDateText.getText().toString().equals("") || startDateText.getText().toString().equals(getResources().getString(R.string.ask_for_start_date))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_start_date, Toast.LENGTH_SHORT).show();
-                } else if (startHourText.getText().toString().equals("") || startHourText.getText().toString().equals(getResources().getString(R.string.ask_for_start_hour))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_start_hour, Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(startDateText.getText().toString())){
+                    startDateText.setError("Empty");
+                } else if(TextUtils.isEmpty(startHourText.getText().toString())){
+                    startHourText.setError("Empty");
                 } else if (Calendar.getInstance().getTime().after(DateFormatter.parseDate(startDateText.getText().toString()))){
                     post.setStartDate(startDateText.getText().toString()+" "+startHourText.getText().toString());
 

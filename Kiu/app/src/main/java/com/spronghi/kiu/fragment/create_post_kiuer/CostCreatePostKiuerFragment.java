@@ -3,6 +3,7 @@ package com.spronghi.kiu.fragment.create_post_kiuer;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.spronghi.kiu.R;
 import com.spronghi.kiu.fragment.FragmentControl;
 import com.spronghi.kiu.fragment.FragmentFactory;
 import com.spronghi.kiu.fragment.ModelFragment;
+import com.spronghi.kiu.http.PostKiuerService;
 import com.spronghi.kiu.model.PostKiuer;
 import com.spronghi.kiu.setup.DoubleFormatter;
 import com.spronghi.kiu.setup.SetupView;
@@ -55,10 +57,10 @@ public class CostCreatePostKiuerFragment extends ModelFragment<PostKiuer> {
         radioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (costText.getText().toString().equals("") || costText.getText().toString().equals(getResources().getString(R.string.ask_for_cost))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_city, Toast.LENGTH_SHORT).show();
-                } else if (durationText.getText().toString().equals("") || durationText.getText().toString().equals(getResources().getString(R.string.ask_for_duration))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_duration, Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(costText.getText().toString())){
+                    costText.setError("Empty");
+                } else if(TextUtils.isEmpty(durationText.getText().toString())){
+                    durationText.setError("Empty");
                 } else {
                     if(!(durationText.getText().toString().contains(" minutes")))
                         durationText.setText(durationText.getText().toString() + " minutes");
@@ -71,15 +73,21 @@ public class CostCreatePostKiuerFragment extends ModelFragment<PostKiuer> {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (costText.getText().toString().equals("") || costText.getText().toString().equals(getResources().getString(R.string.ask_for_cost))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_city, Toast.LENGTH_SHORT).show();
-                } else if (durationText.getText().toString().equals("") || durationText.getText().toString().equals(getResources().getString(R.string.ask_for_duration))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_duration, Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(costText.getText().toString())){
+                    costText.setError("Empty");
+                } else if(TextUtils.isEmpty(durationText.getText().toString())){
+                    durationText.setError("Empty");
                 } else {
                     post.setCost(Double.parseDouble(costText.getText().toString().replace("€/h","")));
                     post.setDuration(Integer.parseInt(durationText.getText().toString().replace(" minutes", "")));
 
-                    //TO DO create the post on database
+                    PostKiuerService.create(post);
+                    Toast.makeText(getActivity(), R.string.post_created, Toast.LENGTH_SHORT).show();
+
+                    manager.beginTransaction()
+                            .replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.LIST_POST_KIUER), "view_post_kiuer")
+                            .addToBackStack(null)
+                            .commit();
                 }
             }
         });
@@ -87,8 +95,10 @@ public class CostCreatePostKiuerFragment extends ModelFragment<PostKiuer> {
         previewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (costText.getText().toString().equals("") || costText.getText().toString().equals(getResources().getString(R.string.ask_for_cost))) {
-                    Toast.makeText(getActivity(), R.string.ask_for_cost, Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(costText.getText().toString())){
+                    costText.setError("Empty");
+                } else if(TextUtils.isEmpty(durationText.getText().toString())){
+                    durationText.setError("Empty");
                 } else {
                     post.setCost(Double.parseDouble(costText.getText().toString().replace("€/h","")));
                     post.setDuration(Integer.parseInt(durationText.getText().toString().replace(" minutes", "")));

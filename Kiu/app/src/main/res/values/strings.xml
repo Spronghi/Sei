@@ -52,6 +52,7 @@
     <string name="title_status">Title and Status</string>
     <string name="start_date_duration">Start Date, Start Hour and Duration</string>
     <string name="city_address_location">City, Address and Location</string>
+    <string name="post_created">Post Created</string>
     <string name="title">Title</string>
     <string name="start_date_before_today">Start date cannot be before today</string>
     <string name="cost_preview">Click for Cost Preview</string>
