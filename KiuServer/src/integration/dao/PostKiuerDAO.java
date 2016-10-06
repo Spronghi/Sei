@@ -25,6 +25,7 @@ public class PostKiuerDAO {
     private static final String DELETE = "DELETE FROM post_kiuer WHERE id=?";
     private static final String SELECT_FROM_KIUER = "SELECT `id`, `open`, `duration`, `cost`, `start`, `to_helper_feedback`, `to_kiuer_feedback`, `kiuer_id`, `helper_id`, `place_id` FROM post_kiuer WHERE `kiuer_id`=?";
     private static final String SELECT_FROM_HELPER = "SELECT `id`, `open`, `duration`, `cost`, `start`, `to_helper_feedback`, `to_kiuer_feedback`, `kiuer_id`, `helper_id`, `place_id` FROM post_kiuer WHERE `helper_id`=?";
+    private static final String SELECT_FROM_CITY = "SELECT post_kiuer.* from `post_kiuer` INNER JOIN `place` on post_kiuer.place_id=place.id && place.city=\"?\"";
     private static final Logger logger = Logger.getLogger(PostKiuerDAO.class.getName());
 
     private KiuerDAO kiuerDAO;
@@ -124,6 +125,9 @@ public class PostKiuerDAO {
             query = Replacer.replaceFirst(query, (String) key);
         } else if(flag.equals(FilterControl.HELPER)){
             query = SELECT_FROM_HELPER;
+            query = Replacer.replaceFirst(query, (String) key);
+        } else if(flag.equals(FilterControl.CITY)){
+            query = SELECT_FROM_CITY;
             query = Replacer.replaceFirst(query, (String) key);
         }
         ResultSet rs = ConnectorFactory.getConnection().executeQuery(query);

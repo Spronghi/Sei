@@ -44,7 +44,39 @@ public class ListHelperFragment extends ModelFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         final View layout = inflater.inflate(R.layout.fragment_helper_list, parent, false);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_helper_toolbar);
+        recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_helper_recycler_view);
 
+        setupRecyclerView();
+        setupToolbar();
+
+        return layout;
+
+    }
+    private void setupRecyclerView(){
+        mAdapter = new HelperAdapter(helperList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(mAdapter);
+
+        populateList();
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                ModelFragment<Helper> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_HELPER);
+                fragment.setModel(helperList.get(position));
+                getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+    }
+    private void setupToolbar(){
         toolbar.setLogo(R.mipmap.ic_logo);
         toolbar.setTitle(R.string.helper);
         toolbar.inflateMenu(R.menu.menu_mtoolbar_postlist);
@@ -74,7 +106,7 @@ public class ListHelperFragment extends ModelFragment{
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    //setListContent(query);
+                    setListContent(query);
                     return false;
                 }
 
@@ -102,35 +134,11 @@ public class ListHelperFragment extends ModelFragment{
                 return false;
             }
         });
-
-
-        recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_helper_recycler_view);
-
-        mAdapter = new HelperAdapter(helperList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(mAdapter);
-
-        populateList();
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                ModelFragment<Helper> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_HELPER);
-                fragment.setModel(helperList.get(position));
-                getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
-
-        return layout;
-
+    }
+    private void setListContent(String query){
+        helperList.clear();
+        for(Helper post : HelperService.getAllByCity(query))
+            helperList.add(post);
     }
     private void populateList(){
         helperList.clear();

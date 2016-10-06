@@ -98,4 +98,13 @@ public class PostKiuerService {
         String jsonString = HttpConnector.makeRequest(url);
         return parser.parseArray(jsonString);
     }
+    public static List<PostKiuer> getAllByCity(String city){
+        String url = "/post_kiuer?";
+        url += "service=city&";
+        url += "city="+city;
+        JSONParser<PostKiuer> parser = JSONParserFactory.getInstance(JSONParserControl.POST_KIUER);
+        String jsonString = HttpConnector.makeRequest(url);
+        Log.d("post_kiuer", jsonString);
+        return parser.parseArray(jsonString);
+    }
 }

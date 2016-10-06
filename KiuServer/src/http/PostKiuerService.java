@@ -85,6 +85,9 @@ public class PostKiuerService extends HttpServlet {
             case HttpControl.KIUER:
                 responseString = getAllByKiuer(request);
                 break;
+            case HttpControl.CITY:
+                responseString = getAllByCity(request);
+                break;
         }
         out.println(responseString);
         out.close();
@@ -122,5 +125,8 @@ public class PostKiuerService extends HttpServlet {
     }
     private String getAllByKiuer(HttpServletRequest request){
         return parser.getJSONArr(dao.getAllBy(FilterControl.KIUER, request.getParameter("kiuer_id"))).toJSONString();
+    }
+    private String getAllByCity(HttpServletRequest request){
+        return parser.getJSONArr(dao.getAllBy(FilterControl.CITY, request.getParameter("city"))).toJSONString();
     }
 }

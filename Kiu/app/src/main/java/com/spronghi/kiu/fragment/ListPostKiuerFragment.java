@@ -97,7 +97,7 @@ public class ListPostKiuerFragment extends ModelFragment {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    //setListContent(query);
+                    setListContent(query);
                     return false;
                 }
 
@@ -167,10 +167,21 @@ public class ListPostKiuerFragment extends ModelFragment {
         }
 
     }
+    private void setListContent(String query){
+        postList.clear();
+        for(PostKiuer post :PostKiuerService.getAllByCity(query)) {
+            if (post.isOpen()) {
+                postList.add(post);
+            }
+        }
+    }
     private void populateList(){
         postList.clear();
-        for(PostKiuer post :PostKiuerService.getAll())
-            postList.add(post);
+        for(PostKiuer post :PostKiuerService.getAll()){
+            if(post.isOpen()){
+                postList.add(post);
+            }
+        }
     }
     private void updateSubtitle(final String subtitle) {
         toolbar.setSubtitle(subtitle);

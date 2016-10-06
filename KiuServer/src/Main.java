@@ -16,7 +16,11 @@ import java.util.List;
  */
 public class Main {
     public static void main(String [] args){
-
+         PostKiuerDAO dao;
+         JSONParser<PostKiuer> parser;
+        dao = new PostKiuerDAO();
+        parser = JSONParserFactory.getInstance(ParserControl.POST_KIUER);
+        System.out.println(parser.getJSONArr(dao.getAllBy(FilterControl.CITY, "sto cazzo")).toJSONString());
     }
 
     private static void populateDB(){
