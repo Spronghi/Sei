@@ -2,6 +2,7 @@ package com.spronghi.kiu.fragment;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -39,6 +41,7 @@ public class ListPostKiuerFragment extends ModelFragment {
     private List<PostKiuer> postList = new ArrayList<>();
     private RecyclerView recyclerView;
     private PostKiuerAdapter mAdapter;
+    SearchView searchView;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -52,6 +55,8 @@ public class ListPostKiuerFragment extends ModelFragment {
         setupToolbar();
         setupRecyclerView();
         setupFab();
+
+        setListContent();
 
         return layout;
 
@@ -73,7 +78,7 @@ public class ListPostKiuerFragment extends ModelFragment {
         toolbar.inflateMenu(R.menu.menu_mtoolbar_postlist);
 
         MenuItem searchItem = toolbar.getMenu().findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView = (SearchView) searchItem.getActionView();
         if (searchItem != null) {
             searchView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,7 +102,7 @@ public class ListPostKiuerFragment extends ModelFragment {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    setListContent(query);
+                    setListContent();
                     return false;
                 }
 
@@ -134,11 +139,12 @@ public class ListPostKiuerFragment extends ModelFragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(mAdapter);
 
-        populateList();
+        setListContent();
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
-            public void onClick(View view, int position) {
+            public void onClick(View view, int position) {        fab.setBackgroundTintList(ColorStateList.valueOf(R.color.accentColor));
+
                 ModelFragment<PostKiuer> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_POST_KIUER);
                 fragment.setModel(postList.get(position));
                 getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment)
@@ -167,21 +173,20 @@ public class ListPostKiuerFragment extends ModelFragment {
         }
 
     }
-    private void setListContent(String query){
+    private void setListContent(){
+        String city;
+        if(TextUtils.isEmpty(searchView.getQuery())){
+            city = CurrentUser.isKiuer() ? CurrentUser.getKiuer().getFavoriteCity() : CurrentUser.getHelper().getFavoriteCity();
+        } else {
+            city = searchView.getQuery().toString();
+        }
         postList.clear();
-        for(PostKiuer post :PostKiuerService.getAllByCity(query)) {
+        for(PostKiuer post :PostKiuerService.getAllByCity(city)) {
             if (post.isOpen()) {
                 postList.add(post);
             }
         }
-    }
-    private void populateList(){
-        postList.clear();
-        for(PostKiuer post :PostKiuerService.getAll()){
-            if(post.isOpen()){
-                postList.add(post);
-            }
-        }
+        mAdapter.notifyDataSetChanged();
     }
     private void updateSubtitle(final String subtitle) {
         toolbar.setSubtitle(subtitle);

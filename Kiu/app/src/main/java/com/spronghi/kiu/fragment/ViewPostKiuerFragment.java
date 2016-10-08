@@ -17,6 +17,7 @@ import com.spronghi.kiu.R;
 import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostKiuer;
 import com.spronghi.kiu.runtime.CurrentUser;
+import com.spronghi.kiu.setup.DoubleFormatter;
 
 
 /**
@@ -74,13 +75,14 @@ public class ViewPostKiuerFragment extends ModelFragment<PostKiuer>{
     }
 
     private void setupView() {
+        double costPreview = (postKiuer.getCost()/60)*postKiuer.getDuration();
         kiuerText.setText(postKiuer.getKiuer().getUsername());
         cityText.setText(postKiuer.getPlace().getCity());
         addressText.setText(postKiuer.getPlace().getAddress());
         locationText.setText(postKiuer.getPlace().getLocation());
         startText.setText("Starts on " + postKiuer.getStartDateString());
         durationText.setText(Integer.toString(postKiuer.getDuration()) + " minutes");
-        costText.setText(postKiuer.getCostString() + "€/h");
+        costText.setText(DoubleFormatter.format(costPreview) + "€");
         final FragmentManager manager = this.getFragmentManager();
 
         kiuerText.setOnClickListener(new View.OnClickListener() {

@@ -74,14 +74,14 @@ public class FeedbackFragment  extends ModelFragment<PostKiuer>{
                     PostKiuerService.update(post);
                     Toast.makeText(getContext(), R.string.successfully_rated, Toast.LENGTH_SHORT).show();
                     if(CurrentUser.isKiuer()){
-                        ModelFragment<Kiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.LIST_USER_KIUER);
+                        ModelFragment<Kiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.USER_POST_KIUER);
                         modelFragment.setModel(post.getKiuer());
                         manager.beginTransaction()
                                 .replace(R.id.activity_main_frame_layout, modelFragment, "view_kiuer_post")
                                 .addToBackStack(null)
                                 .commit();
                     } else {
-                        ModelFragment<Helper> modelFragment = FragmentFactory.getInstance(FragmentControl.LIST_USER_HELPER);
+                        ModelFragment<Helper> modelFragment = FragmentFactory.getInstance(FragmentControl.USER_POST_HELPER);
                         modelFragment.setModel(post.getHelper());
                         manager.beginTransaction()
                                 .replace(R.id.activity_main_frame_layout, modelFragment, "view_helper_post")

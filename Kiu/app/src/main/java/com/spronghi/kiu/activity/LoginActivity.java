@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import com.spronghi.kiu.runtime.CurrentUser;
  */
 public class LoginActivity extends AppCompatActivity {
 
+    private ImageView logo;
     private EditText usernameEditText;
     private EditText passwordEditText;
     private TextView signupLabel;
@@ -44,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mScrollView = (ScrollView) findViewById(R.id.login_activity_scrollview);
 
+        logo = (ImageView) findViewById(R.id.activity_login_logo);
         signupLabel = (TextView) findViewById(R.id.link_login);
         usernameEditText = (EditText)findViewById(R.id.usernameEditText);
         passwordEditText = (EditText)findViewById(R.id.passwordEditText);
@@ -58,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         kiuerRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                logo.setImageResource(R.drawable.logo);
                 mScrollView.setBackgroundColor(getResources().getColor(R.color.primaryColor));
                 kiuerRadioButton.setButtonTintList(ColorStateList.valueOf(getResources().getColor(R.color.accentColor)));
                 helperRadioButton.setButtonTintList(ColorStateList.valueOf(getResources().getColor(R.color.primaryTextColor)));
@@ -74,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         helperRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                logo.setImageResource(R.drawable.logo_dark);
                 mScrollView.setBackgroundColor(getResources().getColor(R.color.accentColor));
                 helperRadioButton.setButtonTintList(ColorStateList.valueOf(getResources().getColor(R.color.primaryColor)));
                 kiuerRadioButton.setButtonTintList(ColorStateList.valueOf(getResources().getColor(R.color.primaryTextColor)));

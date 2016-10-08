@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
  * Created by spronghi on 30/08/16.
  */
 class HttpConnector {
-    private static final String HOST_IP = "192.168.43.134";
+    private static final String HOST_IP = "192.168.1.2";
     private static final String SERVER_ADDRESS = "http://"+HOST_IP+":8080/kiu";
     private static String url;
 

@@ -106,6 +106,4 @@
     <string name="opSuccessfully">Operation succesfully!</string>
     <string name="loginFailed">Wrong username or passworrd!</string>
     <string name="loginFailedUnchecked">Are you Kiuer or Helper?</string>
-
-    <string name="semola">ImSemola</string>
 </resources>

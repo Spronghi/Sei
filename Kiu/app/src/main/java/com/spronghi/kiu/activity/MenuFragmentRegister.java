@@ -17,13 +17,13 @@ public class MenuFragmentRegister extends FragmentControl {
         container.put(R.id.id_kiuer_drawer_menu_icon_kiuer, LIST_POST_KIUER);
         container.put(R.id.id_kiuer_drawer_menu_icon_helper, LIST_HELPER);
         container.put(R.id.id_kiuer_drawer_menu_icon_requests, LIST_REQUEST_KIUER);
-        container.put(R.id.id_kiuer_drawer_menu_icon_posts, LIST_USER_KIUER);
+        container.put(R.id.id_kiuer_drawer_menu_icon_posts, USER_POST_KIUER);
         container.put(R.id.id_kiuer_drawer_menu_icon_kiuing, LIST_KIUING);
         container.put(R.id.id_kiuer_drawer_menu_icon_your_profile, VIEW_KIUER);
 
         container.put(R.id.id_helper_drawer_menu_icon_kiuer, LIST_POST_KIUER);
         container.put(R.id.id_helper_drawer_menu_icon_requests, LIST_REQUEST_HELPER);
-        container.put(R.id.id_helper_drawer_menu_icon_posts, LIST_USER_HELPER);
+        container.put(R.id.id_helper_drawer_menu_icon_posts, USER_POST_HELPER);
         container.put(R.id.id_helper_drawer_menu_icon_kiuing, LIST_KIUING);
         container.put(R.id.id_helper_drawer_menu_icon_your_profile, VIEW_HELPER);
     }

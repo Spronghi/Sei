@@ -75,6 +75,7 @@
                 android:id="@+id/fragment_create_cost_radio_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/accentColor"
                 android:layout_margin="5dp"
                 android:text="@string/cost_preview"
                 android:elevation="4dp"

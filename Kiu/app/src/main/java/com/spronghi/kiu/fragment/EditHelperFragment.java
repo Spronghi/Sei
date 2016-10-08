@@ -1,8 +1,10 @@
 package com.spronghi.kiu.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +14,10 @@ import android.widget.EditText;
 
 import com.spronghi.kiu.R;
 
+import com.spronghi.kiu.activity.MainActivity;
+import com.spronghi.kiu.http.HelperService;
 import com.spronghi.kiu.model.Helper;
+import com.spronghi.kiu.runtime.CurrentUser;
 
 
 /**
@@ -57,6 +62,38 @@ public class EditHelperFragment extends ModelFragment<Helper>{
 
         setupView();
         setupToolbar();
+
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(password.getText().toString())) {
+                    password.setError("Empty");
+                } else if(TextUtils.isEmpty(usernameText.getText().toString())) {
+                    usernameText.setError("Empty");
+                } else if(TextUtils.isEmpty(confPass.getText().toString())) {
+                    confPass.setError("Empty");
+                } else if(TextUtils.isEmpty(email.getText().toString())) {
+                    email.setError("Empty");
+                } else if(TextUtils.isEmpty(favoriteCityText.getText().toString())) {
+                    favoriteCityText.setError("Empty");
+                } else if(TextUtils.isEmpty(favoriteCostText.getText().toString())) {
+                    favoriteCostText.setError("Empty");
+                } else if(!(password.getText().toString().equals(confPass.getText().toString()))) {
+                    password.setError("Not equals");
+                    confPass.setError("Not equals");
+                } else {
+                    helper.setUsername(usernameText.getText().toString());
+                    helper.setFavoriteCity(favoriteCityText.getText().toString());
+                    helper.setFavoriteCost(Double.parseDouble(favoriteCostText.getText().toString().replace("€/h","").replace(",",".")));
+                    helper.setPassword(password.getText().toString());
+                    helper.setEmail(email.getText().toString());
+                    HelperService.update(helper);
+
+                    getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.LIST_POST_KIUER)).addToBackStack(null).commit();
+
+                }
+            }
+        });
 
         return layout;
     }

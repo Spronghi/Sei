@@ -3,6 +3,7 @@ package com.spronghi.kiu.fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 
 import com.spronghi.kiu.R;
 
+import com.spronghi.kiu.http.KiuerService;
 import com.spronghi.kiu.model.Kiuer;
 
 
@@ -53,6 +55,35 @@ public class EditKiuerFragment extends ModelFragment<Kiuer>{
 
         setupToolbar();
         setupView();
+
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(password.getText().toString())) {
+                    password.setError("Empty");
+                } else if(TextUtils.isEmpty(usernameText.getText().toString())) {
+                    usernameText.setError("Empty");
+                } else if(TextUtils.isEmpty(confPass.getText().toString())) {
+                    confPass.setError("Empty");
+                } else if(TextUtils.isEmpty(email.getText().toString())) {
+                    email.setError("Empty");
+                } else if(TextUtils.isEmpty(favoriteCityText.getText().toString())) {
+                    favoriteCityText.setError("Empty");
+                } else if(!(password.getText().toString().equals(confPass.getText().toString()))) {
+                    password.setError("Not equals");
+                    confPass.setError("Not equals");
+                } else {
+                    kiuer.setUsername(usernameText.getText().toString());
+                    kiuer.setPassword(password.getText().toString());
+                    kiuer.setEmail(email.getText().toString());
+                    kiuer.setFavoriteCity(favoriteCityText.getText().toString());
+                    KiuerService.update(kiuer);
+
+                    getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, FragmentFactory.getInstance(FragmentControl.LIST_POST_KIUER)).addToBackStack(null).commit();
+
+                }
+            }
+        });
 
         return layout;
     }

@@ -46,34 +46,6 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/fragment_edit_helper_name"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@color/darkPrimaryColor"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:hint="@string/name"
-                android:textColor="@color/textIconColor"
-                android:textColorHint="@color/textIconColor"
-                android:inputType="textPersonName"/>
-
-            <EditText
-                android:id="@+id/fragment_edit_helper_surname"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/darkPrimaryColor"
-                android:textColor="#fff"
-                android:layout_margin="5dp"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:hint="@string/surname"
-                android:textColorHint="@color/textIconColor"
-                android:inputType="textPersonName"/>
-
-            <EditText
                 android:id="@+id/fragment_edit_helper_favorite_city"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

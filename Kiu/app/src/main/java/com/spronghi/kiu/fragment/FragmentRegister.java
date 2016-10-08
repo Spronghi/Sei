@@ -31,12 +31,16 @@ class FragmentRegister extends FragmentControl{
             container.put(VIEW_REQUEST_HELPER, new RequestHelperFragment().clone());
             container.put(SEND_REQUEST_HELPER, new SendRequestHelperFragment().clone());
             container.put(SEND_REQUEST_KIUER, new SendRequestKiuerFragment().clone());
-            container.put(LIST_USER_KIUER, new ListKiuerUserPostFragment().clone());
-            container.put(LIST_USER_HELPER, new ListHelperUserPostFragment().clone());
             container.put(KIUING, new KiuingFragment().clone());
             container.put(LIST_KIUING, new ListKiuingFragment().clone());
             container.put(FEEDBACK, new FeedbackFragment().clone());
             container.put(LIST_HELPER, new ListHelperFragment().clone());
+            container.put(USER_POST_KIUER, new UserPostKiuerFragment().clone());
+            container.put(USER_POST_HELPER, new UserPostHelperFragment().clone());
+            container.put(LIST_HELPER_USER_CLOSED, new ListHelperUserClosedPostFragment().clone());
+            container.put(LIST_KIUER_USER_CLOSED, new ListKiuerUserClosedPostFragment().clone());
+            container.put(LIST_HELPER_USER_OPEN, new ListHelperUserOpenPostFragment().clone());
+            container.put(LIST_KIUER_USER_OPEN, new ListKiuerUserOpenPostFragment().clone());
         } catch (CloneNotSupportedException e) {
             Log.d("FragmentRegister", e.getLocalizedMessage());
         }

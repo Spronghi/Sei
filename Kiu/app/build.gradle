@@ -1,10 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'spronghi'
+            keyPassword 'spronghi'
+            storeFile file('/home/spronghi/workspace/Sei/Kiu/app/jey.jks')
+            storePassword 'spronghi'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.0"
     useLibrary 'org.apache.http.legacy'
-
     defaultConfig {
         applicationId "com.spronghi.kiu"
         minSdkVersion 22
@@ -21,10 +28,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:design:23.2.1'
-    compile group: 'org.apache.httpcomponents', name: 'httpclient-android', version: '4.3.5.1'
+    compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
 }
 

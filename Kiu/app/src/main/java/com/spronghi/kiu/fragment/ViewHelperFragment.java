@@ -59,7 +59,7 @@ public class ViewHelperFragment extends ModelFragment<Helper>{
         ratingLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ModelFragment<Helper> modelFragment = FragmentFactory.getInstance(FragmentControl.LIST_USER_HELPER);
+                ModelFragment<Helper> modelFragment = FragmentFactory.getInstance(FragmentControl.USER_POST_HELPER);
                 modelFragment.setModel(helper);
                 manager.beginTransaction()
                         .replace(R.id.activity_main_frame_layout, modelFragment, "list_post_helper")

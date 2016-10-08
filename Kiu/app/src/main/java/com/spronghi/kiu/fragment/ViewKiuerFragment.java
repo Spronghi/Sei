@@ -55,7 +55,7 @@ public class ViewKiuerFragment extends ModelFragment<Kiuer> {
         ratingLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ModelFragment<Kiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.LIST_USER_KIUER);
+                ModelFragment<Kiuer> modelFragment = FragmentFactory.getInstance(FragmentControl.USER_POST_KIUER);
                 modelFragment.setModel(kiuer);
                 manager.beginTransaction()
                         .replace(R.id.activity_main_frame_layout, modelFragment, "list_post_kiuer")

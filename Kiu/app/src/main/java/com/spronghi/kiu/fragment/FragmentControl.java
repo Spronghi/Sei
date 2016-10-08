@@ -16,8 +16,6 @@ public class FragmentControl {
     public static final String LIST_POST_KIUER = "list_post_kiuer";
     public static final String LIST_REQUEST_KIUER = "list_request_kiuer";
     public static final String LIST_REQUEST_HELPER = "list_request_helper";
-    public static final String LIST_USER_KIUER = "list_user_kiuer";
-    public static final String LIST_USER_HELPER = "list_user_helper";
     public static final String VIEW_REQUEST_HELPER = "view_request_helper";
     public static final String VIEW_REQUEST_KIUER = "view_request_kiuer";
     public static final String SEND_REQUEST_HELPER = "send_request_helper";
@@ -26,5 +24,11 @@ public class FragmentControl {
     public static final String LIST_KIUING = "list_kiuing";
     public static final String FEEDBACK = "feedback";
     public static final String LIST_HELPER = "list_helper";
+    public static final String USER_POST_KIUER = "user_post_kiuer";
+    public static final String USER_POST_HELPER = "user_post_helper";
+    public static final String LIST_HELPER_USER_CLOSED = "list_helper_user_closed";
+    public static final String LIST_KIUER_USER_CLOSED = "list_kiuer_user_closed";
+    public static final String LIST_HELPER_USER_OPEN = "list_helper_user_open";
+    public static final String LIST_KIUER_USER_OPEN = "list_kiuer_user_open";
 
 }

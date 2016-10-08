@@ -9,9 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,7 +21,7 @@ import com.spronghi.kiu.R;
 import com.spronghi.kiu.adapter.DividerItemDecoration;
 import com.spronghi.kiu.adapter.UserPostAdapter;
 import com.spronghi.kiu.http.PostKiuerService;
-import com.spronghi.kiu.model.Helper;
+import com.spronghi.kiu.model.Kiuer;
 import com.spronghi.kiu.model.PostKiuer;
 
 import java.util.ArrayList;
@@ -32,37 +30,32 @@ import java.util.List;
 /**
  * Created by spronghi on 22/09/16.
  */
-public class ListHelperUserPostFragment extends ModelFragment<Helper> {
-    public static final String TAG = ListHelperUserPostFragment.class.getSimpleName();
+public class ListKiuerUserOpenPostFragment extends ModelFragment<Kiuer> {
+    public static final String TAG = ListKiuerUserOpenPostFragment.class.getSimpleName();
     private Toolbar toolbar;
 
-    private List<PostKiuer> openPostList = new ArrayList<>();
-    private List<PostKiuer> closedPostList = new ArrayList<>();
-    private RecyclerView openRecyclerView;
-    private RecyclerView closedRecyclerView;
-    private UserPostAdapter openAdapter;
-    private UserPostAdapter closedAdapter;
-    private Helper helper;
+    private List<PostKiuer> postList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private UserPostAdapter adapter;
+    private Kiuer kiuer;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        final View layout = inflater.inflate(R.layout.fragment_user_list, parent, false);
+        final View layout = inflater.inflate(R.layout.fragment_user_post_list, parent, false);
         toolbar = (Toolbar) layout.findViewById(R.id.fragment_user_list_toolbar);
         setupToolbar();
 
-        openRecyclerView = (RecyclerView) layout.findViewById(R.id.fragment_user_list_open_recycler_view);
-        setOpenRecyclerView();
+        recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_user_list_recycler_view);
+        setRecyclerView();
 
-        closedRecyclerView = (RecyclerView) layout.findViewById(R.id.fragment_user_list_closed_recycler_view);
-        setClosedRecyclerView();
-
-        populateLists();
+        populateList();
 
         return layout;
 
     }
     private void setupToolbar() {
+        toolbar.setTitle(R.string.open_post);
         final FragmentManager manager = this.getFragmentManager();
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -81,19 +74,19 @@ public class ListHelperUserPostFragment extends ModelFragment<Helper> {
             }
         });
     }
-    private void setOpenRecyclerView(){
-        openAdapter = new UserPostAdapter(openPostList, false);
+    private void setRecyclerView(){
+        adapter = new UserPostAdapter(postList, true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        openRecyclerView.setLayoutManager(mLayoutManager);
-        openRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        openRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
-        openRecyclerView.setAdapter(openAdapter);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(adapter);
 
-        openRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), openRecyclerView, new ClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 ModelFragment<PostKiuer> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_POST_KIUER);
-                fragment.setModel(openPostList.get(position));
+                fragment.setModel(postList.get(position));
                 getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
             }
 
@@ -104,40 +97,15 @@ public class ListHelperUserPostFragment extends ModelFragment<Helper> {
         }));
     }
 
-    private void populateLists(){
-        openPostList.clear();
-        closedPostList.clear();
+    private void populateList(){
+        postList.clear();
 
-        List<PostKiuer> list = PostKiuerService.getAllByHelper(helper);
+        List<PostKiuer> list = PostKiuerService.getAllByKiuer(kiuer);
         for(PostKiuer post : list){
             if(post.isOpen()){
-                openPostList.add(post);
-            } else {
-                closedPostList.add(post);
+                postList.add(post);
             }
         }
-    }
-
-    private void setClosedRecyclerView(){
-        closedAdapter = new UserPostAdapter(closedPostList, false);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        closedRecyclerView.setLayoutManager(mLayoutManager);
-        closedRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        closedRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
-        closedRecyclerView.setAdapter(closedAdapter);
-
-
-        closedRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), closedRecyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                ModelFragment<PostKiuer> fragment = FragmentFactory.getInstance(FragmentControl.VIEW_POST_KIUER);
-                fragment.setModel(closedPostList.get(position));
-                getFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).addToBackStack(null).commit();
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {}
-        }));
     }
 
 
@@ -148,8 +116,8 @@ public class ListHelperUserPostFragment extends ModelFragment<Helper> {
     public void onViewCreated(View view, Bundle savedInstanceState) {}
 
     @Override
-    public void setModel(Helper model) {
-        helper = model;
+    public void setModel(Kiuer model) {
+        kiuer = model;
     }
 
     public interface ClickListener {
@@ -160,9 +128,9 @@ public class ListHelperUserPostFragment extends ModelFragment<Helper> {
     public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private GestureDetector gestureDetector;
-        private ListHelperUserPostFragment.ClickListener clickListener;
+        private ListKiuerUserOpenPostFragment.ClickListener clickListener;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ListHelperUserPostFragment.ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ListKiuerUserOpenPostFragment.ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override
