@@ -17,6 +17,7 @@
     <string name="closed_post">Closed Posts</string>
     <string name="open_post">Open Posts</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="ip_address">IP Address</string>
 
 
     <string name="post">Post</string>
@@ -106,4 +107,8 @@
     <string name="opSuccessfully">Operation succesfully!</string>
     <string name="loginFailed">Wrong username or passworrd!</string>
     <string name="loginFailedUnchecked">Are you Kiuer or Helper?</string>
+
+    <string name="first_execute_title">Oops!!</string>
+    <string name="first_execute_text">We need your server IP address in order to execute the app</string>
+    <string name="ok">OK</string>
 </resources>

@@ -26,6 +26,10 @@
             android:label="@string/app_name"
             android:theme="@style/FullScreen"/>
         <activity
+            android:name="com.spronghi.kiu.activity.FirstExecuteActivity"
+            android:label="@string/app_name"
+            android:theme="@style/FullScreen"/>
+        <activity
             android:name="com.spronghi.kiu.activity.SignupHelperActivity"
             android:label="@string/app_name"
             android:theme="@style/FullScreen"/>

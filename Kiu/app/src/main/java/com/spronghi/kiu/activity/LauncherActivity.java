@@ -1,6 +1,7 @@
 package com.spronghi.kiu.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.spronghi.kiu.R;
+import com.spronghi.kiu.http.HttpConnector;
 
 /**
  * Created by matte on 13/06/2016.
@@ -24,6 +26,7 @@ public class LauncherActivity extends AppCompatActivity {
 
     private long mStartTime;
     private boolean mIsDone;
+    private SharedPreferences preferences;
     private Handler mHandler = new Handler()
     {
 
@@ -47,6 +50,7 @@ public class LauncherActivity extends AppCompatActivity {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         decorView.setSystemUiVisibility(uiOptions);
+
     }
 
     @Override
@@ -57,6 +61,14 @@ public class LauncherActivity extends AppCompatActivity {
         mHandler.sendMessageAtTime(goAheadMessage, mStartTime +
                 MAX_WAIT_INTERVAL);
         Log.d(TAG_LOG, "Handler message sent!");
+        preferences = getSharedPreferences("IPAddress", 0);
+        if(preferences.contains("IPAddress")){
+            HttpConnector.setServerIP(preferences.getString("IPAddress",""));
+        } else {
+            final Intent intent = new Intent(this, FirstExecuteActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void goAhead(){

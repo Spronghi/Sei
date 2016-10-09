@@ -96,6 +96,7 @@
     <string name="kiuiung_finished">Kiuing è finito!</string>
     <string name="your_posts">I tuoi annunci</string>
     <string name="kiuing">Kiuing</string>
+    <string name="ip_address">Indirizzo IP</string>
 
     <string name="usernamehint">Username</string>
     <string name="passwordhint">Password</string>
@@ -107,4 +108,7 @@
     <string name="opSuccessfully">Operazione avvenuta con successo!</string>
     <string name="loginFailed">Username o password sbagliati!</string>
     <string name="loginFailedUnchecked">Sei un Kiuer o un Helper?</string>
+    <string name="first_execute_title">Oops!!</string>
+    <string name="first_execute_text">Abbiamo bisogno dell\'indirizzo IP del server per eseguire l\'app!</string>
+    <string name="ok">OK</string>
 </resources>
