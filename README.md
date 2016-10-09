@@ -2,9 +2,9 @@
 The repository contains the project for intelligents elaboration systems exam. 
 
 ### Kiù
-The project name is Kiù. It is an Android application written in Java 1.8. 
-A presentation of the application can be found [here](Presentation/presentazione.pdf).
-An installation manual can be found [here](Installation.pdf)
+The project name is Kiù. It is an Android application written in Java 1.8. <br />
+A presentation of the application can be found [here](Presentation/presentazione.pdf).<br />
+An installation manual can be found [here](Installation.pdf)<br />
 An italian description of the application was relased from the professor Paolo Buono:
 
 > IL nome dell'app, Kiù, è un suono onomatopeico che richiama al termine inglese queue = coda. 
